@@ -7,7 +7,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Product implements Entity<UUID> {
     private UUID id;
     private String name;
     private String description;
