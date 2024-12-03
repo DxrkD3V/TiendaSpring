@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
+//RepositorioImplementado
 public class RepositoryImpl<T extends Entity<ID>, ID> implements Repository<T, ID> {
 
     private Map<ID, T> map = new HashMap<>();
