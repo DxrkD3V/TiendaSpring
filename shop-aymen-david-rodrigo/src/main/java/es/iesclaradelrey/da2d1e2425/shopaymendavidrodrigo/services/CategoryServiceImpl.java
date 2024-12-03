@@ -19,21 +19,21 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public long count() {
-        return 0;
+        return categoryRepo.count();
     }
 
     @Override
     public void save(Category category) {
-
+        categoryRepo.save(category);
     }
 
     @Override
     public Collection<Category> findAll() {
-        return List.of();
+        return categoryRepo.findAll();
     }
 
     @Override
-    public Optional<Category> findById(long id) {
-        return Optional.empty();
+    public Optional<Category> findById(Long id) {
+        return categoryRepo.findById(id);
     }
 }

@@ -10,5 +10,5 @@ public interface CategoryService {
     long count();
     void save(Category category);
     Collection<Category> findAll();
-    Optional<Category> findById(long id);
+    Optional<Category> findById(Long id);
 }
