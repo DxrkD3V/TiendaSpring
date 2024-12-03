@@ -13,26 +13,34 @@
     <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
     <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#000000" data-border-radius="small"></script>
 </head>
-<body class="font-['Poppins'] bg-gray-50">
-<nav class="bg-custom text-white">
+<body class="font-['Poppins'] bg-gray-50" id="top">
+<nav class="bg-custom text-white fixed w-full top-0 z-50">
     <div class="max-w-8xl mx-auto px-6 py-4">
         <div class="flex justify-between items-center">
             <div class="flex items-center space-x-12">
-                <img src="https://ai-public.creatie.ai/gen_page/logo_placeholder.png" alt="Luxury Cars" class="h-12">
+                <a href="#top"><img src="/imagenes/logo.png" alt="Luxury Cars" class="h-12"></a>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#" class="hover:text-gray-300">Modelos</a>                        <a href="#" class="hover:text-gray-300">Noticias</a>
-                    <a href="#" class="hover:text-gray-300">Testimonios</a>
-                    <a href="#" class="hover:text-gray-300">Contacto</a>
+                    <a href="#Modelos" class="hover:text-gray-300">Modelos</a>
+                    <a href="#Noticias" class="hover:text-gray-300">Noticias</a>
+                    <a href="#Testimonios" class="hover:text-gray-300">Testimonios</a>
+                    <a href="#Contacto" class="hover:text-gray-300">Contacto</a>
                 </div>
             </div>
             <div class="flex items-center space-x-6">
-                <button class="!rounded-button hover:bg-gray-700 px-4 py-2 flex items-center">                        <i class="fas fa-search mr-2"></i>
+                <button class="!rounded-button hover:bg-gray-700 px-4 py-2 flex items-center">
+                    <i class="fas fa-search mr-2"></i>
                     Buscar
                 </button>
             </div>
         </div>
     </div>
 </nav>
+
+
+
+<!-- Compensar el espacio de la barra fija -->
+
+
 <section class="relative h-[600px] overflow-hidden">
     <img src="https://img.freepik.com/premium-photo/luxury-suv-car-wallpaper-background_1102-5377.jpg?w=1060" alt="Luxury Car" class="w-full h-full object-cover">
     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center">
@@ -46,7 +54,7 @@
 </section>
 <section class="py-20 bg-white">
     <div class="max-w-8xl mx-auto px-6">
-        <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16">Modelos Destacados</h2>
+        <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16" id="Modelos">Modelos Destacados</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                 <img src="https://www.mercedes-benzdimovil.com/wp-content/uploads/2023/10/mercedes-benz-s-class-wv223-exterior-hotspot-3302x1858-09-2022-1024x576.webp" alt="Modelo 1" class="w-full h-64 object-cover">
@@ -77,27 +85,37 @@
 </section>
 <section class="py-20 bg-gray-100">
     <div class="max-w-8xl mx-auto px-6">
-        <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16">Últimas Noticias</h2>
+        <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16" id="Noticias">Últimas Noticias</h2>
         <div class="glide">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <li class="glide__slide">
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                            <img src="https://creatie.ai/ai/api/search-image?query=A futuristic electric vehicle concept being unveiled at a premium auto show with dramatic lighting&width=400&height=250&orientation=landscape&flag=4e5a7299-ebc3-4fa2-bc75-f7edc8d0400b" alt="Noticia 1" class="w-full h-48 object-cover">
+                            <img src="/imagenes/Noticia_1.jpg" alt="Noticia 1" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <span class="text-sm text-gray-500">15 Marzo 2024</span>
-                                <h3 class="text-xl font-semibold my-2">Nueva Serie Eléctrica Revoluciona el Mercado</h3>
+                                <h3 class="text-xl font-semibold my-2">Skoda Epiq: el coche eléctrico que revoluciona el mercado español y europeo</h3>
                                 <p class="text-gray-600">La última innovación en vehículos eléctricos de lujo promete redefinir los estándares de la industria.</p>
                             </div>
                         </div>
                     </li>
                     <li class="glide__slide">
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                            <img src="https://creatie.ai/ai/api/search-image?query=A luxury car interior with advanced technology and premium materials being showcased&width=400&height=250&orientation=landscape&flag=b4ad8a85-cd29-40ed-865e-0334d7191cf1" alt="Noticia 2" class="w-full h-48 object-cover">
+                            <img src="/imagenes/Noticia_2.jpg" alt="Noticia 2" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <span class="text-sm text-gray-500">12 Marzo 2024</span>
                                 <h3 class="text-xl font-semibold my-2">Innovaciones en Interiores de Lujo</h3>
                                 <p class="text-gray-600">Descubre las últimas tendencias en diseño interior y tecnología para vehículos premium.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="glide__slide">
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                            <img src="/imagenes/Noticia_3.png" alt="Noticia 3" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <span class="text-sm text-gray-500">14 Noviembre 2024</span>
+                                <h3 class="text-xl font-semibold my-2">Nuevo impuesto para los coches de lujo en España</h3>
+                                <p class="text-gray-600">PSOE y Sumar han pactado un nuevo paquete fiscal que incluye un impuesto a los bienes de lujo, como coches de alta gama y yates.</p>
                             </div>
                         </div>
                     </li>
@@ -111,11 +129,11 @@
 </section>
 <section class="py-20 bg-white">
     <div class="max-w-8xl mx-auto px-6">
-        <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16">Testimonios de Clientes</h2>
+        <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16" id="Testimonios">Testimonios de Clientes</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="bg-gray-50 p-8 rounded-lg">
                 <div class="flex items-center mb-4">
-                    <img src="https://creatie.ai/ai/api/search-image?query=Professional business person headshot with warm smile against neutral background&width=60&height=60&orientation=squarish&flag=1a41701e-ee09-448a-8315-0e81129f2682" alt="Cliente 1" class="w-12 h-12 rounded-full mr-4">
+                    <img src="/imagenes/testimonio_1.png" alt="Cliente 1" class="w-12 h-12 rounded-full mr-4">
                     <div>
                         <h4 class="font-semibold">Carlos Rodríguez</h4>
                         <div class="flex text-yellow-400">                                <i class="fas fa-star"></i>
@@ -130,7 +148,7 @@
             </div>
             <div class="bg-gray-50 p-8 rounded-lg">
                 <div class="flex items-center mb-4">
-                    <img src="https://creatie.ai/ai/api/search-image?query=Elegant businesswoman portrait with confident expression against neutral background&width=60&height=60&orientation=squarish&flag=c7d0bc9f-d1dc-4b35-ad30-9ed22ac89361" alt="Cliente 2" class="w-12 h-12 rounded-full mr-4">
+                    <img src="/imagenes/testimonio_2.png" alt="Cliente 2" class="w-12 h-12 rounded-full mr-4">
                     <div>
                         <h4 class="font-semibold">Ana Martínez</h4>
                         <div class="flex text-yellow-400">                                <i class="fas fa-star"></i>
@@ -145,7 +163,7 @@
             </div>
             <div class="bg-gray-50 p-8 rounded-lg">
                 <div class="flex items-center mb-4">
-                    <img src="https://creatie.ai/ai/api/search-image?query=Executive businessman portrait with professional appearance against neutral background&width=60&height=60&orientation=squarish&flag=11558233-ddaf-4bc5-8554-5dd60f5b558b" alt="Cliente 3" class="w-12 h-12 rounded-full mr-4">
+                    <img src="/imagenes/testimonio_3.png" alt="Cliente 3" class="w-12 h-12 rounded-full mr-4">
                     <div>
                         <h4 class="font-semibold">Miguel Ángel López</h4>
                         <div class="flex text-yellow-400">                                <i class="fas fa-star"></i>
@@ -165,7 +183,7 @@
     <div class="max-w-8xl mx-auto px-6">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-                <h2 class="text-4xl font-['Playfair_Display'] mb-8">Contacto</h2>
+                <h2 class="text-4xl font-['Playfair_Display'] mb-8" id="Contacto">Contacto</h2>
                 <form class="space-y-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
@@ -194,16 +212,16 @@
     <div class="max-w-8xl mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
-                <img src="https://ai-public.creatie.ai/gen_page/logo_placeholder.png" alt="Luxury Cars" class="h-12 mb-6">
+                <img src="/imagenes/logo.png" alt="Luxury Cars" class="h-12 mb-6">
                 <p class="text-gray-300">Experiencia de lujo en cada detalle.</p>
             </div>
             <div>
                 <h4 class="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-300 hover:text-white">Modelos</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Noticias</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Testimonios</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Contacto</a></li>
+                    <li><a href="#Modelos" class="text-gray-300 hover:text-white">Modelos</a></li>
+                    <li><a href="#Noticias" class="text-gray-300 hover:text-white">Noticias</a></li>
+                    <li><a href="#Testimonios" class="text-gray-300 hover:text-white">Testimonios</a></li>
+                    <li><a href="#Contacto" class="text-gray-300 hover:text-white">Contacto</a></li>
                 </ul>
             </div>
             <div>
