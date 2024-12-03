@@ -8,8 +8,8 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
-    private UUID id;
+public class Category implements Entity<Long> {
+    private Long id;
     private String name;
     private String description;
     private String image;
