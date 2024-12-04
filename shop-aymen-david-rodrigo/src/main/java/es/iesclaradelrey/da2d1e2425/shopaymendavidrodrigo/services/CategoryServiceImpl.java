@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
-    public final CategoryRepo categoryRepo;
+    private final CategoryRepo categoryRepo;
 
     public CategoryServiceImpl(CategoryRepo categoryRepo) {
         this.categoryRepo = categoryRepo;
