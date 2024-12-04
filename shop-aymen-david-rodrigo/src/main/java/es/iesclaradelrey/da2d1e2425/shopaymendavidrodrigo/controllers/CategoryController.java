@@ -24,8 +24,7 @@ public class CategoryController {
     public ModelAndView getCategories() {
         Collection<Category> categories = categoryService.findAll();
 
-        ModelAndView modelAndView = new ModelAndView("index", "categories", categories );
-        return modelAndView;
+        return new ModelAndView("categories", "categories", categories );
     }
 
    /* @GetMapping("/{id}");

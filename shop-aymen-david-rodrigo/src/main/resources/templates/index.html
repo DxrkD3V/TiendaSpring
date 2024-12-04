@@ -16,21 +16,66 @@
         html {
             scroll-behavior: smooth;
         }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            left: 50%;
+            transform: translateX(-25%);
+            /*border: solid 2px rgb(27, 27, 27);*/
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 20px 20px;
+            width: 200px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.5s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {display: block;}
+
     </style>
 </head>
 <body class="font-['Poppins'] bg-gray-50" id="top">
 <nav class="bg-custom text-white fixed w-full top-0 z-50">
     <div class="max-w-8xl mx-auto px-6 py-4">
+
         <div class="flex justify-between items-center">
             <div class="flex items-center space-x-12">
                 <a href="#top"><img src="/imagenes/logo.png" alt="Luxury Cars" class="h-12"></a>
+                <div class="dropdown">
+                    <a th:href="@{categories}" class="hover:text-gray-300" id="categories-link" >Categorias</a>
+                    <div class="dropdown-content">
+                        <div th:each="category : ${categories}">
+                            <a th:text="${category.name}"></a>
+                        </div>
+                    </div>
+                </div>
                 <div class="hidden md:flex space-x-8">
+                    <!-- <a th:href="@{categories}" class="hover:text-gray-300" id="categories-link" >Categorias</a> -->
                     <a href="#Modelos" class="hover:text-gray-300">Modelos</a>
                     <a href="#Noticias" class="hover:text-gray-300">Noticias</a>
                     <a href="#Testimonios" class="hover:text-gray-300">Testimonios</a>
                     <a href="#Contacto" class="hover:text-gray-300">Contacto</a>
                 </div>
             </div>
+
             <div class="flex items-center space-x-6">
                 <button class="!rounded-button hover:bg-gray-700 px-4 py-2 flex items-center">
                     <i class="fas fa-search mr-2"></i>
@@ -38,8 +83,10 @@
                 </button>
             </div>
         </div>
+
     </div>
 </nav>
+
 
 
 
@@ -54,6 +101,7 @@
             <p class="text-xl mb-8 max-w-2xl">Descubra nuestra exclusiva colección de vehículos de alta gama, donde el lujo se encuentra con la excelencia automotriz.</p>
             <button class="!rounded-button bg-custom hover:bg-gray-800 text-white px-8 py-3 text-lg">                    Descubra Nuestra Colección
             </button>
+
         </div>
     </div>
 </section>

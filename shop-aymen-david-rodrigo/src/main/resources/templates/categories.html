@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://ai-public.creatie.ai/gen_page/tailwind-custom.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.theme.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
+  <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#000000" data-border-radius="small"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      left: 50%;
+      transform: translateX(-25%);
+      /*border: solid 2px rgb(27, 27, 27);*/
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 20px 20px;
+      width: 200px;
+      text-decoration: none;
+      display: block;
+      transition: all 0.5s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: black;
+      color: white;
+    }
+
+    .dropdown:hover .dropdown-content {display: block;}
+
+  </style>
+</head>
+<body class="font-['Poppins'] bg-gray-50">
+<nav class="bg-custom text-white fixed w-full top-0 z-50">
+  <div class="max-w-8xl mx-auto px-6 py-4">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center space-x-12">
+        <a href="#top"><img src="/imagenes/logo.png" alt="Luxury Cars" class="h-12"></a>
+        <div class="dropdown">
+          <a th:href="@{categories}" class="hover:text-gray-300" id="categories-link" >Categorias</a>
+          <div class="dropdown-content">
+            <div th:each="category : ${categories}">
+              <a th:text="${category.name}"></a>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:flex space-x-8">
+          <a th:href="@{categories}" class="hover:text-gray-300">Categorias</a>
+          <a href="#Modelos" class="hover:text-gray-300">Modelos</a>
+          <a href="#Noticias" class="hover:text-gray-300">Noticias</a>
+          <a href="#Testimonios" class="hover:text-gray-300">Testimonios</a>
+          <a href="#Contacto" class="hover:text-gray-300">Contacto</a>
+        </div>
+      </div>
+      <div class="flex items-center space-x-6">
+        <button class="!rounded-button hover:bg-gray-700 px-4 py-2 flex items-center">
+          <i class="fas fa-search mr-2"></i>
+          Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+<section class="py-20 bg-white">
+  <div class="max-w-8xl mx-auto px-6">
+    <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16">Modelos Destacados</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <img src="https://www.mercedes-benzdimovil.com/wp-content/uploads/2023/10/mercedes-benz-s-class-wv223-exterior-hotspot-3302x1858-09-2022-1024x576.webp" alt="Modelo 1" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-2">Mercedes-Benz S-Class</h3>
+          <p class="text-gray-600 mb-4">Desde €125.000</p>
+          <button class="!rounded-button w-full bg-custom text-white py-2 hover:bg-gray-800">Ver Detalles</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <img src="https://pictures.porsche.com/rtt/iris?COSY-EU-100-1711coMvsi60AAt5FwcmBEgA4qP8iBUDxPE3Cb9pNXkBuNYdMGF4tl3U0%25z8rMHIspbWvanYb%255y%25oq%25vSTmjMXD4qAZeoNBPUSfUx4RmHlCgI7Zl2dioCxkF%25vUqCNwuWXsOs8IeV6iTxjgzhRc2GaWqA7fQr7DOJtWFnQbNWMbdJ6gzyel2Pz3BZhUynAYL" alt="Modelo 2" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-2">Porsche 911 GT3</h3>
+          <p class="text-gray-600 mb-4">Desde €185.000</p>
+          <button class="!rounded-button w-full bg-custom text-white py-2 hover:bg-gray-800">Ver Detalles</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <img src="https://static.independent.co.uk/2022/11/04/12/ACT_0769_06603_HR.jpg?quality=75&width=1368&crop=3%3A2%2Csmart&auto=webp" alt="Modelo 3" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-2">Range Rover Autobiography</h3>
+          <p class="text-gray-600 mb-4">Desde €145.000</p>
+          <button class="!rounded-button w-full bg-custom text-white py-2 hover:bg-gray-800">Ver Detalles</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <img src="https://static.independent.co.uk/2022/11/04/12/ACT_0769_06603_HR.jpg?quality=75&width=1368&crop=3%3A2%2Csmart&auto=webp" alt="Modelo 3" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-2">Range Rover Autobiography</h3>
+          <p class="text-gray-600 mb-4">Desde €145.000</p>
+          <button class="!rounded-button w-full bg-custom text-white py-2 hover:bg-gray-800">Ver Detalles</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <img src="https://static.independent.co.uk/2022/11/04/12/ACT_0769_06603_HR.jpg?quality=75&width=1368&crop=3%3A2%2Csmart&auto=webp" alt="Modelo 3" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-2">Range Rover Autobiography</h3>
+          <p class="text-gray-600 mb-4">Desde €145.000</p>
+          <button class="!rounded-button w-full bg-custom text-white py-2 hover:bg-gray-800">Ver Detalles</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="bg-custom text-white py-12">
+  <div class="max-w-8xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div>
+        <img src="/imagenes/logo.png" alt="Luxury Cars" class="h-12 mb-6">
+        <p class="text-gray-300">Experiencia de lujo en cada detalle.</p>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
+        <ul class="space-y-2">
+          <li><a href="#Modelos" class="text-gray-300 hover:text-white">Modelos</a></li>
+          <li><a href="#Noticias" class="text-gray-300 hover:text-white">Noticias</a></li>
+          <li><a href="#Testimonios" class="text-gray-300 hover:text-white">Testimonios</a></li>
+          <li><a href="#Contacto" class="text-gray-300 hover:text-white">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Contacto</h4>
+        <ul class="space-y-2">
+          <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i>Calle Principal 123, Madrid</li>
+          <li class="flex items-center"><i class="fas fa-phone mr-2"></i>+34 900 123 456</li>
+          <li class="flex items-center"><i class="fas fa-envelope mr-2"></i>info@luxurycars.es</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+        <form class="space-y-4">
+          <input type="email" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white" placeholder="Su email">                        <button type="submit" class="!rounded-button w-full bg-white text-custom py-2 hover:bg-gray-200">Suscribirse</button>
+        </form>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+      <p class="text-gray-400">© 2024 Luxury Cars. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+<script>
+  new Glide('.glide', {
+    type: 'carousel',
+    perView: 3,
+    gap: 32,
+    breakpoints: {
+      1024: {
+        perView: 2
+      },
+      640: {
+        perView: 1
+      }
+    }
+  }).mount();
+</script>
+</body>
+</html>
