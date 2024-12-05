@@ -1,7 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.commandlinerunner;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.CategoryService;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Categories.CategoryService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

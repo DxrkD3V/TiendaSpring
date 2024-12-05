@@ -1,16 +1,15 @@
-package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services;
+package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Categories;
 
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.CategoryRepo;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.Categories.CategoryRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepo categoryRepo;
 
     public CategoryServiceImpl(CategoryRepo categoryRepo) {

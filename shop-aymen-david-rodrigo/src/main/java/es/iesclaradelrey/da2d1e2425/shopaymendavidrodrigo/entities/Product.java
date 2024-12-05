@@ -7,10 +7,15 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product implements Entity<UUID> {
-    private UUID id;
+public class Product implements Entity<Long> {
+    private Long id;
     private String name;
     private String description;
     private Double price;
     private String manufactur;
+
+    @Override
+    public Long getId() {
+        return this.id;
+    }
 }

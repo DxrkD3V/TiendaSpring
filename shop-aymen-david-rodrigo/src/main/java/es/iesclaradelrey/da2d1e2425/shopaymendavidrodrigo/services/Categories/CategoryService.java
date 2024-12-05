@@ -1,7 +1,6 @@
-package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services;
+package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Categories;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.CategoryRepo;
 
 import java.util.Collection;
 import java.util.Optional;
