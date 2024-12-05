@@ -23,10 +23,15 @@ public class CategoriesInit implements CommandLineRunner {
 
         Category category1 = new Category(1L, "4x4", descripcion4x4,"/imagenes/4x4.jpg");
         Category category2 = new Category(2L, "Electricos", descripcionelectricos,"/imagenes/electricos.jpg");
-
+        Category category3 = new Category(3L, "Deportivos", descripciondeportivos,"/imagenes/deportivos.jpg");
+        Category category4 = new Category(4L, "Familiares", descripcionfamiliares,"/imagenes/familiares.jpg");
+        Category category5 = new Category(5L, "Lujo", descripcionluxo,"/imagenes/lujo.jpg");
 
         categoryService.save(category1);
         categoryService.save(category2);
+        categoryService.save(category3);
+        categoryService.save(category4);
+        categoryService.save(category5);
 
     }
 }

@@ -50,7 +50,7 @@
 
     .dropdown:hover .dropdown-content {display: block;}
     .description-container {
-      max-width: 100%; /* Controla el ancho */
+      max-width: 2500px; /* Controla el ancho */
       max-height: 100px; /* Limita la altura */
       overflow-y: auto; /* Habilita el scroll vertical */
       overflow-x: hidden; /* Evita el scroll horizontal */
@@ -64,7 +64,7 @@
   <div class="max-w-8xl mx-auto px-6 py-4">
     <div class="flex justify-between items-center">
       <div class="flex items-center space-x-12">
-        <a href="#top"><img src="/imagenes/logo.png" alt="Luxury Cars" class="h-12"></a>
+        <a href="/"><img src="/imagenes/logo.png" alt="Ryze Cars" class="h-12"></a>
         <div class="dropdown">
           <a th:href="@{categories}" class="hover:text-gray-300" id="categories-link" >Categorias</a>
           <div class="dropdown-content">
@@ -74,7 +74,6 @@
           </div>
         </div>
         <div class="hidden md:flex space-x-8">
-          <a th:href="@{categories}" class="hover:text-gray-300">Categorias</a>
           <a href="#Modelos" class="hover:text-gray-300">Modelos</a>
           <a href="#Noticias" class="hover:text-gray-300">Noticias</a>
           <a href="#Testimonios" class="hover:text-gray-300">Testimonios</a>
@@ -93,7 +92,7 @@
 <section class="py-20 bg-white">
   <div class="max-w-8xl mx-auto px-6">
     <!-- Título -->
-    <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16">Modelos Destacados</h2>
+    <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16" style="padding: 40px;">Categorias</h2>
 
     <!-- Contenedor de tarjetas -->
     <div class="space-y-6">
@@ -110,7 +109,9 @@
         <div class="p-6 flex-grow flex flex-col justify-between">
           <div>
             <h3 class="text-2xl font-semibold mb-2" th:text="${category.name}">Nombre</h3>
-            <p class="text-gray-600 mb-4 description-text" th:text="${category.description}">Descripción</p>
+            <div class="description-container">
+              <p class="text-gray-600 mb-4 description-text" th:text="${category.description}">Descripción</p>
+            </div>
           </div>
           <button class="!rounded-button w-full bg-custom text-white py-2 hover:bg-gray-800 mt-auto">
             Ver Detalles
@@ -126,7 +127,7 @@
   <div class="max-w-8xl mx-auto px-6">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       <div>
-        <img src="/imagenes/logo.png" alt="Luxury Cars" class="h-12 mb-6">
+        <img src="/imagenes/logo.png" alt="Ryze Cars" class="h-12 mb-6">
         <p class="text-gray-300">Experiencia de lujo en cada detalle.</p>
       </div>
       <div>
@@ -172,6 +173,7 @@
       }
     }
   }).mount();
+
 </script>
 </body>
 </html>
