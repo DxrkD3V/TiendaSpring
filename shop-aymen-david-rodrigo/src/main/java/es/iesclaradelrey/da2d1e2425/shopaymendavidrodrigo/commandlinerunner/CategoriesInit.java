@@ -21,11 +21,11 @@ public class CategoriesInit implements CommandLineRunner {
         String descripcionfamiliares = "Viaja con comodidad y seguridad en nuestros vehículos familiares, diseñados para acompañarte en cada aventura en familia. Con amplios espacios, tecnología avanzada y características de seguridad excepcionales, nuestros coches familiares ofrecen el equilibrio perfecto entre confort, versatilidad y rendimiento. Ya sea para viajes largos o trayectos urbanos, disfrutarás de una conducción suave y relajante, con el respaldo de una marca que cuida de lo que más importa: tu familia.";
         String descripcionluxo = "Déjate seducir por el lujo y la exclusividad con nuestros vehículos de alta gama. Cada detalle de estos coches está diseñado para brindarte la máxima comodidad y elegancia, desde sus materiales premium hasta sus prestaciones tecnológicas de última generación. Con un diseño sofisticado y una conducción impecable, nuestros coches de lujo son la elección perfecta para aquellos que buscan lo mejor en cada viaje. Disfruta de una experiencia de conducción única, donde la perfección es la norma.";
 
-        Category category1 = new Category(1L, "4x4", descripcion4x4,"/imagenes/4x4.jpg");
-        Category category2 = new Category(2L, "Electricos", descripcionelectricos,"/imagenes/electricos.jpg");
-        Category category3 = new Category(3L, "Deportivos", descripciondeportivos,"/imagenes/deportivos.jpg");
-        Category category4 = new Category(4L, "Familiares", descripcionfamiliares,"/imagenes/familiares.jpg");
-        Category category5 = new Category(5L, "Lujo", descripcionluxo,"/imagenes/lujo.jpg");
+        Category category1 = new Category("4x4", descripcion4x4,"/imagenes/4x4.jpg");
+        Category category2 = new Category("Electricos", descripcionelectricos,"/imagenes/electricos.jpg");
+        Category category3 = new Category("Deportivos", descripciondeportivos,"/imagenes/deportivos.jpg");
+        Category category4 = new Category("Familiares", descripcionfamiliares,"/imagenes/familiares.jpg");
+        Category category5 = new Category("Lujo", descripcionluxo,"/imagenes/lujo.jpg");
 
         categoryService.save(category1);
         categoryService.save(category2);
