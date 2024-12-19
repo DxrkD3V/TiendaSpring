@@ -23,7 +23,7 @@ public class Product {
     @Column(length = 10)
     private Double price;
     @Column(nullable = false, length = 50)
-    private String manufactur;
+    private String manufacture;
 
     @ManyToMany
     @JoinTable(name = "categories_products")
