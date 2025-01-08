@@ -28,8 +28,8 @@
 .search-input {
     background-color: #010201 !important;
     border: none !important;
-    width: 300px !important;
-    height: 56px !important;
+    width: 200px !important;
+    height: 46px !important;
     border-radius: 10px !important;
     color: rgb(214, 116, 25) !important;
     padding-inline: 59px !important;
@@ -69,7 +69,7 @@
     width: 30px !important;
     height: 20px !important;
     position: absolute !important;
-    background: #d1791c !important;
+    background: #221c16 !important;
     top: 10px !important;
     left: 5px !important;
     filter: blur(20px) !important;
@@ -344,6 +344,6 @@
 }
 #search-icon {
     position: absolute !important;
-    left: 20px !important;
-    top: 15px !important;
+    left: 15px !important;
+    top: 10px !important;
 }

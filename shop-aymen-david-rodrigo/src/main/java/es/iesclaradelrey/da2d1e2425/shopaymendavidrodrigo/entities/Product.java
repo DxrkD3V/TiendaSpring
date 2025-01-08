@@ -1,21 +1,31 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities;
 
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product implements Entity<Long> {
+@Entity
+@Table(name="products")
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false, length = 50, unique = true)
     private String name;
+    @Column(nullable = false, length = 1000)
     private String description;
+    @Column(length = 10)
     private Double price;
-    private String manufactur;
+    @Column(nullable = false, length = 50)
+    private String manufacture;
 
-    @Override
-    public Long getId() {
-        return this.id;
-    }
+    @ManyToMany
+    @JoinTable(name = "categories_products")
+    List<Category> categories;
 }
