@@ -8,11 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CategoriesInit implements CommandLineRunner {
+public class ObjectsInit implements CommandLineRunner {
     private final CategoryService categoryService;
     private final ProductService productService;
 
-    public CategoriesInit(CategoryService categoryService, ProductService productService) {
+    public ObjectsInit(CategoryService categoryService, ProductService productService) {
         this.categoryService = categoryService;
         this.productService = productService;
     }
@@ -37,9 +37,32 @@ public class CategoriesInit implements CommandLineRunner {
         categoryService.save(category4);
         categoryService.save(category5);
 
-        String descripciontesla = "Interesante tesla";
-        Product product1 = new Product(null, "Tesla", descripciontesla, 10000.00, "Tesla", category1);
+
+        Product product1 = new Product(null, "Toyota Land Cruiser", "Robusto 4x4 con capacidad todoterreno.", 45000.00, "Toyota", category1);
+        Product product2 = new Product(null, "Jeep Wrangler", "Clásico todoterreno ideal para aventuras.", 42000.00, "Jeep", category1);
+
+        Product product3 = new Product(null, "Ford S-Max", "Familiar espacioso con gran capacidad.", 32000.00, "Ford", category2);
+        Product product4 = new Product(null, "Renault Grand Scenic", "Familiar versátil con tecnología avanzada.", 30000.00, "Renault", category2);
+
+        Product product5 = new Product(null, "Tesla Model 3", "Eléctrico con autonomía y tecnología avanzada.", 50000.00, "Tesla", category3);
+        Product product6 = new Product(null, "Nissan Leaf", "Compacto eléctrico con cero emisiones.", 28000.00, "Nissan", category3);
+
+        Product product7 = new Product(null, "Porsche 911", "Deportivo icónico con rendimiento superior.", 100000.00, "Porsche", category4);
+        Product product8 = new Product(null, "Ferrari F8 Tributo", "Deportivo de lujo con diseño exclusivo.", 250000.00, "Ferrari", category4);
+
+        Product product9 = new Product(null, "Rolls Royce Phantom", "Lujo sin igual con detalles artesanales.", 450000.00, "Rolls Royce", category5);
+        Product product10 = new Product(null, "Bentley Continental GT", "Lujo y confort en un coupé elegante.", 350000.00, "Bentley", category5);
+
         productService.save(product1);
+        productService.save(product2);
+        productService.save(product3);
+        productService.save(product4);
+        productService.save(product5);
+        productService.save(product6);
+        productService.save(product7);
+        productService.save(product8);
+        productService.save(product9);
+        productService.save(product10);
 
     }
 }

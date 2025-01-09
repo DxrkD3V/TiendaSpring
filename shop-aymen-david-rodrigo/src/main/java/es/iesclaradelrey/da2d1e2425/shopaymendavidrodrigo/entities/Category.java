@@ -34,8 +34,4 @@ public class Category{
 
     @OneToMany(mappedBy = "category")
     List<Product> products = new ArrayList<>();
-
-    public void addProduct(Product product) {
-        products.add(product);
-    }
 }
