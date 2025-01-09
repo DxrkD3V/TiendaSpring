@@ -1,16 +1,20 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.commandlinerunner;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Categories.CategoryService;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Products.ProductService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CategoriesInit implements CommandLineRunner {
     private final CategoryService categoryService;
+    private final ProductService productService;
 
-    public CategoriesInit(CategoryService categoryService) {
+    public CategoriesInit(CategoryService categoryService, ProductService productService) {
         this.categoryService = categoryService;
+        this.productService = productService;
     }
 
     @Override
@@ -32,6 +36,10 @@ public class CategoriesInit implements CommandLineRunner {
         categoryService.save(category3);
         categoryService.save(category4);
         categoryService.save(category5);
+
+        String descripciontesla = "Interesante tesla";
+        Product product1 = new Product(null, "Tesla", descripciontesla, 10000.00, "Tesla", category1);
+        productService.save(product1);
 
     }
 }

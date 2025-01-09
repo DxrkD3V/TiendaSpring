@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -31,6 +32,10 @@ public class Category{
         this.image = image;
     }
 
-    @OneToMany(mappedBy = "categories")
-    List<Product> products;
+    @OneToMany(mappedBy = "category")
+    List<Product> products = new ArrayList<>();
+
+    public void addProduct(Product product) {
+        products.add(product);
+    }
 }

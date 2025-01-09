@@ -3,11 +3,13 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Products;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.Products.ProductRepo;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class ProductServiceImpl implements ProductService{
 private ProductRepo productRepo;
 public ProductServiceImpl(ProductRepo productRepo) {

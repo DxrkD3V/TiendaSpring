@@ -26,5 +26,6 @@ public class Product {
     private String manufacture;
 
     @ManyToOne
-    Category category;
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 }
