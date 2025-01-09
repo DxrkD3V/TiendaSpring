@@ -25,7 +25,6 @@ public class Product {
     @Column(nullable = false, length = 50)
     private String manufacture;
 
-    @ManyToMany
-    @JoinTable(name = "categories_products")
-    List<Category> categories;
+    @ManyToOne
+    Category category;
 }

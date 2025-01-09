@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,6 +31,6 @@ public class Category{
         this.image = image;
     }
 
-    @ManyToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "categories")
     List<Product> products;
 }
