@@ -12,6 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.theme.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="/imagenes/logo.ico" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
     <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
     <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#000000"
@@ -102,7 +103,7 @@
                     <a th:href="@{categories}" class="hover:text-gray-300" id="categories-link">Categorias</a>
                     <div class="dropdown-content">
                         <div th:each="category : ${categories}">
-                            <a th:text="${category.name}"></a>
+                            <a th:href="@{|/categories/category/${category.id}|}" th:text="${category.name}"></a>
                         </div>
                     </div>
                 </div>

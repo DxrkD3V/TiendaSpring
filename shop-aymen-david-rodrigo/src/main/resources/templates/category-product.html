@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Motors</title>
+    <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://ai-public.creatie.ai/gen_page/tailwind-custom.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.theme.min.css" rel="stylesheet">
+    <link rel="icon" href="/imagenes/logo.ico" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
     <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
     <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#000000" data-border-radius="small"></script>
@@ -57,12 +59,12 @@
     <div class="max-w-8xl mx-auto px-6 py-4">
         <div class="flex justify-between items-center">
             <div class="flex items-center space-x-12">
-                <a href="#top"><img src="/imagenes/logo.png" alt="Luxury Cars" class="h-12"></a>
+                <a href="/"><img src="/imagenes/logo.png" alt="Ryze Cars" class="h-12"></a>
                 <div class="dropdown">
-                    <a th:href="@{categories}" class="hover:text-gray-300" id="categories-link" >Categorias</a>
+                    <a th:href="@{|/categories|}" class="hover:text-gray-300" id="categories-link" >Categorias</a>
                     <div class="dropdown-content">
                         <div th:each="category : ${categories}">
-                            <a th:text="${category.name}"></a>
+                            <a th:href="@{|/categories/category/${category.id}|}" th:text="${category.name}"></a>
                         </div>
                     </div>
                 </div>
@@ -85,19 +87,28 @@
 </nav>
 <section class="py-20 bg-white">
     <div class="max-w-8xl mx-auto px-6">
-        <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16">Modelos Destacados</h2>
+        <h2  class="text-4xl font-['Playfair_Display'] text-center mb-16" th:text="${category.name}">Modelos Destacados</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="https://www.mercedes-benzdimovil.com/wp-content/uploads/2023/10/mercedes-benz-s-class-wv223-exterior-hotspot-3302x1858-09-2022-1024x576.webp" alt="Modelo 1" class="w-full h-64 object-cover">
+            <div th:each="product : ${products}" class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img th:src="${product.imageurl}" th:alt="${product.name}" class="w-full h-64 object-cover">
                 <div class="p-6">
-                    <h3 class="text-xl font-semibold mb-2">Mercedes-Benz S-Class</h3>
-                    <p class="text-gray-600 mb-4">Desde €125.000</p>
-                    <button class="!rounded-button w-full bg-custom text-white py-2 hover:bg-gray-800">Ver Detalles</button>
+                    <h3 class="text-xl font-semibold mb-2" th:text="${product.name}"></h3>
+                    <p class="text-gray-600 mb-4">
+                        <span th:text="${product.description}"></span>
+                    </p>
+                    <p class="text-gray-600 mb-4">
+                        Desde <span th:text="${product.price}"></span>€
+                    </p>
+
+                    <button class="!rounded-button w-full bg-custom text-white py-2 hover:bg-gray-800">
+                        Ver Detalles
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <footer class="bg-custom text-white py-12">
     <div class="max-w-8xl mx-auto px-6">

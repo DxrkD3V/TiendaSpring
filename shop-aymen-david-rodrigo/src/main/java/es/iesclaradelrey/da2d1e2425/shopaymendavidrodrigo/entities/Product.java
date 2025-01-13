@@ -18,6 +18,8 @@ public class Product {
     private Long id;
     @Column(nullable = false, length = 50, unique = true)
     private String name;
+    @Column(nullable = false, length = 255)
+    private String imageurl;
     @Column(nullable = false, length = 1000)
     private String description;
     @Column(length = 10)

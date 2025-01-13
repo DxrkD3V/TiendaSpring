@@ -3,11 +3,15 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.controllers;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Categories.CategoryService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/categories")
@@ -25,10 +29,15 @@ public class CategoryController {
         return new ModelAndView("categories", "categories", categories );
     }
 
-   /* @GetMapping("/{id}");
-    public Category getCategory(@PathVariable Long id) {
-        Category category = categoryService.findById(id);
+    @GetMapping("category/{id}")
+    public String getCategoryProducts(@PathVariable Long id, Model model) {
+        Optional<Category> category = categoryService.findById(id);
+        Collection<Category> allCategories = categoryService.findAll();
 
-        return category;
-    }*/
+        model.addAttribute("products", category.get().getProducts());
+        model.addAttribute("categories", allCategories);
+        model.addAttribute("category", category.get());
+
+        return "category-product";
+    }
 }
