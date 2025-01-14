@@ -27,7 +27,19 @@ public class Product {
     @Column(nullable = false, length = 50)
     private String manufacture;
 
+    public Product(String name, String imageurl, String description, Double price, String manufacture, Category category) {
+        this.name = name;
+        this.imageurl = imageurl;
+        this.description = description;
+        this.price = price;
+        this.manufacture = manufacture;
+        this.category = category;
+    }
+
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+
+    @OneToMany(mappedBy = "product")
+    List<Rating> ratings;
 }
