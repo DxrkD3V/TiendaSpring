@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Motors</title>
+  <link rel="stylesheet" href="/button.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://ai-public.creatie.ai/gen_page/tailwind-custom.css" rel="stylesheet">
@@ -20,43 +21,64 @@
     .dropdown {
       position: relative;
       display: inline-block;
-      margin-right: 10px;
     }
-
     .dropdown-content {
-      display: none;
+      display: block;
       position: absolute;
+      top: 100%; /* Debajo del elemento principal */
+      left: 0;
       background-color: #f1f1f1;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      min-width: 200px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      opacity: 0; /* Oculto por defecto */
+      transform: translateY(-10px); /* Empieza un poco arriba */
+      transition: opacity 0.4s ease, transform 0.4s ease; /* Transición suave */
+      pointer-events: none; /* No interactuable cuando está oculto */
       z-index: 1;
-      left: 50%;
-      transform: translateX(-25%);
-      /*border: solid 2px rgb(27, 27, 27);*/
+      border-radius: 5px;
     }
-
     .dropdown-content a {
-      color: black;
-      padding: 20px 20px;
-      width: 200px;
+      color: #333;
+      font-size: 16px;
+      padding: 12px 16px;
       text-decoration: none;
       display: block;
-      transition: all 0.5s;
+      transition: background-color 0.3s ease, color 0.3s ease; /* Suavizamos el hover */
     }
+
 
     .dropdown-content a:hover {
-      background-color: black;
-      color: white;
+      background-color: #000;
+      color: #fff;
+    }
+    .dropdown:hover .dropdown-content,
+    .dropdown-content:hover { /* Aparece al pasar el ratón */
+      opacity: 1; /* Se hace visible */
+      transform: translateY(0); /* Se posiciona en su lugar */
+      pointer-events: auto; /* Activa la interacción */
+    }
+    .box {
+      position: relative;
+    }
+    .box:hover .input {
+      width: 175px; /* Reducido a la mitad */
+      background: #3b3640;
+      border-radius: 10px;
+    }
+    .box i {
+      position: absolute;
+      top: 50%;
+      right: 7.5px; /* Reducido a la mitad */
+      transform: translate(-50%, -50%);
+      font-size: 13px; /* Reducido a la mitad */
+      color: #ffb136;
+      transition: .2s;
+    }
+    .box:hover i {
+      opacity: 0;
+      z-index: -1;
     }
 
-    .dropdown:hover .dropdown-content {display: block;}
-    .description-container {
-      max-width: 2500px; /* Controla el ancho */
-      max-height: 100px; /* Limita la altura */
-      overflow-y: auto; /* Habilita el scroll vertical */
-      overflow-x: hidden; /* Evita el scroll horizontal */
-      padding-right: 8px; /* Para que no se superponga con la barra de scroll */
-    }
 
   </style>
 </head>
@@ -81,11 +103,59 @@
           <a href="/#Contacto" class="hover:text-gray-300">Contacto</a>
         </div>
       </div>
-      <div class="flex items-center space-x-6">
-        <button class="!rounded-button hover:bg-gray-700 px-4 py-2 flex items-center">
-          <i class="fas fa-search mr-2"></i>
-          Buscar
-        </button>
+      <div class="box" >
+        <form name="search" >
+          <div id="search-container">
+            <div class="glow-effect"></div>
+            <div class="border-dark"></div>
+            <div class="border-dark"></div>
+            <div class="border-dark"></div>
+
+            <div class="white-overlay"></div>
+
+            <div class="outer-border"></div>
+            <div id="main">
+              <div id="search-box">
+                <input placeholder="Search..." type="text" name="search-text" class="search-input">
+                <div id="input-shadow"></div>
+                <div id="highlight-shadow"></div>
+                <div class="filter-frame"></div>
+                <div id="search-icon">
+                  <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke-linejoin="round"
+                          stroke-linecap="round"
+                          height="24"
+                          fill="none"
+                          class="feather feather-search"
+                  >
+                    <circle stroke="url(#search)" r="8" cy="11" cx="11"></circle>
+                    <line
+                            stroke="url(#searchl)"
+                            y2="16.65"
+                            y1="22"
+                            x2="16.65"
+                            x1="22"
+                    ></line>
+                    <defs>
+                      <linearGradient gradientTransform="rotate(50)" id="search">
+                        <stop stop-color="#f8e7f8" offset="0%"></stop>
+                        <stop stop-color="#b6a9b7" offset="50%"></stop>
+                      </linearGradient>
+                      <linearGradient id="searchl">
+                        <stop stop-color="#b6a9b7" offset="0%"></stop>
+                        <stop stop-color="#837484" offset="50%"></stop>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>

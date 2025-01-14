@@ -38,6 +38,7 @@
             transition: opacity 0.4s ease, transform 0.4s ease; /* Transición suave */
             pointer-events: none; /* No interactuable cuando está oculto */
             z-index: 1;
+            border-radius: 5px;
         }
         .dropdown-content a {
             color: #333;
@@ -46,8 +47,9 @@
             text-decoration: none;
             display: block;
             transition: background-color 0.3s ease, color 0.3s ease; /* Suavizamos el hover */
-            border-bottom: 1px solid #eaeaea; /* Líneas divisorias */
         }
+
+
         .dropdown-content a:hover {
             background-color: #000;
             color: #fff;
@@ -102,8 +104,10 @@
                 <div class="dropdown">
                     <a th:href="@{categories}" class="hover:text-gray-300" id="categories-link">Categorias</a>
                     <div class="dropdown-content">
-                        <div th:each="category : ${categories}">
-                            <a th:href="@{|/categories/category/${category.id}|}" th:text="${category.name}"></a>
+                        <div th:each="category, iterStat : ${categories}">
+                            <a th:href="@{|/categories/category/${category.id}|}"
+                               th:text="${category.name}"
+                               ></a>
                         </div>
                     </div>
                 </div>
