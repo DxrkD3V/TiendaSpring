@@ -1,7 +1,10 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.controllers;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Categories.CategoryService;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Products.ProductService;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Products.ProductServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +20,11 @@ import java.util.Optional;
 @RequestMapping("/categories")
 public class CategoryController {
     private final CategoryService categoryService;
+    private final ProductService productService;
 
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryService categoryService, ProductServiceImpl productServiceImpl) {
         this.categoryService = categoryService;
+        this.productService = productServiceImpl;
     }
 
     @GetMapping
@@ -39,5 +44,17 @@ public class CategoryController {
         model.addAttribute("category", category.get());
 
         return "category-product";
+    }
+
+    @GetMapping("product/{id}")
+    public String getProducts(@PathVariable Long id, Model model) {
+        Optional<Product> product = productService.findById(id);
+        Collection<Category> allCategories = categoryService.findAll();
+
+        model.addAttribute("product", product.get());
+        model.addAttribute("ratings", product.get().getRatings());
+        model.addAttribute("categories", allCategories);
+
+        return "products";
     }
 }

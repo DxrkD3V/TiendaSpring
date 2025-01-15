@@ -3,7 +3,6 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.Categori
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import org.springframework.data.repository.ListCrudRepository;
 
-//CategoriaRepo
 public interface CategoryRepo extends ListCrudRepository<Category, Long> {
 
 }

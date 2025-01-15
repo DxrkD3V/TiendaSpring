@@ -3,6 +3,7 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,5 +42,5 @@ public class Product {
     private Category category;
 
     @OneToMany(mappedBy = "product")
-    List<Rating> ratings;
+    List<Rating> ratings = new ArrayList<>();
 }

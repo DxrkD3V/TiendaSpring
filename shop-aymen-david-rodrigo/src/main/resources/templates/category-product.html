@@ -174,10 +174,10 @@
                     <p class="text-gray-600 mb-4">
                         Desde <span th:text="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"></span>€
                     </p>
-
-                    <button class="!rounded-button w-full bg-custom text-white py-2 hover:bg-gray-800">
+                    <a th:href="@{|/categories/product/${product.id}|}"
+                       class="!rounded-button w-full bg-custom text-white py-2 hover:bg-gray-800 px-8">
                         Ver Detalles
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

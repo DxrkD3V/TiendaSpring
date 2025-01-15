@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Porsche 911 GT3 - Vehículo Deportivo de Alto Rendimiento</title>
+  <html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://ai-public.creatie.ai/gen_page/tailwind-custom.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.theme.min.css" rel="stylesheet">
+  <link rel="icon" href="/imagenes/logo.ico" type="image/x-icon">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
+  <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#000000" data-border-radius="small"></script>
+  <style>
+    <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: block;
+      position: absolute;
+      top: 100%; /* Debajo del elemento principal */
+      left: 0;
+      background-color: #f1f1f1;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      opacity: 0; /* Oculto por defecto */
+      transform: translateY(-10px); /* Empieza un poco arriba */
+      transition: opacity 0.4s ease, transform 0.4s ease; /* Transición suave */
+      pointer-events: none; /* No interactuable cuando está oculto */
+      z-index: 1;
+      border-radius: 5px;
+    }
+    .dropdown-content a {
+      color: #333;
+      font-size: 16px;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s ease, color 0.3s ease; /* Suavizamos el hover */
+    }
+
+
+    .dropdown-content a:hover {
+      background-color: #000;
+      color: #fff;
+    }
+    .dropdown:hover .dropdown-content,
+    .dropdown-content:hover { /* Aparece al pasar el ratón */
+      opacity: 1; /* Se hace visible */
+      transform: translateY(0); /* Se posiciona en su lugar */
+      pointer-events: auto; /* Activa la interacción */
+    }.box {
+       position: relative;
+     }
+    .input {
+      padding: 5px; /* Reducido a la mitad */
+      width: 40px; /* Reducido a la mitad */
+      height: 40px; /* Reducido a la mitad */
+      background: none;
+      border: 2px solid #ffb136; /* Reducido a la mitad */
+      border-radius: 50px;
+      box-sizing: border-box;
+      font-size: 13px; /* Reducido a la mitad */
+      color: #ffb136;
+      outline: none;
+      transition: .5s;
+    }
+    .box:hover .input {
+      width: 175px; /* Reducido a la mitad */
+      background: #3b3640;
+      border-radius: 10px;
+    }
+    .box i {
+      position: absolute;
+      top: 50%;
+      right: 7.5px; /* Reducido a la mitad */
+      transform: translate(-50%, -50%);
+      font-size: 13px; /* Reducido a la mitad */
+      color: #ffb136;
+      transition: .2s;
+    }
+    .box:hover i {
+      opacity: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body class="font-['Poppins']  bg-gray-50">
+<nav class="bg-custom text-white fixed w-full top-0 z-50">
+  <div class="max-w-8xl mx-auto px-6 py-4">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center space-x-12">
+        <a href="/"><img src="/imagenes/logo.png" alt="Ryze Cars" class="h-12"></a>
+        <div class="dropdown">
+          <a th:href="@{|/categories|}" class="hover:text-gray-300" id="categories-link" >Categorias</a>
+          <div class="dropdown-content">
+            <div th:each="category : ${categories}">
+              <a th:href="@{|/categories/category/${category.id}|}" th:text="${category.name}"></a>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:flex space-x-8">
+          <a href="#Modelos" class="hover:text-gray-300">Modelos</a>
+          <a href="#Noticias" class="hover:text-gray-300">Noticias</a>
+          <a href="#Testimonios" class="hover:text-gray-300">Testimonios</a>
+          <a href="#Contacto" class="hover:text-gray-300">Contacto</a>
+        </div>
+      </div>
+      <div class="flex items-center space-x-6">
+        <button class="!rounded-button hover:bg-gray-700 px-4 py-2 flex items-center">
+          <i class="fas fa-search mr-2"></i>
+          Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="relative">
+    <div class="glide">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+          <li class="glide__slide">
+            <img th:src="${product.imageurl}" alt="Porsche 911 GT3" class="w-full h-[800px] object-cover">
+          </li>
+        </ul>
+      </div>
+      <div class="glide__bullets" data-glide-el="controls[nav]">
+        <button class="glide__bullet" data-glide-dir="=0"></button>
+        <button class="glide__bullet" data-glide-dir="=1"></button>
+        <button class="glide__bullet" data-glide-dir="=2"></button>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="text-center mb-16">
+      <h1 th:text="${product.name}" class="text-4xl font-bold text-gray-900 mb-4 font-playfair"></h1>
+      <p th:text="${product.description}" class="text-xl text-gray-600 max-w-3xl mx-auto">La máxima expresión del rendimiento deportivo</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Especificaciones Técnicas</h2>
+        <div class="space-y-4">
+          <div class="flex items-center">
+            <i class="fa-solid fa-car text-custom w-8"></i>
+            <span class="text-gray-700">Motor: 4.0L Boxer 6 cilindros</span>
+          </div>
+          <div class="flex items-center">
+            <i class="fas fa-horse-head text-custom w-8"></i>
+            <span class="text-gray-700">Potencia: 510 CV</span>
+          </div>
+          <div class="flex items-center">                            <i class="fas fa-tachometer-alt text-custom w-8"></i>
+            <span class="text-gray-700">0-100 km/h: 3.4 segundos</span>
+          </div>
+          <div class="flex items-center">
+            <i class="fas fa-gauge-high text-custom w-8"></i>
+            <span class="text-gray-700">Velocidad máxima: 318 km/h</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Precio y Financiación</h2>
+        <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
+          <div th:text="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')} + '€'" class="text-4xl font-bold text-custom mb-4"></div>
+          <p class="text-gray-600 mb-6">Precio base sin opcionales</p>
+          <button class="w-full bg-custom text-white py-3 px-6 !rounded-button hover:bg-gray-900 transition-colors">                            Solicitar Información
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Opiniones de Clientes</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div th:each="rating : ${ratings}" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-400 flex">
+              <span th:each="i : ${#numbers.sequence(1, rating.rating.intValue())}">
+                <i class="fas fa-star"></i>
+              </span>
+              <span th:if="${rating.rating.intValue() < rating.rating}">
+               <i class="fas fa-star-half-alt"></i>
+              </span>
+              <span th:each="i : ${#numbers.sequence(rating.rating.intValue() + 1, 5)}">
+                <i class="far fa-star"></i>
+              </span>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-4" th:text="${rating.comment}">"Texto del comentario aquí"</p>
+          <div class="font-medium text-gray-900" th:text="${rating.name}">Nombre del usuario</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="bg-custom text-white py-12">
+  <div class="max-w-8xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div>
+        <img src="/imagenes/logo.png" alt="Luxury Cars" class="h-12 mb-6">
+        <p class="text-gray-300">Experiencia de lujo en cada detalle.</p>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
+        <ul class="space-y-2">
+          <li><a href="#Modelos" class="text-gray-300 hover:text-white">Modelos</a></li>
+          <li><a href="#Noticias" class="text-gray-300 hover:text-white">Noticias</a></li>
+          <li><a href="#Testimonios" class="text-gray-300 hover:text-white">Testimonios</a></li>
+          <li><a href="#Contacto" class="text-gray-300 hover:text-white">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Contacto</h4>
+        <ul class="space-y-2">
+          <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i>Calle Principal 123, Madrid</li>
+          <li class="flex items-center"><i class="fas fa-phone mr-2"></i>+34 900 123 456</li>
+          <li class="flex items-center"><i class="fas fa-envelope mr-2"></i>info@luxurycars.es</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+        <form class="space-y-4">
+          <input type="email" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white" placeholder="Su email">                        <button type="submit" class="!rounded-button w-full bg-white text-custom py-2 hover:bg-gray-200">Suscribirse</button>
+        </form>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+      <p class="text-gray-400">© 2024 Luxury Cars. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
+<script>
+  new Glide('.glide', {
+    type: 'carousel',
+    startAt: 0,
+    perView: 1,
+    autoplay: 5000
+  }).mount();
+</script>
+</body>
+</html>
