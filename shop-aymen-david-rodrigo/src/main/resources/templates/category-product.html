@@ -172,7 +172,7 @@
                         <span th:text="${product.description}"></span>
                     </p>
                     <p class="text-gray-600 mb-4">
-                        Desde <span th:text="${product.price}"></span>€
+                        Desde <span th:text="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"></span>€
                     </p>
 
                     <button class="!rounded-button w-full bg-custom text-white py-2 hover:bg-gray-800">
