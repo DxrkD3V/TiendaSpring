@@ -27,14 +27,25 @@ public class Product {
     private Double price;
     @Column(nullable = false, length = 50)
     private String manufacture;
+    @Column(nullable = false, length = 50)
+    private String motor;
+    @Column(nullable = false)
+    private int hp;
+    @Column(nullable = false)
+    private int maxVelocity;
 
-    public Product(String name, String imageurl, String description, Double price, String manufacture, Category category) {
+
+    public Product(String name, String imageurl, String description, Double price, String manufacture, String motor , int hp, int maxVelocity, Category category) {
         this.name = name;
         this.imageurl = imageurl;
         this.description = description;
         this.price = price;
         this.manufacture = manufacture;
         this.category = category;
+        this.motor = motor;
+        this.hp = hp;
+        this.maxVelocity = maxVelocity;
+
     }
 
     @ManyToOne
