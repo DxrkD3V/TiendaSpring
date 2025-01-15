@@ -31,11 +31,11 @@ public class ObjectsInit implements CommandLineRunner {
         String descripcionfamiliares = "Viaja con comodidad y seguridad en nuestros vehículos familiares, diseñados para acompañarte en cada aventura en familia. Con amplios espacios, tecnología avanzada y características de seguridad excepcionales, nuestros coches familiares ofrecen el equilibrio perfecto entre confort, versatilidad y rendimiento. Ya sea para viajes largos o trayectos urbanos, disfrutarás de una conducción suave y relajante, con el respaldo de una marca que cuida de lo que más importa: tu familia.";
         String descripcionluxo = "Déjate seducir por el lujo y la exclusividad con nuestros vehículos de alta gama. Cada detalle de estos coches está diseñado para brindarte la máxima comodidad y elegancia, desde sus materiales premium hasta sus prestaciones tecnológicas de última generación. Con un diseño sofisticado y una conducción impecable, nuestros coches de lujo son la elección perfecta para aquellos que buscan lo mejor en cada viaje. Disfruta de una experiencia de conducción única, donde la perfección es la norma.";
 
-        Category todoterreno = new Category("4x4", descripcion4x4,"/imagenes/4x4.jpg");
-        Category electricos = new Category("Electricos", descripcionelectricos,"/imagenes/electricos.jpg");
-        Category deportivos = new Category("Deportivos", descripciondeportivos,"/imagenes/deportivos.jpg");
-        Category familiares = new Category("Familiares", descripcionfamiliares,"/imagenes/familiares.jpg");
-        Category lujo = new Category("Lujo", descripcionluxo,"/imagenes/lujo.jpg");
+        Category todoterreno = new Category("4x4", descripcion4x4, "/imagenes/4x4.jpg");
+        Category electricos = new Category("Electricos", descripcionelectricos, "/imagenes/electricos.jpg");
+        Category deportivos = new Category("Deportivos", descripciondeportivos, "/imagenes/deportivos.jpg");
+        Category familiares = new Category("Familiares", descripcionfamiliares, "/imagenes/familiares.jpg");
+        Category lujo = new Category("Lujo", descripcionluxo, "/imagenes/lujo.jpg");
 
         categoryService.save(todoterreno);
         categoryService.save(electricos);
@@ -44,44 +44,36 @@ public class ObjectsInit implements CommandLineRunner {
         categoryService.save(lujo);
 
 
-        Product product1 = new Product("Toyota Land Cruiser","https://scene7.toyota.eu/is/image/toyotaeurope/LCR0012a_24_WEB:Large-Landscape?ts=1712237347791&resMode=sharp2&op_usm=1.75,0.3,2,0&fmt=png-alpha", "Robusto 4x4 con capacidad todoterreno.", 45000.00, "Toyota", todoterreno);
-        Product product2 = new Product("Jeep Wrangler","https://cdn.prod.website-files.com/5ec85520c4dfff034b036be2/65c2a025c92733315983325b_wrangler3.webp", "Clásico todoterreno ideal para aventuras.", 42000.00, "Jeep", todoterreno);
-
-        Product product3 = new Product("Ford S-Max","https://images.prismic.io/carwow/50be31d1-da22-4d93-a972-7fa00cd51987_LHD+Ford+S-MAX+2020+exterior-05.jpg", "Familiar espacioso con gran capacidad.", 32000.00, "Ford", familiares);
-        Product product4 = new Product("Renault Grand Scenic","https://www.km77.com/images/medium/2/6/8/3/renault-grand-scenic-2021-frontal.352683.jpg", "Familiar versátil con tecnología avanzada.", 30000.00, "Renault", familiares);
-
-        Product product5 = new Product("Tesla Model 3","https://cdn-drivek-datak.motork.net/configurator-imgs/cars/es/1600/TESLA/MODEL-3/43043_SEDAN-4-DOORS/tesla-model-3-front-view.jpg", "Eléctrico con autonomía y tecnología avanzada.", 50000.00, "Tesla", electricos);
-        Product product6 = new Product("Nissan Leaf","https://images.forococheselectricos.com/image/l/1320w/wp-content/uploads/2017/11/170905215242-2018-nissan-leaf-front-1024x576.jpg", "Compacto eléctrico con cero emisiones.", 28000.00, "Nissan", electricos);
-        Product product7 = new Product("Porsche 911","https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/05/Porsche-911-Carrera-2025-Hibrido-16.jpg?w=880", "Deportivo icónico con rendimiento superior.", 100000.00, "Porsche", deportivos);
-        Product product8 = new Product("Ferrari F8 Tributo","https://cdn.ferrari.com/cms/network/media/img/resize/6094000a8c09a35ca689fba0-ferrari-magazine-S3OmQ-vnzt.jpg", "Deportivo de lujo con diseño exclusivo.", 250000.00, "Ferrari", deportivos);
-
-
-        Product product9 = new Product("Rolls Royce Phantom","https://www.autonocion.com/wp-content/uploads/2018/11/Mansory-Rolls-Royce-Phantom-2018-25.jpg", "Lujo sin igual con detalles artesanales.", 450000.00, "Rolls Royce", lujo);
-        Product product10 = new Product( "Bentley Continental GT","https://hips.hearstapps.com/hmg-prod/images/continental-gt-and-gtc-s-1-1654518508.jpg", "Lujo y confort en un coupé elegante.", 350000.00, "Bentley", lujo);
-        Product product11 = new Product("Land Rover Defender", "https://pictures.dealer.com/m/mocrevecoeurlr/0693/7c2016eae6d8fa09798d45758dd00143x.jpg", "Robusto 4x4 ideal para terrenos difíciles.", 55000.00, "Land Rover", todoterreno);
-        Product product12 = new Product("Toyota Hilux", "https://s2.glbimg.com/FK-W1TarrxErVVPZ8HcXczwDzeI=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/U/k/sf737dSDeaSEL2oyQldg/2019-11-18-hiluxmateria.jpg", "Fuerza y durabilidad en cualquier terreno.", 40000.00, "Toyota", todoterreno);
-        Product product13 = new Product("Mercedes-Benz G-Class", "http://carlook.net/data/db_photos/mercedes-benz/g-class_amg/w463f_f/mercedes-benz_g-class_amg_w463f_f_suv5d-1917.jpg", "Lujoso todoterreno con capacidad todoterreno insuperable.", 130000.00, "Mercedes-Benz", todoterreno);
-        Product product14 = new Product("Jeep Cherokee", "https://wallpaperaccess.com/full/2692213.jpg", "Un todoterreno versátil con gran capacidad.", 45000.00, "Jeep", todoterreno);
-
-        Product product15 = new Product("Peugeot 5008", "https://images.netdirector.co.uk/gforces-auto/image/upload/q_auto,c_crop,f_auto,fl_lossy,x_1403,y_1307,w_4344,h_2441/auto-client/0b05e4a0f276ccc6c70945a53ee2f221/2961047_kvru6m5i40.jpg", "Familiar espacioso con diseño moderno y eficiencia.", 38000.00, "Peugeot", familiares);
-        Product product16 = new Product("Volkswagen Touran", "https://www.topgear.com/sites/default/files/cars-car/carousel/2016/03/vw_7422.jpg", "Familiar compacto y eficiente con una excelente relación calidad-precio.", 32000.00, "Volkswagen", familiares);
-        Product product17 = new Product("Skoda Superb", "https://auto.ironhorse.ru/wp-content/uploads/2015/10/superb-3-lb-fl-front.jpg", "Familiar con acabados premium y amplio espacio interior.", 42000.00, "Skoda", familiares);
-        Product product18 = new Product("Honda CR-V", "https://www.hdcarwallpapers.com/walls/2018_honda_cr_v_4k_3-HD.jpg", "SUV familiar espacioso, con alta eficiencia y tecnología avanzada.", 35000.00, "Honda", familiares);
-
-        Product product19 = new Product("Audi Q4 e-tron", "https://s1.cdn.autoevolution.com/images/news/gallery/examining-the-all-new-q4-e-trons-available-powertrains-and-the-tech-behind-them_8.jpg", "Eléctrico con estilo y tecnología avanzada.", 55000.00, "Audi", electricos);
-        Product product20 = new Product("Ford Mustang Mach-E", "https://media.autoexpress.co.uk/image/private/s--IofBDo_C--/v1575319158/autoexpress/2019/11/ford_mustang_mach-e_04_1.jpg", "SUV eléctrico con gran autonomía y rendimiento.", 60000.00, "Ford", electricos);
-        Product product21 = new Product("BMW iX", "https://www.electrichybridvehicletechnology.com/wp-content/uploads/2021/06/P90422119-highRes.jpg", "Eléctrico de lujo con un diseño impresionante.", 70000.00, "BMW", electricos);
-        Product product22 = new Product("Hyundai Ioniq 5", "https://cdn.motor1.com/images/mgl/XxEO9/s3/hyundai-ioniq-5-right-hand-drive.jpg", "SUV eléctrico con diseño futurista y gran rendimiento.", 48000.00, "Hyundai", electricos);
-
-        Product product23 = new Product("McLaren 720S", "http://www.hdcarwallpapers.com/walls/mclaren_720s_coupe_2017_2-HD.jpg", "Deportivo de alto rendimiento y diseño aerodinámico.", 300000.00, "McLaren", deportivos);
-        Product product24 = new Product("Lamborghini Huracán", "http://www.autoguide.com/blog/wp-content/uploads/2016/08/2016-Lamborghini-Huracan-LP-610-4-Spyder-Review-5.jpg", "Deportivo italiano con diseño llamativo y motor potente.", 250000.00, "Lamborghini", deportivos);
-        Product product25 = new Product("Aston Martin Vantage", "https://abbhbhjlqr.cloudimg.io/images.autodaily.com.au/2021/06/Aston-Martin-Vantage-F1-Edition-7.jpg?w=2520", "Deportivo británico de lujo con rendimiento sin igual.", 175000.00, "Aston Martin", deportivos);
-        Product product26 = new Product("Chevrolet Corvette Stingray", "https://photo-voiture.motorlegend.com/hd/chevrolet-corvette-c7-stingray-coupe-6-2-v8-466ch-91384.jpg", "Deportivo estadounidense con un diseño agresivo y un motor V8.", 65000.00, "Chevrolet", deportivos);
-
-        Product product27 = new Product("BMW 7 Series", "https://media.whatcar.com/wc-image/2019-01/2019_bmw_7_series_front.jpg", "De lujo con tecnología avanzada y comodidad excepcional.", 90000.00, "BMW", lujo);
-        Product product28 = new Product("Porsche Panamera", "https://www.automobilesreview.com/gallery/2017-porsche-panamera/2017-porsche-panamera-05.jpg", "De lujo con un rendimiento de alta gama y un diseño impresionante.", 120000.00, "Porsche", lujo);
-        Product product29 = new Product("Jaguar XJ", "http://momentcar.com/images/jaguar-xj-super-v8-1.jpg", "Berlina de lujo con un diseño elegante y un interior lujoso.", 95000.00, "Jaguar", lujo);
-        Product product30 = new Product("Maserati Quattroporte", "https://cevpu.com/wp-content/uploads/2017/01/2017-Maserati-Quattroporte-GTS-GranSport-exterior-front-and-side.jpg", "De lujo con un rendimiento excepcional y un diseño único.", 120000.00, "Maserati", lujo);
+        Product product1 = new Product("Toyota Land Cruiser", "https://scene7.toyota.eu/is/image/toyotaeurope/LCR0012a_24_WEB:Large-Landscape?ts=1712237347791&resMode=sharp2&op_usm=1.75,0.3,2,0&fmt=png-alpha", "Robusto 4x4 con capacidad todoterreno.", 45000.00, "Toyota", "4.0L V6", 271, 190, todoterreno);
+        Product product2 = new Product("Jeep Wrangler", "https://cdn.prod.website-files.com/5ec85520c4dfff034b036be2/65c2a025c92733315983325b_wrangler3.webp", "Clásico todoterreno ideal para aventuras.", 42000.00, "Jeep", "3.6L V6", 285, 180, todoterreno);
+        Product product3 = new Product("Ford S-Max", "https://images.prismic.io/carwow/50be31d1-da22-4d93-a972-7fa00cd51987_LHD+Ford+S-MAX+2020+exterior-05.jpg", "Familiar espacioso con gran capacidad.", 32000.00, "Ford", "2.0L I4 Turbo", 190, 200, familiares);
+        Product product4 = new Product("Renault Grand Scenic", "https://www.km77.com/images/medium/2/6/8/3/renault-grand-scenic-2021-frontal.352683.jpg", "Familiar versátil con tecnología avanzada.", 30000.00, "Renault", "1.3L I4 Turbo", 140, 190, familiares);
+        Product product5 = new Product("Tesla Model 3", "https://cdn-drivek-datak.motork.net/configurator-imgs/cars/es/1600/TESLA/MODEL-3/43043_SEDAN-4-DOORS/tesla-model-3-front-view.jpg", "Eléctrico con autonomía y tecnología avanzada.", 50000.00, "Tesla", "Eléctrico", 450, 225, electricos);
+        Product product6 = new Product("Nissan Leaf", "https://images.forococheselectricos.com/image/l/1320w/wp-content/uploads/2017/11/170905215242-2018-nissan-leaf-front-1024x576.jpg", "Compacto eléctrico con cero emisiones.", 28000.00, "Nissan", "Eléctrico", 150, 150, electricos);
+        Product product7 = new Product("Porsche 911", "https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/05/Porsche-911-Carrera-2025-Hibrido-16.jpg?w=880", "Deportivo icónico con rendimiento superior.", 100000.00, "Porsche", "3.0L Boxer 6", 443, 305, deportivos);
+        Product product8 = new Product("Ferrari F8 Tributo", "https://cdn.ferrari.com/cms/network/media/img/resize/6094000a8c09a35ca689fba0-ferrari-magazine-S3OmQ-vnzt.jpg", "Deportivo de lujo con diseño exclusivo.", 250000.00, "Ferrari", "3.9L V8 Turbo", 710, 340, deportivos);
+        Product product9 = new Product("Rolls Royce Phantom", "https://www.autonocion.com/wp-content/uploads/2018/11/Mansory-Rolls-Royce-Phantom-2018-25.jpg", "Lujo sin igual con detalles artesanales.", 450000.00, "Rolls Royce", "6.75L V12", 563, 250, lujo);
+        Product product10 = new Product("Bentley Continental GT", "https://hips.hearstapps.com/hmg-prod/images/continental-gt-and-gtc-s-1-1654518508.jpg", "Lujo y confort en un coupé elegante.", 350000.00, "Bentley", "4.0L V8", 542, 318, lujo);
+        Product product11 = new Product("Land Rover Defender", "https://pictures.dealer.com/m/mocrevecoeurlr/0693/7c2016eae6d8fa09798d45758dd00143x.jpg", "Robusto 4x4 ideal para terrenos difíciles.", 55000.00, "Land Rover", "3.0L I6", 395, 191, todoterreno);
+        Product product12 = new Product("Toyota Hilux", "https://s2.glbimg.com/FK-W1TarrxErVVPZ8HcXczwDzeI=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/U/k/sf737dSDeaSEL2oyQldg/2019-11-18-hiluxmateria.jpg", "Fuerza y durabilidad en cualquier terreno.", 40000.00, "Toyota", "2.8L I4 Turbo Diesel", 201, 175, todoterreno);
+        Product product13 = new Product("Mercedes-Benz G-Class", "http://carlook.net/data/db_photos/mercedes-benz/g-class_amg/w463f_f/mercedes-benz_g-class_amg_w463f_f_suv5d-1917.jpg", "Lujoso todoterreno con capacidad todoterreno insuperable.", 130000.00, "Mercedes-Benz", "4.0L V8 Turbo", 577, 210, todoterreno);
+        Product product14 = new Product("Jeep Cherokee", "https://wallpaperaccess.com/full/2692213.jpg", "Un todoterreno versátil con gran capacidad.", 45000.00, "Jeep", "3.2L V6", 271, 180, todoterreno);
+        Product product15 = new Product("Peugeot 5008", "https://images.netdirector.co.uk/gforces-auto/image/upload/q_auto,c_crop,f_auto,fl_lossy,x_1403,y_1307,w_4344,h_2441/auto-client/0b05e4a0f276ccc6c70945a53ee2f221/2961047_kvru6m5i40.jpg", "Familiar espacioso con diseño moderno y eficiencia.", 38000.00, "Peugeot", "1.2L I3 Turbo", 131, 188, familiares);
+        Product product16 = new Product("Volkswagen Touran", "https://www.topgear.com/sites/default/files/cars-car/carousel/2016/03/vw_7422.jpg", "Familiar compacto y eficiente con una excelente relación calidad-precio.", 32000.00, "Volkswagen", "1.5L I4 Turbo", 150, 200, familiares);
+        Product product17 = new Product("Skoda Superb", "https://auto.ironhorse.ru/wp-content/uploads/2015/10/superb-3-lb-fl-front.jpg", "Familiar con acabados premium y amplio espacio interior.", 42000.00, "Skoda", "2.0L I4 Turbo", 272, 250, familiares);
+        Product product18 = new Product("Honda CR-V", "https://www.hdcarwallpapers.com/walls/2018_honda_cr_v_4k_3-HD.jpg", "SUV familiar espacioso, con alta eficiencia y tecnología avanzada.", 35000.00, "Honda", "1.5L I4 Turbo", 190, 200, familiares);
+        Product product19 = new Product("Audi Q4 e-tron", "https://s1.cdn.autoevolution.com/images/news/gallery/examining-the-all-new-q4-e-trons-available-powertrains-and-the-tech-behind-them_8.jpg", "Eléctrico con estilo y tecnología avanzada.", 55000.00, "Audi", "Eléctrico", 201, 180, electricos);
+        Product product20 = new Product("Ford Mustang Mach-E", "https://media.autoexpress.co.uk/image/private/s--IofBDo_C--/v1575319158/autoexpress/2019/11/ford_mustang_mach-e_04_1.jpg", "SUV eléctrico con gran autonomía y rendimiento.", 60000.00, "Ford", "Eléctrico", 346, 180, electricos);
+        Product product21 = new Product("BMW iX", "https://www.electrichybridvehicletechnology.com/wp-content/uploads/2021/06/P90422119-highRes.jpg", "Eléctrico de lujo con un diseño impresionante.", 70000.00, "BMW", "Eléctrico", 516, 200, electricos);
+        Product product22 = new Product("Hyundai Ioniq 5", "https://cdn.motor1.com/images/mgl/XxEO9/s3/hyundai-ioniq-5-right-hand-drive.jpg", "SUV eléctrico con diseño futurista y gran rendimiento.", 48000.00, "Hyundai", "Eléctrico", 302, 185, electricos);
+        Product product23 = new Product("McLaren 720S", "http://www.hdcarwallpapers.com/walls/mclaren_720s_coupe_2017_2-HD.jpg", "Deportivo de alto rendimiento y diseño aerodinámico.", 300000.00, "McLaren", "V8 Twin-Turbo", 710, 341, deportivos);
+        Product product24 = new Product("Lamborghini Huracán", "http://www.autoguide.com/blog/wp-content/uploads/2016/08/2016-Lamborghini-Huracan-LP-610-4-Spyder-Review-5.jpg", "Deportivo italiano con diseño llamativo y motor potente.", 250000.00, "Lamborghini", "V10", 610, 325, deportivos);
+        Product product25 = new Product("Aston Martin Vantage", "https://abbhbhjlqr.cloudimg.io/images.autodaily.com.au/2021/06/Aston-Martin-Vantage-F1-Edition-7.jpg?w=2520", "Deportivo británico de lujo con rendimiento sin igual.", 175000.00, "Aston Martin", "V8 Twin-Turbo", 503, 314, deportivos);
+        Product product26 = new Product("Chevrolet Corvette Stingray", "https://photo-voiture.motorlegend.com/hd/chevrolet-corvette-c7-stingray-coupe-6-2-v8-466ch-91384.jpg", "Deportivo estadounidense con un diseño agresivo y un motor V8.", 65000.00, "Chevrolet", "V8", 495, 296, deportivos);
+        Product product27 = new Product("BMW 7 Series", "https://media.whatcar.com/wc-image/2019-01/2019_bmw_7_series_front.jpg", "De lujo con tecnología avanzada y comodidad excepcional.", 90000.00, "BMW", "Híbrido", 523, 250, lujo);
+        Product product28 = new Product("Porsche Panamera", "https://www.automobilesreview.com/gallery/2017-porsche-panamera/2017-porsche-panamera-05.jpg", "De lujo con un rendimiento de alta gama y un diseño impresionante.", 120000.00, "Porsche", "V8 Twin-Turbo", 550, 310, lujo);
+        Product product29 = new Product("Jaguar XJ", "http://momentcar.com/images/jaguar-xj-super-v8-1.jpg", "Berlina de lujo con un diseño elegante y un interior lujoso.", 95000.00, "Jaguar", "V6 Supercharged", 340, 250, lujo);
+        Product product30 = new Product("Maserati Quattroporte", "https://cevpu.com/wp-content/uploads/2017/01/2017-Maserati-Quattroporte-GTS-GranSport-exterior-front-and-side.jpg", "De lujo con un rendimiento excepcional y un diseño único.", 120000.00, "Maserati", "V8 Twin-Turbo", 580, 310, lujo);
 
 
         productService.save(product1);
