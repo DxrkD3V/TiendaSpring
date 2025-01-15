@@ -2,6 +2,7 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.controllers;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Rating;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Categories.CategoryService;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Products.ProductService;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Products.ProductServiceImpl;
@@ -51,8 +52,16 @@ public class CategoryController {
         Optional<Product> product = productService.findById(id);
         Collection<Category> allCategories = categoryService.findAll();
 
+        Collection<Rating> ratings = product.get().getRatings();
+
+        double averageRating = ratings.stream()
+                .mapToDouble(Rating::getRating)
+                .average()
+                .orElse(0.0);
+
         model.addAttribute("product", product.get());
         model.addAttribute("ratings", product.get().getRatings());
+        model.addAttribute("averageRating", averageRating);
         model.addAttribute("categories", allCategories);
 
         return "products";
