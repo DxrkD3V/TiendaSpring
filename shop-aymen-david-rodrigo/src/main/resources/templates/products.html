@@ -150,18 +150,15 @@
         <div class="space-y-4">
           <div class="flex items-center">
             <i class="fa-solid fa-car text-custom w-8"></i>
-            <span class="text-gray-700">Motor: 4.0L Boxer 6 cilindros</span>
+            <span th:text="'Motor: ' + ${product.motor}"></span>
           </div>
           <div class="flex items-center">
             <i class="fas fa-horse-head text-custom w-8"></i>
-            <span class="text-gray-700">Potencia: 510 CV</span>
-          </div>
-          <div class="flex items-center">                            <i class="fas fa-tachometer-alt text-custom w-8"></i>
-            <span class="text-gray-700">0-100 km/h: 3.4 segundos</span>
+            <span th:text="'Potencia: ' + ${product.hp} + ' CV'"></span>
           </div>
           <div class="flex items-center">
             <i class="fas fa-gauge-high text-custom w-8"></i>
-            <span class="text-gray-700">Velocidad máxima: 318 km/h</span>
+            <span th:text="'Velocidad Maxima: ' + ${product.maxVelocity} + ' km/h'"></span>
           </div>
         </div>
       </div>
@@ -175,8 +172,11 @@
         </div>
       </div>
     </div>
-    <div class="mb-16">
+    <div class="mb-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Opiniones de Clientes</h2>
+      <div th:if="${ratings.isEmpty()}" class="text-center">
+        <p class="text-gray-500 italic py-3">No hay reseñas para este producto.</p>
+      </div>
       <div th:if="${ratings != null and !ratings.isEmpty()}">
         <div class="flex flex-col items-center" >
           <div class="text-gray-800 py-1 font-bold text-2xl">
@@ -193,9 +193,6 @@
               <i class="far fa-star"></i>
             </span>
           </div>
-        </div>
-        <div th:if="${ratings == null or ratings.isEmpty()}">
-          <p class="text-gray-500 italic">No hay reseñas para esto.</p>
         </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div th:each="rating : ${ratings}" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
