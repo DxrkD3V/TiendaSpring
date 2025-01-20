@@ -119,8 +119,8 @@
                     <a href="#Contacto" class="hover:text-gray-300">Contacto</a>
                 </div>
             </div>
-            <div class="box" >
-                <form name="search" >
+            <div class="box">
+                <form action="/search" method="get" name="search">
                     <div id="search-container">
                         <div class="glow-effect"></div>
                         <div class="border-dark"></div>
@@ -132,47 +132,56 @@
                         <div class="outer-border"></div>
                         <div id="main">
                             <div id="search-box">
-                                <input placeholder="Search..." type="text" name="search-text" class="search-input">
+                                <!-- Cambiado el name a 'query' para que coincida con el controlador -->
+                                <input
+                                        placeholder="Search..."
+                                        type="text"
+                                        name="query"
+                                        class="search-input"
+                                        required>
                                 <div id="input-shadow"></div>
                                 <div id="highlight-shadow"></div>
                                 <div class="filter-frame"></div>
                                 <div id="search-icon">
-                                    <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            viewBox="0 0 24 24"
-                                            stroke-width="2"
-                                            stroke-linejoin="round"
-                                            stroke-linecap="round"
-                                            height="24"
-                                            fill="none"
-                                            class="feather feather-search"
-                                    >
-                                        <circle stroke="url(#search)" r="8" cy="11" cx="11"></circle>
-                                        <line
-                                                stroke="url(#searchl)"
-                                                y2="16.65"
-                                                y1="22"
-                                                x2="16.65"
-                                                x1="22"
-                                        ></line>
-                                        <defs>
-                                            <linearGradient gradientTransform="rotate(50)" id="search">
-                                                <stop stop-color="#f8e7f8" offset="0%"></stop>
-                                                <stop stop-color="#b6a9b7" offset="50%"></stop>
-                                            </linearGradient>
-                                            <linearGradient id="searchl">
-                                                <stop stop-color="#b6a9b7" offset="0%"></stop>
-                                                <stop stop-color="#837484" offset="50%"></stop>
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
+                                    <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                        <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="2"
+                                                stroke-linejoin="round"
+                                                stroke-linecap="round"
+                                                height="24"
+                                                fill="none"
+                                                class="feather feather-search"
+                                        >
+                                            <circle stroke="url(#search)" r="8" cy="11" cx="11"></circle>
+                                            <line
+                                                    stroke="url(#searchl)"
+                                                    y2="16.65"
+                                                    y1="22"
+                                                    x2="16.65"
+                                                    x1="22"
+                                            ></line>
+                                            <defs>
+                                                <linearGradient gradientTransform="rotate(50)" id="search">
+                                                    <stop stop-color="#f8e7f8" offset="0%"></stop>
+                                                    <stop stop-color="#b6a9b7" offset="50%"></stop>
+                                                </linearGradient>
+                                                <linearGradient id="searchl">
+                                                    <stop stop-color="#b6a9b7" offset="0%"></stop>
+                                                    <stop stop-color="#837484" offset="50%"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 </nav>
@@ -272,60 +281,28 @@
     <div class="max-w-8xl mx-auto px-6">
         <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16" id="Testimonios">Testimonios de Clientes</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-gray-50 p-8 rounded-lg">
+            <div th:each="rating, iterStat : ${ratings}" class="bg-gray-50 p-8 rounded-lg">
                 <div class="flex items-center mb-4">
-                    <img src="/imagenes/testimonio_1.png" alt="Cliente 1" class="w-12 h-12 rounded-full mr-4">
+                    <!-- Imagen por defecto del cliente -->
+                    <img th:src="@{'/imagenes/testimonio_' + ${iterStat.index + 1} + '.png'}" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
                     <div>
-                        <h4 class="font-semibold">Carlos Rodríguez</h4>
-                        <div class="flex text-yellow-400"><i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                        <!-- Nombre del cliente -->
+                        <h4 class="font-semibold" th:text="${rating.name}">Nombre del Cliente</h4>
+                        <div class="flex text-yellow-400">
+                            <!-- Estrellas completas -->
+                            <i class="fas fa-star" th:each="i : ${#numbers.sequence(1, T(java.lang.Math).floor(rating.rating))}"></i>
+                            <!-- Media estrella si el valor lo permite -->
+                            <i class="fas fa-star-half-alt" th:if="${rating.rating % 1 >= 0.5}"></i>
                         </div>
                     </div>
                 </div>
-                <p class="text-gray-600">"Servicio excepcional y atención personalizada. El proceso de compra fue
-                    impecable y el vehículo supera todas mis expectativas."
-                </p>
-            </div>
-            <div class="bg-gray-50 p-8 rounded-lg">
-                <div class="flex items-center mb-4">
-                    <img src="/imagenes/testimonio_2.png" alt="Cliente 2" class="w-12 h-12 rounded-full mr-4">
-                    <div>
-                        <h4 class="font-semibold">Ana Martínez</h4>
-                        <div class="flex text-yellow-400"><i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-gray-600">"La experiencia de compra fue extraordinaria. El equipo de ventas fue muy
-                    profesional y me ayudó a encontrar el coche perfecto."
-                </p>
-            </div>
-            <div class="bg-gray-50 p-8 rounded-lg">
-                <div class="flex items-center mb-4">
-                    <img src="/imagenes/testimonio_3.png" alt="Cliente 3" class="w-12 h-12 rounded-full mr-4">
-                    <div>
-                        <h4 class="font-semibold">Miguel Ángel López</h4>
-                        <div class="flex text-yellow-400"><i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-gray-600">"Increíble selección de vehículos de lujo y un servicio post-venta excepcional.
-                    Totalmente recomendado."
-                </p>
+                <!-- Comentario del cliente -->
+                <p class="text-gray-600" th:text="${rating.comment}">Comentario del cliente</p>
             </div>
         </div>
     </div>
 </section>
+
 <section class="py-20 bg-gray-100">
     <div class="max-w-8xl mx-auto px-6">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">

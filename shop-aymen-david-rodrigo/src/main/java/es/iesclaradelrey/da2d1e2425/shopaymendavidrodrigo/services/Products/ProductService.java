@@ -10,5 +10,6 @@ public interface ProductService {
     void save(Product product);
     Collection<Product> findAll();
     Collection<Product> findByCategoryID(Long categoryId);
+    Collection<Product> findByName(String name);
     Optional<Product> findById(Long id);
 }

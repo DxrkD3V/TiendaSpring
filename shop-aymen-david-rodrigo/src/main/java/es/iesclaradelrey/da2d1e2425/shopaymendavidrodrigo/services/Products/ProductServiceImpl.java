@@ -34,6 +34,16 @@ public ProductServiceImpl(ProductRepo productRepo) {
     return productRepo.findAll().stream().filter(product -> product.getCategory().getId().equals(categoryId)).collect(Collectors.toList());
 
     }
+    @Override
+    public Collection<Product> findByName(String name) {
+        return productRepo.findAll()
+                .stream()
+                .filter(product -> product.getName().equalsIgnoreCase(name))
+                .collect(Collectors.toList());
+    }
+
+
+
     public Optional<Product> findById(Long id) {
         return productRepo.findById(id);
     }
