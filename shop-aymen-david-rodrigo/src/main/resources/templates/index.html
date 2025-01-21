@@ -93,6 +93,24 @@
             opacity: 0;
             z-index: -1;
         }
+        #dropdown {
+            border: 1px solid #ccc;
+            background: white;
+            position: absolute;
+            z-index: 1000;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        #dropdown div {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #dropdown div:hover {
+            background-color: black;
+            color: white;
+        }
     </style>
 </head>
 <body class="font-['Poppins'] bg-gray-50" id="top">
@@ -120,7 +138,7 @@
                 </div>
             </div>
             <div class="box">
-                <form action="/search" method="get" name="search">
+                <form id="search-form" name="search">
                     <div id="search-container">
                         <div class="glow-effect"></div>
                         <div class="border-dark"></div>
@@ -132,11 +150,11 @@
                         <div class="outer-border"></div>
                         <div id="main">
                             <div id="search-box">
-                                <!-- Cambiado el name a 'query' para que coincida con el controlador -->
                                 <input
                                         placeholder="Search..."
                                         type="text"
                                         name="query"
+                                        id="query-input"
                                         class="search-input"
                                         required>
                                 <div id="input-shadow"></div>
@@ -153,16 +171,15 @@
                                                 stroke-linecap="round"
                                                 height="24"
                                                 fill="none"
-                                                class="feather feather-search"
-                                        >
+                                                class="feather feather-search">
                                             <circle stroke="url(#search)" r="8" cy="11" cx="11"></circle>
                                             <line
                                                     stroke="url(#searchl)"
                                                     y2="16.65"
                                                     y1="22"
                                                     x2="16.65"
-                                                    x1="22"
-                                            ></line>
+                                                    x1="22">
+                                            </line>
                                             <defs>
                                                 <linearGradient gradientTransform="rotate(50)" id="search">
                                                     <stop stop-color="#f8e7f8" offset="0%"></stop>
@@ -177,11 +194,11 @@
                                     </button>
                                 </div>
                             </div>
+                            <div id="dropdown" style="display: none; color: black; border: 1px solid #ccc; background: white; position: absolute; z-index: 1000;"></div>
                         </div>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </nav>
@@ -482,5 +499,6 @@
         }
     }).mount();
 </script>
+<script src="/JavaScript.js"></script>
 </body>
 </html>

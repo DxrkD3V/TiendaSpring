@@ -5,10 +5,12 @@ import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Rating;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Categories.CategoryService;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Products.ProductService;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Ratings.RatingService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
@@ -41,21 +43,11 @@ public class HomeController {
 
         return "index";
     }
-        @GetMapping("/search")
-    public String buscarProducto(@RequestParam("query") String query, Model model) {
-        // Buscar producto por nombre exacto (puedes ajustar para búsqueda parcial si lo deseas)
-        Optional<Product> producto = productService.findByName(query).stream().findFirst();
 
-        if (producto.isPresent()) {
-            // Si el producto existe, redirigir al detalle del producto
-            return "redirect:categories/product/" + producto.get().getId();
-        }
-
-        // Si no se encuentra, redirigir a la página de categorías
-        return "redirect:/categories";
+    //REPONSEENTITY POR QUE SI NO, DEVUELVE SEARCH.HTML... Y yo solo quiero devolver la query
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> buscarProductos(@RequestParam String query) {
+        List<Product> products = productService.findByNameContainingIgnoreCase(query);
+        return ResponseEntity.ok(products);
     }
-
-
-
-
 }

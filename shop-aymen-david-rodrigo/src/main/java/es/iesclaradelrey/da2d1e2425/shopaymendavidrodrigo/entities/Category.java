@@ -1,5 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import lombok.*;
@@ -25,7 +26,6 @@ public class Category{
     @Column(nullable = false, length = 1000)
     private String description;
     private String image;
-
     public Category(String name, String description, String image) {
         this.name = name;
         this.description = description;

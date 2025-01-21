@@ -5,6 +5,7 @@ import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.Products.
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,11 @@ public ProductServiceImpl(ProductRepo productRepo) {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Product> findByNameContainingIgnoreCase(String query) {
+        List<Product> products = productRepo.findByNameContainingIgnoreCase(query);
+        return products;
+    }
 
 
     public Optional<Product> findById(Long id) {

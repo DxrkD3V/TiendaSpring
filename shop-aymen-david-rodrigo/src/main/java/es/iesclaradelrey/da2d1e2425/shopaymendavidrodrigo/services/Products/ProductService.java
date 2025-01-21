@@ -3,6 +3,7 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Products;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
@@ -11,5 +12,8 @@ public interface ProductService {
     Collection<Product> findAll();
     Collection<Product> findByCategoryID(Long categoryId);
     Collection<Product> findByName(String name);
+
+    List<Product> findByNameContainingIgnoreCase(String query);
+
     Optional<Product> findById(Long id);
 }

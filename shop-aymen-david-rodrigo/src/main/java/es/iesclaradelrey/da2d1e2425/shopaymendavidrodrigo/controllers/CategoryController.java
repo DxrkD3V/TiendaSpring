@@ -29,10 +29,12 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ModelAndView getCategories() {
+    public String getCategories(Model model) {
         Collection<Category> categories = categoryService.findAll();
-
-        return new ModelAndView("categories", "categories", categories );
+        Collection<Product> products = productService.findAll();
+        model.addAttribute("categories", categories);
+        model.addAttribute("products", products);
+        return "categories";
     }
 
     @GetMapping("category/{id}")
