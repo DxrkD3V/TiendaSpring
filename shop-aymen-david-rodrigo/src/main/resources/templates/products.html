@@ -112,6 +112,25 @@
       opacity: 0;
       z-index: -1;
     }
+    #dropdown {
+      background: white;
+      position: absolute;
+      z-index: 1000;
+      transition: background 0.3s ease, color 0.3s ease;
+      border-radius: 5px;
+    }
+
+    #dropdown div {
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      border-radius: 5px;
+    }
+
+    #dropdown div:hover {
+      background-color: black;
+      color: white;
+    }
   </style>
 </head>
 <body class="font-['Poppins']  bg-gray-50">
@@ -136,7 +155,7 @@
         </div>
       </div>
       <div class="box">
-        <form id="search-form" name="search">
+        <form id="search-form" name="search" autocomplete="off">
           <div id="search-container">
             <div class="glow-effect"></div>
             <div class="border-dark"></div>

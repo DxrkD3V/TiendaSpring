@@ -44,7 +44,7 @@ public class HomeController {
         return "index";
     }
 
-    //REPONSEENTITY POR QUE SI NO, DEVUELVE SEARCH.HTML... Y yo solo quiero devolver la query
+    //REPONSEENTITY POR QUE SI NO, DEVUELVE SEARCH.HTML... Y yo solo quiero devolver el JSON de la Query
     @GetMapping("/search")
     public ResponseEntity<List<Product>> buscarProductos(@RequestParam String query) {
         List<Product> products = productService.findByNameContainingIgnoreCase(query);
