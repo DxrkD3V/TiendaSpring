@@ -281,13 +281,14 @@
           </div>
           <div class="text-yellow-400 mb-4 items-center text-2xl mb-4">
             <span th:each="i : ${#numbers.sequence(1, averageRating.intValue())}">
-              <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
             </span>
             <span th:if="${averageRating - averageRating.intValue() >= 0.5}">
-              <i class="fas fa-star-half-alt"></i>
+                <i class="fas fa-star-half-alt"></i>
             </span>
-            <span th:each="i : ${#numbers.sequence(averageRating.intValue() + 2, 5)}">
-              <i class="far fa-star"></i>
+            <span th:each="i : ${#numbers.sequence(1, 5 - averageRating.intValue() - (averageRating - averageRating.intValue() >= 0.5 ? 1 : 0))}"
+                  th:if="${averageRating < 5}">
+                <i class="far fa-star"></i>
             </span>
           </div>
         </div>
@@ -300,7 +301,7 @@
             <span th:if="${rating.rating.intValue() < rating.rating and rating.rating < 5}">
               <i class="fas fa-star-half-alt"></i>
             </span>
-        </div>
+          </div>
           <p class="text-gray-600 mb-4 py-2" th:text="${rating.comment}"></p>
           <div class="font-medium text-gray-900" th:text="${rating.name}"></div>
         </div>

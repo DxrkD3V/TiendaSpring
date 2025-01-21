@@ -110,7 +110,7 @@ public class ObjectsInit implements CommandLineRunner {
         Rating rating1 = new Rating(4.5, "Alice", "Great product, exceeded my expectations!", new Date(), product1);
         Rating rating2 = new Rating(3.0, "Bob", "Average quality, but worth the price.", new Date(), product1);
         Rating rating3 = new Rating(5.0, "Charlie", "Absolutely love it! Highly recommended.", new Date(), product2);
-        Rating rating4 = new Rating(2.0, "Diana", "Not as described, a bit disappointed.", new Date(), product2);
+        Rating rating4 = new Rating(5.0, "Diana", "Not as described, a bit disappointed.", new Date(), product2);
         Rating rating5 = new Rating(4.0, "Eve", "Good value for money, would buy again.", new Date(), product3);
         Rating rating6 = new Rating(1.5, "Frank", "Terrible experience, arrived broken.", new Date(), product3);
         Rating rating7 = new Rating(3.5, "Grace", "Decent product, delivery took a while.", new Date(), product4);
