@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
 </head>
@@ -19,10 +19,10 @@
             </div>
           </div>
           <div class="hidden md:flex space-x-8">
-            <a href="#/Modelos" class="hover:text-gray-300">Modelos</a>
-            <a href="#/Noticias" class="hover:text-gray-300">Noticias</a>
-            <a href="#/Testimonios" class="hover:text-gray-300">Testimonios</a>
-            <a href="#/Contacto" class="hover:text-gray-300">Contacto</a>
+            <a th:href="@{/#Modelos}" class="hover:text-gray-300">Modelos</a>
+            <a th:href="@{/#Noticias}" class="hover:text-gray-300">Noticias</a>
+            <a th:href="@{/#Testimonios}" class="hover:text-gray-300">Testimonios</a>
+            <a th:href="@{/#Contacto}" class="hover:text-gray-300">Contacto</a>
           </div>
         </div>
         <div class="box">
