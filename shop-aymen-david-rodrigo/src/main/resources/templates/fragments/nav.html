@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<header th:fragment="navPage">
+  <nav class="bg-custom text-white fixed w-full top-0 z-50">
+    <div class="max-w-8xl mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-12">
+          <a href="/"><img src="/imagenes/logo.png" alt="Ryze Cars" class="h-12"></a>
+          <div class="dropdown">
+            <a th:href="@{|/categories|}" class="hover:text-gray-300" id="categories-link" >Categorias</a>
+            <div class="dropdown-content">
+              <div th:each="category : ${categories}">
+                <a th:href="@{|/categories/category/${category.id}|}" th:text="${category.name}"></a>
+              </div>
+            </div>
+          </div>
+          <div class="hidden md:flex space-x-8">
+            <a href="#/Modelos" class="hover:text-gray-300">Modelos</a>
+            <a href="#/Noticias" class="hover:text-gray-300">Noticias</a>
+            <a href="#/Testimonios" class="hover:text-gray-300">Testimonios</a>
+            <a href="#/Contacto" class="hover:text-gray-300">Contacto</a>
+          </div>
+        </div>
+        <div class="box">
+          <form id="search-form" name="search" autocomplete="off">
+            <div id="search-container">
+              <div class="glow-effect"></div>
+              <div class="border-dark"></div>
+              <div class="border-dark"></div>
+              <div class="border-dark"></div>
+
+              <div class="white-overlay"></div>
+
+              <div class="outer-border"></div>
+              <div id="main">
+                <div id="search-box">
+                  <input
+                          placeholder="Search..."
+                          type="text"
+                          name="query"
+                          id="query-input"
+                          class="search-input"
+                          required>
+                  <div id="input-shadow"></div>
+                  <div id="highlight-shadow"></div>
+                  <div class="filter-frame"></div>
+                  <div id="search-icon">
+                    <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                      <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke-linejoin="round"
+                              stroke-linecap="round"
+                              height="24"
+                              fill="none"
+                              class="feather feather-search">
+                        <circle stroke="url(#search)" r="8" cy="11" cx="11"></circle>
+                        <line
+                                stroke="url(#searchl)"
+                                y2="16.65"
+                                y1="22"
+                                x2="16.65"
+                                x1="22">
+                        </line>
+                        <defs>
+                          <linearGradient gradientTransform="rotate(50)" id="search">
+                            <stop stop-color="#f8e7f8" offset="0%"></stop>
+                            <stop stop-color="#b6a9b7" offset="50%"></stop>
+                          </linearGradient>
+                          <linearGradient id="searchl">
+                            <stop stop-color="#b6a9b7" offset="0%"></stop>
+                            <stop stop-color="#837484" offset="50%"></stop>
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div id="dropdown" style="display: none; color: black; border: 1px solid #ccc; background: white; position: absolute; z-index: 1000;"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+</body>
+</html>
