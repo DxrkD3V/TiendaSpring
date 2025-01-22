@@ -1,0 +1,26 @@
+.index .dropdown-content {
+    display: block;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+}
+.index .dropdown:hover .dropdown-content {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.index #dropdown {
+    background: white;
+    position: absolute;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+.index #dropdown div {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.index #dropdown div:hover {
+    background-color: black;
+    color: white;
+}

@@ -1,0 +1,11 @@
+.categories .dropdown-content {
+    left: 50%;
+    transform: translateX(-25%);
+}
+.categories .description-container {
+    max-width: 2500px;
+    max-height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+}
