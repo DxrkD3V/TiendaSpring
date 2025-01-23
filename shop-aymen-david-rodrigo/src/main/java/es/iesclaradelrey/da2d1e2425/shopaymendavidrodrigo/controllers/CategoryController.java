@@ -11,10 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -46,7 +44,7 @@ public class CategoryController {
         model.addAttribute("categories", allCategories);
         model.addAttribute("category", category.get());
 
-        return "category-product";
+        return "category-products";
     }
 
     @GetMapping("product/{id}")
@@ -66,6 +64,6 @@ public class CategoryController {
         model.addAttribute("averageRating", averageRating);
         model.addAttribute("categories", allCategories);
 
-        return "products";
+        return "product";
     }
 }

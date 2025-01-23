@@ -1,112 +1,48 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/head :: headPage}">
-    <title th:text="${product.name} + ' - Ryze Cars'"></title>
-    <link href="/css/products.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Products</title>
 </head>
-<body class="font-['Poppins']  bg-gray-50">
-<header th:replace="~{fragments/nav :: navPage}"></header>
-<main>
-  <div class="relative">
-    <div class="glide">
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides">
-          <li class="glide__slide">
-            <img th:src="${product.imageurl}" alt="Porsche 911 GT3" class="w-full h-[800px] object-cover">
-          </li>
-        </ul>
-      </div>
-      <div class="glide__bullets" data-glide-el="controls[nav]">
-        <button class="glide__bullet" data-glide-dir="=0"></button>
-        <button class="glide__bullet" data-glide-dir="=1"></button>
-        <button class="glide__bullet" data-glide-dir="=2"></button>
-      </div>
-    </div>
-  </div>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="text-center mb-16">
-      <h1 th:text="${product.name}" class="text-4xl font-bold text-gray-900 mb-4 font-playfair"></h1>
-      <p th:text="${product.description}" class="text-xl text-gray-600 max-w-3xl mx-auto">La máxima expresión del rendimiento deportivo</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
-      <div>
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">Especificaciones Técnicas</h2>
-        <div class="space-y-4">
-          <div class="flex items-center">
-            <i class="fa-solid fa-car text-custom w-8"></i>
-            <span th:text="'Motor: ' + ${product.motor}"></span>
-          </div>
-          <div class="flex items-center">
-            <i class="fas fa-horse-head text-custom w-8"></i>
-            <span th:text="'Potencia: ' + ${product.hp} + ' CV'"></span>
-          </div>
-          <div class="flex items-center">
-            <i class="fas fa-gauge-high text-custom w-8"></i>
-            <span th:text="'Velocidad Maxima: ' + ${product.maxVelocity} + ' km/h'"></span>
-          </div>
+<body class="font-['Poppins'] bg-gray-50">
+<header th:replace="~{/fragments/nav :: navPage}"></header>
+<section class="py-20 bg-white">
+    <div class="max-w-8xl mx-auto px-6">
+        <!-- Título principal -->
+        <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16" style="...">Productos</h2>
+
+        <!-- Contenedor de categorías -->
+        <div class="space-y-12">
+            <!-- Iterar por cada categoría -->
+            <div th:each="category : ${categories}" class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Nombre de la categoría -->
+                <div class="p-6">
+                    <h2 class="text-3xl font-semibold mb-6" th:text="${category.name}">Nombre de la Categoría</h2>
+                </div>
+                <!-- Contenedor de productos -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
+                    <!-- Iterar por cada producto dentro de la categoría -->
+                    <div th:each="product : ${category.products}" class="bg-gray-100 rounded-lg shadow-md overflow-hidden">
+                        <img
+                                th:src="${product.imageurl}"
+                                alt="imagen de [[${product.name}]]"
+                                class="w-full h-48 object-cover"
+                        >
+                        <div class="p-4 flex flex-col">
+                            <h3 class="text-xl font-semibold mb-2" th:text="${product.name}">Nombre del Producto</h3>
+                            <p class="text-gray-600 mb-4" th:text="${product.description}">Descripción</p>
+                            <a th:href="@{|/categories/product/${product.id}|}"
+                               class="bg-black text-white py-2 hover:bg-gray-800 text-center rounded mt-auto">
+                                Ver Detalles
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div>
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">Precio y Financiación</h2>
-        <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
-          <div th:text="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')} + '€'" class="text-4xl font-bold text-custom mb-4"></div>
-          <p class="text-gray-600 mb-6">Precio base sin opcionales</p>
-          <button class="w-full bg-custom text-white py-3 px-6 !rounded-button hover:bg-gray-900 transition-colors">                            Solicitar Información
-          </button>
-        </div>
-      </div>
     </div>
-    <div class="mb-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Opiniones de Clientes</h2>
-      <div th:if="${ratings.isEmpty()}" class="text-center">
-        <p class="text-gray-500 italic py-3">No hay reseñas para este producto.</p>
-      </div>
-      <div th:if="${ratings != null and !ratings.isEmpty()}">
-        <div class="flex flex-col items-center" >
-          <div class="text-gray-800 py-1 font-bold text-2xl">
-            <h2 th:text="${#numbers.formatDecimal(averageRating, 1, 1)} + ' / 5'"></h2>
-          </div>
-          <div class="text-yellow-400 mb-4 items-center text-2xl mb-4">
-            <span th:each="i : ${#numbers.sequence(1, averageRating.intValue())}">
-                <i class="fas fa-star"></i>
-            </span>
-            <span th:if="${averageRating - averageRating.intValue() >= 0.5}">
-                <i class="fas fa-star-half-alt"></i>
-            </span>
-            <span th:each="i : ${#numbers.sequence(1, 5 - averageRating.intValue() - (averageRating - averageRating.intValue() >= 0.5 ? 1 : 0))}"
-                  th:if="${averageRating < 5}">
-                <i class="far fa-star"></i>
-            </span>
-          </div>
-        </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div th:each="rating : ${ratings}" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <div class="text-yellow-400 flex">
-            <span th:each="i : ${#numbers.sequence(1, T(java.lang.Math).min(rating.rating.intValue(), 5))}">
-              <i class="fas fa-star"></i>
-            </span>
-            <span th:if="${rating.rating.intValue() < rating.rating and rating.rating < 5}">
-              <i class="fas fa-star-half-alt"></i>
-            </span>
-          </div>
-          <p class="text-gray-600 mb-4 py-2" th:text="${rating.comment}"></p>
-          <div class="font-medium text-gray-900" th:text="${rating.name}"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-</main>
-<footer th:replace="~{fragments/footer :: footerPage}"></footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
-<script>
-  new Glide('.glide', {
-    type: 'carousel',
-    startAt: 0,
-    perView: 1,
-    autoplay: 5000
-  }).mount();
-</script>
-<script src="/JavaScript.js"></script>
+</section>
+
+<footer th:replace="~{/fragments/footer :: footerPage}"></footer>
 </body>
 </html>
