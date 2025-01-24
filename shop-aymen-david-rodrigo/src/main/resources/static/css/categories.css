@@ -9,3 +9,26 @@
     overflow-x: hidden;
     padding-right: 8px;
 }
+.box i {
+    position: absolute;
+    top: 50%;
+    right: 7.5px; /* Reducido a la mitad */
+    transform: translate(-50%, -50%);
+    font-size: 13px; /* Reducido a la mitad */
+    color: #ffb136;
+    transition: .2s;
+}
+.box:hover i {
+    opacity: 0;
+    z-index: -1;
+}
+.box {
+    position: relative;
+}
+.description-container {
+    max-width: 2500px; /* Controla el ancho */
+    max-height: 100px; /* Limita la altura */
+    overflow-y: auto; /* Habilita el scroll vertical */
+    overflow-x: hidden; /* Evita el scroll horizontal */
+    padding-right: 8px; /* Para que no se superponga con la barra de scroll */
+}

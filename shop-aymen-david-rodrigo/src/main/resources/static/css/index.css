@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: smooth;
+}
 .index .dropdown-content {
     display: block;
     opacity: 0;
