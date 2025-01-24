@@ -89,8 +89,9 @@
               <i class="fas fa-star-half-alt"></i>
             </span>
           </div>
-          <p class="text-gray-600 mb-4 py-2" th:text="${rating.comment}"></p>
+          <p class="text-gray-600 mb-4 py-2 h-24 overflow-y-auto text-ellipsis" th:text="${rating.comment}"></p>
           <div class="font-medium text-gray-900" th:text="${rating.name}"></div>
+          <div class="font-small text-gray-900" th:text="${#dates.format(rating.date, 'dd/MM/yyyy')}"></div>
         </div>
       </div>
     </div>

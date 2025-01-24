@@ -107,16 +107,29 @@ public class ObjectsInit implements CommandLineRunner {
         productService.save(product29);
         productService.save(product30);
 
-        Rating rating1 = new Rating(4.5, "Alice", "Great product, exceeded my expectations!", new Date(), product1);
-        Rating rating2 = new Rating(3.0, "Bob", "Average quality, but worth the price.", new Date(), product1);
-        Rating rating3 = new Rating(5.0, "Charlie", "Absolutely love it! Highly recommended.", new Date(), product2);
-        Rating rating4 = new Rating(5.0, "Diana", "Not as described, a bit disappointed.", new Date(), product2);
-        Rating rating5 = new Rating(4.0, "Eve", "Good value for money, would buy again.", new Date(), product3);
-        Rating rating6 = new Rating(1.5, "Frank", "Terrible experience, arrived broken.", new Date(), product3);
-        Rating rating7 = new Rating(3.5, "Grace", "Decent product, delivery took a while.", new Date(), product4);
-        Rating rating8 = new Rating(4.8, "Hank", "Excellent quality, very satisfied.", new Date(), product4);
-        Rating rating9 = new Rating(2.5, "Ivy", "Okay product, but expected more.", new Date(), product5);
-        Rating rating10 = new Rating(5.0, "Alice", "Perfect! Exactly what I was looking for.", new Date(), product5);
+        String comentario1 = "El coche es increíble, tiene un diseño moderno y los acabados interiores son de alta calidad. El motor responde perfectamente y es muy eficiente en cuanto al consumo de combustible. Sin duda, lo recomendaría a cualquiera que esté buscando un coche confiable y elegante.";
+        String comentario2 = "Es un coche aceptable, pero los materiales del interior parecen algo baratos para el precio que tiene. Además, he notado que el consumo de gasolina es más alto de lo que se indica en la ficha técnica. Aun así, cumple su función para el día a día.";
+        String comentario3 = "¡Estoy encantado con mi compra! Este coche es una maravilla. Es espacioso, cómodo y tiene muchísima tecnología integrada. Los sensores y asistentes de conducción funcionan de maravilla, y la conducción es suave incluso en carreteras complicadas. Lo volvería a comprar sin dudarlo.";
+        String comentario4 = "Me llevé una decepción con este coche. Aunque el diseño exterior es atractivo, la mecánica no cumple con mis expectativas. Ya tuve que llevarlo al taller dos veces en menos de tres meses por problemas eléctricos. No lo recomendaría.";
+        String comentario5 = "Es una excelente opción por el precio. El motor responde bien en ciudad y en carretera, y el sistema de sonido es sorprendentemente bueno. No es un coche de lujo, pero ofrece mucho por lo que cuesta. Perfecto para una familia pequeña.";
+        String comentario6 = "Terrible experiencia. El coche llegó con un rayón en la pintura y las ruedas desalineadas. Además, la atención al cliente del concesionario fue muy deficiente. No recomendaría este modelo ni esta marca a nadie.";
+        String comentario7 = "El coche está bien, pero esperaba más. La conducción es cómoda, pero el espacio en el maletero es menor de lo que esperaba. También me ha decepcionado el sistema de navegación, que parece anticuado comparado con otros modelos del mercado.";
+        String comentario8 = "Este coche supera todas mis expectativas. Es potente, eficiente y muy cómodo para largos viajes. Además, los asientos son ergonómicos y no te cansas incluso después de conducir durante horas. Definitivamente lo recomendaría para quienes busquen calidad y confort.";
+        String comentario9 = "El coche está bien en general, pero he notado que la suspensión no es muy buena en carreteras con baches. Aparte de eso, el diseño y la tecnología son bastante buenos. Es una opción decente, pero tiene margen de mejora.";
+        String comentario10 = "¡Perfecto en todos los sentidos! Este coche tiene todo lo que se puede pedir: un diseño espectacular, un interior lleno de detalles de lujo y un motor que es una auténtica joya. La experiencia de conducción es insuperable. Estoy encantado con mi compra.";
+
+
+        Rating rating1 = new Rating(4.5, "Ana", comentario1, new Date(120, 5, 15), product1);
+        Rating rating2 = new Rating(3.0, "José", comentario2, new Date(121, 2, 10), product1);
+        Rating rating3 = new Rating(5.0, "Carlos", comentario3, new Date(122, 8, 25), product2);
+        Rating rating4 = new Rating(2.0, "María", comentario4, new Date(123, 3, 5), product2);
+        Rating rating5 = new Rating(4.0, "Sofía", comentario5, new Date(124, 0, 12), product3);
+        Rating rating6 = new Rating(1.0, "Javier", comentario6, new Date(120, 10, 20), product3);
+        Rating rating7 = new Rating(3.5, "Raúl", comentario7, new Date(121, 6, 15), product4);
+        Rating rating8 = new Rating(4.8, "Elena", comentario8, new Date(123, 4, 22), product4);
+        Rating rating9 = new Rating(3.0, "Luis", comentario9, new Date(122, 1, 18), product5);
+        Rating rating10 = new Rating(5.0, "Carmen", comentario10, new Date(124, 11, 5), product5);
+
 
         ratingService.save(rating1);
         ratingService.save(rating2);
