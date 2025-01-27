@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/fragments/head :: headPage}">
-    <meta charset="UTF-8">
-    <title>Products</title>
+<head th:replace="~{/fragments/head :: headPage('Products','')}">
+
+
 </head>
 <body class="font-['Poppins'] bg-gray-50">
 <header th:replace="~{/fragments/nav :: navPage}"></header>
 <section class="py-20 bg-white">
     <div class="max-w-8xl mx-auto px-6">
         <!-- Título principal -->
-        <h2 class="text-4xl font-['Playfair_Display'] text-center mb-16" style="...">Productos</h2>
+        <h2 class="text-4xl font-['Playfair_Display'] text-center mt-16 mb-16" style="...">Productos</h2>
 
         <!-- Contenedor de categorías -->
         <div class="space-y-12">
