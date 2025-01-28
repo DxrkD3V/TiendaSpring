@@ -57,4 +57,7 @@ public class Product {
     @OneToMany(mappedBy = "product")
     @JsonIgnore
     List<Rating> ratings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product")
+    List<ShoppingCart> shoppingCarts;
 }

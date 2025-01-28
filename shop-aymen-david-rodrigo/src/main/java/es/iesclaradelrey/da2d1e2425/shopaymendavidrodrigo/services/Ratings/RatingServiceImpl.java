@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class RatingServiceImpl implements RatingService{
-    private RatingRepository ratingRepository;
+    private final RatingRepository ratingRepository;
     public RatingServiceImpl(RatingRepository ratingRepository) {
         this.ratingRepository = ratingRepository;
     }
