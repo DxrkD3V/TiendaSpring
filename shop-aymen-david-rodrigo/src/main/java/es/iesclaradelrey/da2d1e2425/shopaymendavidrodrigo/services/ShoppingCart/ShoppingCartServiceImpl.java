@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -30,7 +31,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public Collection<ShoppingCart> findByProductID(Long productId) {
-        return shoppingCartRepository.findByProductId(productId);
+    public Optional<ShoppingCart> findByProductID(Long productId) {
+        return shoppingCartRepository.findByProductId(productId).stream().findFirst();
     }
 }

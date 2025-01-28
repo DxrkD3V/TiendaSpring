@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -28,5 +28,11 @@ public class ShoppingCart {
     @ManyToOne
     Product product;
 
+    public ShoppingCart(int units ,Product product) {
+        this.units = units;
+        this.product = product;
+        this.updateAt = LocalDateTime.now();
+        this.addAt = LocalDateTime.now();
+    }
 
 }
