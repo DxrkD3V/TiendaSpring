@@ -9,7 +9,7 @@
 <header th:fragment="navPage">
   <nav class="bg-custom text-white fixed w-full top-0 z-50">
     <div class="max-w-8xl mx-auto px-6 py-4">
-      <div class="flex justify-between items-center">
+      <div class="flex justify-between items-center inline">
         <div class="flex items-center space-x-12">
           <a href="/"><img src="/imagenes/logo.png" alt="Ryze Cars" class="h-12"></a>
           <div class="dropdown">
@@ -27,68 +27,80 @@
             <a th:href="@{/#Contacto}" class="hover:text-gray-300">Contacto</a>
           </div>
         </div>
-        <div class="box">
-          <form id="search-form" name="search" autocomplete="off">
-            <div id="search-container">
-              <div class="glow-effect"></div>
-              <div class="border-dark"></div>
-              <div class="border-dark"></div>
-              <div class="border-dark"></div>
+        <div class="flex justify-between items-center space-x-4">
+          <div class="box">
+            <form id="search-form" name="search" autocomplete="off">
+              <div id="search-container">
+                <div class="glow-effect"></div>
+                <div class="border-dark"></div>
+                <div class="border-dark"></div>
+                <div class="border-dark"></div>
 
-              <div class="white-overlay"></div>
+                <div class="white-overlay"></div>
 
-              <div class="outer-border"></div>
-              <div id="main">
-                <div id="search-box">
-                  <input
-                          placeholder="Search..."
-                          type="text"
-                          name="query"
-                          id="query-input"
-                          class="search-input"
-                          required>
-                  <div id="input-shadow"></div>
-                  <div id="highlight-shadow"></div>
-                  <div class="filter-frame"></div>
-                  <div id="search-icon">
-                    <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
-                      <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              viewBox="0 0 24 24"
-                              stroke-width="2"
-                              stroke-linejoin="round"
-                              stroke-linecap="round"
-                              height="24"
-                              fill="none"
-                              class="feather feather-search">
-                        <circle stroke="url(#search)" r="8" cy="11" cx="11"></circle>
-                        <line
-                                stroke="url(#searchl)"
-                                y2="16.65"
-                                y1="22"
-                                x2="16.65"
-                                x1="22">
-                        </line>
-                        <defs>
-                          <linearGradient gradientTransform="rotate(50)" id="search">
-                            <stop stop-color="#f8e7f8" offset="0%"></stop>
-                            <stop stop-color="#b6a9b7" offset="50%"></stop>
-                          </linearGradient>
-                          <linearGradient id="searchl">
-                            <stop stop-color="#b6a9b7" offset="0%"></stop>
-                            <stop stop-color="#837484" offset="50%"></stop>
-                          </linearGradient>
-                        </defs>
-                      </svg>
-                    </button>
+                <div class="outer-border"></div>
+                <div id="main">
+                  <div id="search-box">
+                    <input
+                            placeholder="Search..."
+                            type="text"
+                            name="query"
+                            id="query-input"
+                            class="search-input"
+                            required>
+                    <div id="input-shadow"></div>
+                    <div id="highlight-shadow"></div>
+                    <div class="filter-frame"></div>
+                    <div id="search-icon">
+                      <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke-linejoin="round"
+                                stroke-linecap="round"
+                                height="24"
+                                fill="none"
+                                class="feather feather-search">
+                          <circle stroke="url(#search)" r="8" cy="11" cx="11"></circle>
+                          <line
+                                  stroke="url(#searchl)"
+                                  y2="16.65"
+                                  y1="22"
+                                  x2="16.65"
+                                  x1="22">
+                          </line>
+                          <defs>
+                            <linearGradient gradientTransform="rotate(50)" id="search">
+                              <stop stop-color="#f8e7f8" offset="0%"></stop>
+                              <stop stop-color="#b6a9b7" offset="50%"></stop>
+                            </linearGradient>
+                            <linearGradient id="searchl">
+                              <stop stop-color="#b6a9b7" offset="0%"></stop>
+                              <stop stop-color="#837484" offset="50%"></stop>
+                            </linearGradient>
+                          </defs>
+                        </svg>
+                      </button>
+                    </div>
                   </div>
+                  <div id="dropdown" style="display: none; color: black; border: 1px solid #ccc; background: white; position: absolute; z-index: 1000;"></div>
                 </div>
-                <div id="dropdown" style="display: none; color: black; border: 1px solid #ccc; background: white; position: absolute; z-index: 1000;"></div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
+          <div>
+            <button data-quantity="0" class="btn-cart">
+              <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="20.52" width="14.38" xmlns="http://www.w3.org/2000/svg">
+                <title>icon-cart</title>
+                <path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0"></path>
+              </svg>
+              <span class="quantity"></span>
+            </button>
+          </div>
         </div>
+
       </div>
     </div>
   </nav>
