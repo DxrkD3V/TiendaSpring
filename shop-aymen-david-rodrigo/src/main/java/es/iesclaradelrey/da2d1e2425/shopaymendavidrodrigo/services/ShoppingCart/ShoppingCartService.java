@@ -10,5 +10,7 @@ public interface ShoppingCartService {
     long count();
     void save(ShoppingCart shoppingCart);
     Collection<ShoppingCart> findAll();
-    Collection<ShoppingCart> findByProductID(Long productId);
+    Optional<ShoppingCart> findByProductID(Long productId);
+    ShoppingCart sumUnits(ShoppingCart shoppingCart);
+
 }

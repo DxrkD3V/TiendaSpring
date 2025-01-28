@@ -1,5 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.ShoppingCart;
 
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.ShoppingCart;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.ShoppingCart.ShoppingCartRepository;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public Optional<ShoppingCart> findByProductID(Long productId) {
         return shoppingCartRepository.findByProductId(productId).stream().findFirst();
+    }
+
+    @Override
+    public ShoppingCart sumUnits(ShoppingCart shoppingCart) {
+        shoppingCart.setUnits(shoppingCart.getUnits() + 1);
+        shoppingCartRepository.save(shoppingCart);
+        return shoppingCart;
     }
 }

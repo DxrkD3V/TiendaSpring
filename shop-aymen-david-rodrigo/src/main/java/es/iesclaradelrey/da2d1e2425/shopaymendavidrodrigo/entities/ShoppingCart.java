@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "shopping_carts")
+@Table(name = "shopping_cart")
 public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,7 @@ public class ShoppingCart {
     private LocalDateTime updateAt;
 
     @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
     Product product;
 
     public ShoppingCart(int units ,Product product) {

@@ -27,7 +27,7 @@ public class ProductController {
     @GetMapping
     public String getProducts(Model model) {
         Collection<Category> categories = categoryService.findAll();
-        model.addAttribute("categories", categories);
+        model.addAttribute("ca  tegories", categories);
         return "products";
     }
 }
