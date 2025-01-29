@@ -3,6 +3,7 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.controllers;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.ShoppingCart;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Categories.CategoryService;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Products.ProductService;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.ShoppingCart.ShoppingCartService;
 import jakarta.persistence.EntityNotFoundException;
@@ -21,10 +22,12 @@ import java.util.Optional;
 public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
+    private final CategoryService categoryService;
 
-    public ShoppingCartController(ShoppingCartService shoppingCartService, ProductService productService) {
+    public ShoppingCartController(ShoppingCartService shoppingCartService, ProductService productService, CategoryService categoryService) {
         this.shoppingCartService = shoppingCartService;
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping
@@ -34,7 +37,7 @@ public class ShoppingCartController {
         double total = shoppingCarts.stream()
                 .mapToDouble(cart -> cart.getProduct().getPrice() * cart.getUnits())
                 .sum();
-
+        model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("shoppingCart", shoppingCarts);
         model.addAttribute("totalPrice", total);
         model.addAttribute("products", products);
