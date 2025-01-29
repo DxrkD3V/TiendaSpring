@@ -74,4 +74,13 @@ public class ShoppingCartController {
         return "redirect:" + returnUrl;
     }
 
+    @GetMapping("/removeAll")
+    public String removeAllProducts() {
+        Collection<ShoppingCart> shoppingCarts = shoppingCartService.findAll();
+        for(ShoppingCart shoppingCart : shoppingCarts) {
+            shoppingCartService.remove(shoppingCart);
+        }
+        return "redirect:/shoppingCart";
+    }
+
 }

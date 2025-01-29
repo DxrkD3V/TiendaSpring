@@ -17,6 +17,9 @@
         </div>
 
         <div th:if="${!shoppingCart.isEmpty()}" class="space-y-8">
+            <a th:href="@{/shoppingCart/removeAll}"  class="!rounded-button bg-red-500 text-white px-4 py-2 hover:bg-red-600">
+                Eliminar Todos
+            </a>
             <!-- Lista de productos en el carrito -->
             <div th:each="item : ${shoppingCart}" class="flex items-center justify-between bg-gray-100 p-6 rounded-lg">
                 <img th:src="${item.product.imageurl}" th:alt="${item.product.name}" class="w-32 h-32 object-cover rounded-lg">
