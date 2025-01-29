@@ -27,9 +27,9 @@
                 </div>
                 <div class="flex flex-col items-center">
                     <p class="text-lg font-semibold text-gray-800 mb-4">Total: <span th:text="${#numbers.formatDecimal(item.product.price * item.units, 1, 'COMMA', 2, 'POINT')} + ' €'"></span></p>
-                    <button th:onclick="|/shoppingCart/remove/${item.product.id}|" class="!rounded-button bg-red-500 text-white px-4 py-2 hover:bg-red-600">
+                    <a th:href="@{/shoppingCart/remove(productId=${item.product.id}, returnurl=${'/shoppingCart'})}"  class="!rounded-button bg-red-500 text-white px-4 py-2 hover:bg-red-600">
                         Eliminar
-                    </button>
+                    </a>
                 </div>
             </div>
 

@@ -42,4 +42,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         shoppingCartRepository.save(shoppingCart);
         return shoppingCart;
     }
+
+    public void remove(ShoppingCart shoppingCart) {
+        shoppingCartRepository.delete(shoppingCart);
+    }
 }

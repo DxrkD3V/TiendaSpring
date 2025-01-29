@@ -30,12 +30,14 @@ public class ShoppingCartController {
     @GetMapping
     public String getProducts(Model model) {
         Collection<ShoppingCart> shoppingCarts = shoppingCartService.findAll();
+        Collection<Product> products = productService.findAll();
         double total = shoppingCarts.stream()
                 .mapToDouble(cart -> cart.getProduct().getPrice() * cart.getUnits())
                 .sum();
 
         model.addAttribute("shoppingCart", shoppingCarts);
         model.addAttribute("totalPrice", total);
+        model.addAttribute("products", products);
         return "shoppingCart";
     }
 
@@ -53,6 +55,19 @@ public class ShoppingCartController {
         }
         return "redirect:" + returnUrl;
     }
-
+    @GetMapping(value = "/remove", params="returnurl")
+    public String removeProduct(@RequestParam("productId") Long id,
+                                @RequestParam("returnurl") String returnUrl) {
+        Optional<ShoppingCart> shoppingCart = shoppingCartService.findByProductID(id);
+        shoppingCart.ifPresent(item -> {
+            if (item.getUnits() > 1) {
+                item.setUnits(item.getUnits() - 1);
+                shoppingCartService.save(item);
+            } else {
+                shoppingCartService.remove(item);
+            }
+        });
+        return "redirect:" + returnUrl;
+    }
 
 }

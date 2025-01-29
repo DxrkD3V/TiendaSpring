@@ -13,4 +13,5 @@ public interface ShoppingCartService {
     Optional<ShoppingCart> findByProductID(Long productId);
     ShoppingCart sumUnits(ShoppingCart shoppingCart);
 
+    void remove(ShoppingCart shoppingCart);
 }
