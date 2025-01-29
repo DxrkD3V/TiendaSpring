@@ -62,14 +62,15 @@ public class ShoppingCartController {
     public String removeProduct(@RequestParam("productId") Long id,
                                 @RequestParam("returnurl") String returnUrl) {
         Optional<ShoppingCart> shoppingCart = shoppingCartService.findByProductID(id);
-        shoppingCart.ifPresent(item -> {
-            if (item.getUnits() > 1) {
-                item.setUnits(item.getUnits() - 1);
-                shoppingCartService.save(item);
-            } else {
-                shoppingCartService.remove(item);
+
+        if(shoppingCart.isPresent()) {
+            if(shoppingCart.get().getUnits() > 1) {
+                shoppingCart.get().setUnits(shoppingCart.get().getUnits() - 1);
+                shoppingCartService.save(shoppingCart.get());
+            }else{
+                shoppingCartService.remove(shoppingCart.get());
             }
-        });
+        }
         return "redirect:" + returnUrl;
     }
 
