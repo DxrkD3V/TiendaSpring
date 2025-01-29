@@ -30,7 +30,12 @@ public class ShoppingCartController {
     @GetMapping
     public String getProducts(Model model) {
         Collection<ShoppingCart> shoppingCarts = shoppingCartService.findAll();
+        double total = shoppingCarts.stream()
+                .mapToDouble(cart -> cart.getProduct().getPrice() * cart.getUnits())
+                .sum();
+
         model.addAttribute("shoppingCart", shoppingCarts);
+        model.addAttribute("totalPrice", total);
         return "shoppingCart";
     }
 
