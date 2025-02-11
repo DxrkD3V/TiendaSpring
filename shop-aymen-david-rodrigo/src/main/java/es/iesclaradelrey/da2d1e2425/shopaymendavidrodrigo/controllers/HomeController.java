@@ -2,16 +2,14 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.controllers;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Rating;
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Categories.CategoryService;
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Products.ProductService;
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Ratings.RatingService;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.categories.CategoryService;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.products.ProductService;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.ratings.RatingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 

@@ -26,6 +26,8 @@ public class Product {
     private String description;
     @Column(length = 10)
     private Double price;
+    @Column(nullable = false)
+    private int stock;
     @Column(nullable = false, length = 50)
     private String manufacture;
     @Column(nullable = false, length = 50)
@@ -36,16 +38,18 @@ public class Product {
     private int maxVelocity;
 
 
-    public Product(String name, String imageurl, String description, Double price, String manufacture, String motor , int hp, int maxVelocity, Category category) {
+    public Product(String name, String imageurl, String description, Double price, String manufacture, String motor , int hp, int maxVelocity, int stock ,Category category) {
         this.name = name;
         this.imageurl = imageurl;
         this.description = description;
         this.price = price;
         this.manufacture = manufacture;
-        this.category = category;
         this.motor = motor;
         this.hp = hp;
         this.maxVelocity = maxVelocity;
+        this.stock = stock;
+        this.category = category;
+
 
     }
 

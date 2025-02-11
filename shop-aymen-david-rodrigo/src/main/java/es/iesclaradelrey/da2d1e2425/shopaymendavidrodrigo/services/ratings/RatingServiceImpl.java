@@ -1,11 +1,10 @@
-package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Ratings;
+package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.ratings;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Rating;
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.Ratings.RatingRepository;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.ratings.RatingRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service

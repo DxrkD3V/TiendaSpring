@@ -1,4 +1,4 @@
-package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.Ratings;
+package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.ratings;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Rating;
 

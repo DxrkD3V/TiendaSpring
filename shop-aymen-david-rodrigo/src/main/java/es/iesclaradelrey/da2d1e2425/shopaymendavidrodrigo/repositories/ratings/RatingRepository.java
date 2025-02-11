@@ -1,4 +1,4 @@
-package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.Ratings;
+package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.ratings;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Rating;
 import org.springframework.data.repository.ListCrudRepository;
