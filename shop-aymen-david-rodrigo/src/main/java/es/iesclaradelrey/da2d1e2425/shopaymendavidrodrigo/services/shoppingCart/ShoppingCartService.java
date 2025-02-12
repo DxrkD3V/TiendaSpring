@@ -1,5 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.shoppingCart;
 
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.ShoppingCart;
 
 import java.util.Collection;
@@ -13,7 +14,7 @@ public interface ShoppingCartService {
 
     void sumUnits(ShoppingCart shoppingCart);
     Double sumTotalPrice(Collection<ShoppingCart> shoppingCarts);
-    void add(Long id);
+    void add(Product product);
     void remove(Long id);
     void removeAll();
 }

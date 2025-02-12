@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/shoppingCart")
@@ -44,7 +45,10 @@ public class ShoppingCartController {
     @GetMapping(value = "/add", params="returnurl")
     public String addProduct (@RequestParam("productId") Long id,
                               @RequestParam("returnurl") String returnUrl) {
-        shoppingCartService.add(id);
+        Optional<Product> product = productService.findById(id);
+        if (product.isPresent()) {
+            shoppingCartService.add(product.get());
+        }
 
         return "redirect:" + returnUrl;
     }

@@ -49,13 +49,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public void add(Long id) {
-        Optional<ShoppingCart> shoppingCart = shoppingCartRepository.findByProductId(id);
+    public void add(Product product) {
+        Optional<ShoppingCart> shoppingCart = shoppingCartRepository.findByProductId(product.getId());
 
         if (shoppingCart.isPresent()) {
             sumUnits(shoppingCart.get());
         } else {
-            ShoppingCart newShoppingCart = new ShoppingCart(1,shoppingCart.get().getProduct());
+            ShoppingCart newShoppingCart = new ShoppingCart(1,product);
             shoppingCartRepository.save(newShoppingCart);
         }
     }
