@@ -2,7 +2,12 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.shoppingCart
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.ShoppingCart;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.NotRemaningUnitsException;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.products.ProductRepository;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.shoppingCart.ShoppingCartRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -11,8 +16,12 @@ import java.util.Optional;
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     private final ShoppingCartRepository shoppingCartRepository;
-    public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository) {
+    private final ProductRepository productRepository;
+    private Exception EntityNotFoundException;
+
+    public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository, ProductRepository productRepository) {
         this.shoppingCartRepository = shoppingCartRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -76,5 +85,24 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public void removeAll() {
         Collection<ShoppingCart> shoppingCarts = shoppingCartRepository.findAll();
         shoppingCartRepository.deleteAll(shoppingCarts);
+    }
+
+    @Override
+    public void saveOrUpdate (Long productId, int addUnits) throws Exception {
+        Product product = productRepository
+                .findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el producto de id "+productId));
+
+        ShoppingCart itemCart = shoppingCartRepository
+                .findByProductId(productId)
+                .orElse(new ShoppingCart(0,product));
+
+
+        int remaningUnits = product.getStock() - itemCart.getUnits() - addUnits;
+        if(remaningUnits < 0) {
+            throw new NotRemaningUnitsException("No hay unidades suficientes en el stock para este producto. Solo quedan "+(product.getStock() - itemCart.getUnits()));
+        }
+        itemCart.setUnits(addUnits);
+        shoppingCartRepository.save(itemCart);
     }
 }

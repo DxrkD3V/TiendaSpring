@@ -17,4 +17,6 @@ public interface ShoppingCartService {
     void add(Product product);
     void remove(Long id);
     void removeAll();
+
+    void saveOrUpdate(Long productId, int addUnits) throws Exception;
 }
