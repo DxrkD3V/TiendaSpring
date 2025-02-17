@@ -9,20 +9,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/v1")
 public class ShoppingCartRestController {
     private final ShoppingCartService shoppingCartService;
-    private final ProductService productService;
 
-    public ShoppingCartRestController(ShoppingCartService shoppingCartService, ProductService productService) {
+    public ShoppingCartRestController(ShoppingCartService shoppingCartService) {
         this.shoppingCartService = shoppingCartService;
-        this.productService = productService;
     }
 
     @PostMapping("/add")
     public ResponseEntity<String> addProduct(@RequestBody AddItemCartDTO productDto) throws Exception {
             shoppingCartService.saveOrUpdate(productDto.getProductId(),productDto.getAddUnits());
-            return ResponseEntity.ok("Proucto añadido");
+            return ResponseEntity.status(HttpStatus.OK).body("producto añadido");
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> removeProduct(@RequestBody AddItemCartDTO productDto) throws Exception {
+        shoppingCartService.delete(productDto.getProductId());
+        return ResponseEntity.status(HttpStatus.OK).body("producto eliminado");
     }
 
 

@@ -102,7 +102,25 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         if(remaningUnits < 0) {
             throw new NotRemaningUnitsException("No hay unidades suficientes en el stock para este producto. Solo quedan "+(product.getStock() - itemCart.getUnits()));
         }
-        itemCart.setUnits(addUnits);
+        itemCart.setUnits(addUnits + itemCart.getUnits());
         shoppingCartRepository.save(itemCart);
+    }
+
+    @Override
+    public void delete(Long productId) {
+        Product product = productRepository
+                .findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el producto de id "+productId));
+
+        ShoppingCart itemCart = shoppingCartRepository
+                .findByProductId(productId)
+                .orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el producto de id "+productId+" en el carrito"));
+
+        if(itemCart.getUnits() > 1) {
+            itemCart.setUnits(itemCart.getUnits() - 1);
+        }else{
+            shoppingCartRepository.delete(itemCart);
+        }
+
     }
 }

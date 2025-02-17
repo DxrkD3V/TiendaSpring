@@ -1,7 +1,7 @@
-POST http://localhost:8080/api/products/add
+POST http://localhost:8000/api/products/add
 Content-Type: application/json
 
 {
-  "productId": 1,
-  "addUnits": 2
+  "productId": 2,
+  "addUnits": 1
 }

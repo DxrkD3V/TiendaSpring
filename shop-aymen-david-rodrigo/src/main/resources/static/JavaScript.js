@@ -50,3 +50,75 @@ document.addEventListener('click', function (event) {
         dropdown.style.display = 'none';
     }
 });
+
+function addToCart(productId, addUnits) {
+    fetch("/api/v1/add", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ productId: productId, addUnits: addUnits })
+    })
+        .then(async response => {
+            const responseBody = await response.text();
+            if (!response.ok) {
+                throw new Error(`${responseBody}`);
+            }
+            return responseBody;
+        })
+        .then(data => {
+            showToast("✅ Éxito", data, "bg-green-500");
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            showToast("❌ Error", error.message, "bg-red-500");
+        });
+}
+
+
+function showToast(title, message, bgColor) {
+    const toastContainer = document.getElementById("toastContainer");
+
+    const toast = document.createElement("div");
+    toast.className = `flex items-center ${bgColor} text-white text-sm px-4 py-3 rounded-lg shadow-md transition-opacity opacity-100`;
+    toast.innerHTML = `
+        <strong class="mr-2">${title}:</strong> 
+        <span>${message}</span>
+        <button class="ml-auto text-white opacity-70 hover:opacity-100" onclick="this.parentElement.remove()">✖</button>
+    `;
+
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("opacity-0");
+        setTimeout(() => toast.remove(), 500);
+    }, 4000);
+}
+
+
+
+document.addEventListener("click", function (event) {
+    const quantityDisplay = document.getElementById("quantityDisplay");
+    let quantity = parseInt(quantityDisplay.getAttribute("data-quantity"));
+
+    if (event.target.matches(".quantity-btn")) {
+        const action = event.target.getAttribute("data-action");
+        if (action === "increase") {
+            quantity++;
+        } else if (action === "decrease" && quantity > 1) {
+            quantity--;
+        }
+        quantityDisplay.textContent = quantity;
+        quantityDisplay.setAttribute("data-quantity", quantity);
+    }
+
+    if (event.target.closest(".CartBtn")) {
+        const button = event.target.closest(".CartBtn");
+        const productId = button.getAttribute("data-product-id");
+        if (productId) {
+            addToCart(productId, quantity);
+        } else {
+            console.error("No se encontró el productId");
+        }
+    }
+});
