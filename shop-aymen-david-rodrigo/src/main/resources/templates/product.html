@@ -126,6 +126,9 @@
     autoplay: 5000
   }).mount();
 </script>
-<script src="/JavaScript.js"></script>
+<script th:inline="javascript">
+  const CONTEXT_PATH = /*[[@{/}]]*/ "/";
+</script>
+<script th:src="@{/JavaScript.js}"></script>
 </body>
 </html>

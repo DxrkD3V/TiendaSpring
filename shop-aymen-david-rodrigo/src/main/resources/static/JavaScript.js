@@ -1,3 +1,5 @@
+
+
 document.getElementById('query-input').addEventListener('keyup', async function (e) {
     const query = e.target.value.trim();
     const dropdown = document.getElementById('dropdown');
@@ -52,7 +54,7 @@ document.addEventListener('click', function (event) {
 });
 
 function addToCart(productId, addUnits) {
-    fetch("/api/v1/add", {
+    fetch(`${CONTEXT_PATH}api/v1/add`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
