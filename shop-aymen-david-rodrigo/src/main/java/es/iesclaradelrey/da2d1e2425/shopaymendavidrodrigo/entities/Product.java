@@ -38,6 +38,20 @@ public class Product {
     private int maxVelocity;
 
 
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    List<Rating> ratings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product")
+    List<ShoppingCart> shoppingCarts;
+
+
     public Product(String name, String imageurl, String description, Double price, String manufacture, String motor , int hp, int maxVelocity, int stock ,Category category) {
         this.name = name;
         this.imageurl = imageurl;
@@ -52,16 +66,4 @@ public class Product {
 
 
     }
-
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
-
-    @OneToMany(mappedBy = "product")
-    @JsonIgnore
-    List<Rating> ratings = new ArrayList<>();
-
-    @OneToMany(mappedBy = "product")
-    List<ShoppingCart> shoppingCarts;
 }

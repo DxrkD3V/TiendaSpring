@@ -13,8 +13,14 @@ public class GlobalExceptionHandler {
     ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
+
     @ExceptionHandler(NotRemaningUnitsException.class)
     ResponseEntity<String> handleTaskAssignmentAlreadyCompletedException(NotRemaningUnitsException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    }
+
+    @ExceptionHandler(AlreadyExistException.class)
+    ResponseEntity<String> handleTaskAssignmentAlreadyCompletedException(AlreadyExistException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     }
 }

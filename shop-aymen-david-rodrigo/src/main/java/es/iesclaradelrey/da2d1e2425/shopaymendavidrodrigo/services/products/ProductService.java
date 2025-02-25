@@ -1,5 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.products;
 
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateProductDto;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 
 import java.util.Collection;
@@ -16,4 +17,5 @@ public interface ProductService {
     List<Product> findByNameContainingIgnoreCase(String query);
 
     Optional<Product> findById(Long id);
+    void create(CreateProductDto createProductDto);
 }

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ProductRepository extends ListCrudRepository<Product, Long> {
     List<Product> findByNameContainingIgnoreCase(String name);
+    boolean existsProductByNameIgnoreCase(String name);
 }

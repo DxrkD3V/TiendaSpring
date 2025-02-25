@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear un nuevo producto</title>
+</head>
+<body>
+<h1>Crear un nuevo producto</h1>
+<form method="post" th:object="${product}">
+  <div>
+    <label for="txt-name">Nombre:</label>
+  </div>
+  <div>
+    <input type="text" id="txt-name" th:field="*{name}" required>
+  </div>
+
+  <div>
+    <label for="txt-imageurl">URL de la Imagen:</label>
+  </div>
+  <div>
+    <input type="text" id="txt-imageurl" th:field="*{imageurl}" required>
+  </div>
+
+  <div>
+    <label for="txt-description">Descripción:</label>
+  </div>
+  <div>
+    <textarea id="txt-description" th:field="*{description}" required></textarea>
+  </div>
+
+  <div>
+    <label for="txt-price">Precio (€):</label>
+  </div>
+  <div>
+    <input type="number" id="txt-price" th:field="*{price}" step="0.01" required>
+  </div>
+
+  <div>
+    <label for="txt-stock">Stock:</label>
+  </div>
+  <div>
+    <input type="number" id="txt-stock" th:field="*{stock}" min="0" required>
+  </div>
+
+  <div>
+    <label for="txt-manufacture">Fabricante:</label>
+  </div>
+  <div>
+    <input type="text" id="txt-manufacture" th:field="*{manufacture}" required>
+  </div>
+
+  <div>
+    <label for="txt-motor">Motor:</label>
+  </div>
+  <div>
+    <input type="text" id="txt-motor" th:field="*{motor}" required>
+  </div>
+
+  <div>
+    <label for="txt-hp">Potencia (HP):</label>
+  </div>
+  <div>
+    <input type="number" id="txt-hp" th:field="*{hp}" min="0" required>
+  </div>
+
+  <div>
+    <label for="txt-maxVelocity">Velocidad Máxima (km/h):</label>
+  </div>
+  <div>
+    <input type="number" id="txt-maxVelocity" th:field="*{maxVelocity}" min="0" required>
+  </div>
+
+  <div>
+    <label for="sel-category">Categoría:</label>
+  </div>
+  <div>
+    <select id="sel-category" th:field="*{category}" required>
+      <option value="" disabled selected>-- Seleccione una categoría --</option>
+      <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+    </select>
+  </div>
+
+  <button type="submit">Aceptar</button>
+</form>
+</body>
+</html>
