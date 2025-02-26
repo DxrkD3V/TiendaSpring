@@ -47,7 +47,7 @@ public class ProductController {
 
     @PostMapping("/new")
     public ModelAndView newProduct(@ModelAttribute CreateProductDto productDto) {
-        productService.create(productDto);
-        return new ModelAndView("products","products", productDto);
+        Long productId = productService.create(productDto);
+        return new ModelAndView("redirect:/categories/product/" + productId);
     }
 }

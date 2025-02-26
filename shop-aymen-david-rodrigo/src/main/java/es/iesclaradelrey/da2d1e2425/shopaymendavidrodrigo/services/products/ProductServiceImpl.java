@@ -57,10 +57,11 @@ public ProductServiceImpl(ProductRepository productRepo) {
     }
 
     @Override
-    public void create(CreateProductDto productDto) {
-        if(productRepository.existsProductByNameIgnoreCase(productDto.getName())) {
-            throw new AlreadyExistException(String.format("Ya existe un producto con el nombre %s",productDto.getName()));
+    public Long create(CreateProductDto productDto) {
+        if (productRepository.existsProductByNameIgnoreCase(productDto.getName())) {
+            throw new AlreadyExistException(String.format("Ya existe un producto con el nombre %s", productDto.getName()));
         }
+
         Product product = new Product();
         product.setName(productDto.getName());
         product.setImageurl(productDto.getImageurl());
@@ -72,7 +73,9 @@ public ProductServiceImpl(ProductRepository productRepo) {
         product.setMotor(productDto.getMotor());
         product.setHp(productDto.getHp());
         product.setMaxVelocity(productDto.getMaxVelocity());
-        productRepository.save(product);
 
+        Product savedProduct = productRepository.save(product);
+
+        return savedProduct.getId();
     }
 }

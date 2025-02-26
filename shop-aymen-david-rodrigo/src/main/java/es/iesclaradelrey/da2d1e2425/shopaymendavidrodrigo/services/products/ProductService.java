@@ -17,5 +17,5 @@ public interface ProductService {
     List<Product> findByNameContainingIgnoreCase(String query);
 
     Optional<Product> findById(Long id);
-    void create(CreateProductDto createProductDto);
+    Long create(CreateProductDto createProductDto);
 }
