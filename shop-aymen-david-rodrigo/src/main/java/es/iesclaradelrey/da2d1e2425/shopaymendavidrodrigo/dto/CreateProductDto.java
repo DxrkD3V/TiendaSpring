@@ -20,11 +20,9 @@ public class CreateProductDto {
     @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
     private String name;
 
-    @NotNull(message = "La URL de la imagen es obligatoria")
     @Size(min = 5, max = 255, message = "La URL de la imagen debe tener entre 5 y 255 caracteres")
     private String imageurl;
 
-    @NotNull(message = "La descripción es obligatoria")
     @Size(min = 10, max = 500, message = "La descripción debe tener entre 10 y 500 caracteres")
     private String description;
 
@@ -40,15 +38,12 @@ public class CreateProductDto {
     @Size(min = 2, max = 100, message = "El fabricante debe tener entre 2 y 100 caracteres")
     private String manufacture;
 
-    @NotNull(message = "El motor es obligatorio")
     @Size(min = 2, max = 50, message = "El motor debe tener entre 2 y 50 caracteres")
     private String motor;
 
-    @NotNull(message = "La potencia es obligatoria")
     @Min(value = 0, message = "La potencia no puede ser negativa")
     private int hp;
 
-    @NotNull(message = "La velocidad máxima es obligatoria")
     @Min(value = 0, message = "La velocidad máxima no puede ser negativa")
     private int maxVelocity;
 
