@@ -2,7 +2,6 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.controllers;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateProductDto;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.categories.CategoryService;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.products.ProductService;
 import org.springframework.stereotype.Controller;
@@ -39,7 +38,7 @@ public class ProductController {
     @GetMapping("/new")
     public ModelAndView newProduct() {
         Collection<Category> categories = categoryService.findAll();
-        ModelAndView modelAndView = new ModelAndView("formProducts");
+        ModelAndView modelAndView = new ModelAndView("new-product");
         modelAndView.addObject("product", new CreateProductDto());
         modelAndView.addObject("categories", categories);
         return modelAndView;
