@@ -39,6 +39,4 @@ public class CategoryAdminController {
 
         return "admin/category/list-categories";
     }
-
-
 }

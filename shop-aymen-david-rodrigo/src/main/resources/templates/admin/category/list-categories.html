@@ -12,7 +12,7 @@
     <form th:replace="~{/fragments/admin/form :: form('/admin/categories')}"></form>
 </div>
 
-<div class="mt-3">
+<div class="container mt-3">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -22,11 +22,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="category : ${categories}">
-            <td th:text="${category.name}"></td>
-            <td th:text="${category.description}"></td>
-            <td>Acciones</td>
-        </tr>
+        <div class="border border-dark rounded">
+            <tr th:each="category : ${categories}">
+                <td th:text="${category.name}"></td>
+                <td th:text="${category.description}"></td>
+                <td>Acciones</td>
+            </tr>
+        </div>
+
         </tbody>
     </table>
     <div th:replace="~{/fragments/admin/pagination :: pagination('categories')}"></div>

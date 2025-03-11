@@ -1,7 +1,9 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.products;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateProductDto;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
+import org.springframework.data.domain.Page;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,4 +20,7 @@ public interface ProductService {
 
     Optional<Product> findById(Long id);
     Long create(CreateProductDto createProductDto);
+
+    Page<Product> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir);
+
 }
