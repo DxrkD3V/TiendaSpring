@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+</head>
+<body>
+
+<div th:fragment="pagination(url)">
+  <ul class="pagination">
+    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+      <a class="page-link"
+         th:href="@{${'/admin/' + url}(pageNumber=${currentPage - 1}, pageSize=${pageSize}, orderBy=${orderBy}, orderDir=${orderDir})}">
+        Anterior
+      </a>
+    </li>
+
+    <li th:each="i : ${#numbers.sequence((currentPage >= 3 ? currentPage - 2 : 1), (currentPage + 2 > totalPages ? totalPages : currentPage + 2))}"
+        class="page-item"
+        th:classappend="${i == currentPage} ? 'active'">
+      <a class="page-link"
+         th:href="@{${'/admin/' + url}(pageNumber=${i}, pageSize=${pageSize}, orderBy=${orderBy}, orderDir=${orderDir})}"
+         th:text="${i}">
+      </a>
+    </li>
+
+    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+      <a class="page-link"
+         th:href="@{${'/admin/' + url}(pageNumber=${currentPage + 1}, pageSize=${pageSize}, orderBy=${orderBy}, orderDir=${orderDir})}">
+        Siguiente
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+</body>
+</html>

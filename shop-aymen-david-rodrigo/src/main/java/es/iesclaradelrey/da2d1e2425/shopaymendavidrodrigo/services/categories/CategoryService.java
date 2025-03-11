@@ -1,7 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.categories;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
-
+import org.springframework.data.domain.Page;
 import java.util.Collection;
 import java.util.Optional;
 

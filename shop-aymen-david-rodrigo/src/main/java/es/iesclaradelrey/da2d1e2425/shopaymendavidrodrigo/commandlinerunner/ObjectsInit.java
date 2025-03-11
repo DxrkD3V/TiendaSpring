@@ -36,12 +36,13 @@ public class ObjectsInit implements CommandLineRunner {
         Category deportivos = new Category("Deportivos", descripciondeportivos, "/imagenes/deportivos.jpg");
         Category familiares = new Category("Familiares", descripcionfamiliares, "/imagenes/familiares.jpg");
         Category lujo = new Category("Lujo", descripcionluxo, "/imagenes/lujo.jpg");
-
+        Category test = new Category("Test", "test","Test");
         categoryService.save(todoterreno);
         categoryService.save(electricos);
         categoryService.save(deportivos);
         categoryService.save(familiares);
         categoryService.save(lujo);
+        categoryService.save(test);
 
 
 

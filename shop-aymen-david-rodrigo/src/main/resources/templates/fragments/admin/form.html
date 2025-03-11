@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+</head>
+<body>
+
+<form th:fragment="form(action)" th:method="get" th:action="@{${action}}" class="d-flex flex-wrap gap-3 align-items-center">
+    <div class="d-flex flex-column">
+        <label for="orderBy" class="form-label">Ordenar por</label>
+        <select id="orderBy" name="orderBy" class="form-select">
+            <option value="name" th:selected="${orderBy == 'name'}">Nombre</option>
+            <option value="description" th:selected="${orderBy == 'description'}">Descripción</option>
+        </select>
+    </div>
+    <div class="d-flex flex-column">
+        <label for="orderDir" class="form-label">En sentido</label>
+        <select id="orderDir" name="orderDir" class="form-select">
+            <option value="asc" th:selected="${orderDir == 'asc'}">Ascendente</option>
+            <option value="desc" th:selected="${orderDir == 'desc'}">Descendente</option>
+        </select>
+    </div>
+    <div class="d-flex flex-column">
+        <label for="pageSize" class="form-label">En cada página</label>
+        <input id="pageSize" name="pageSize" type="number" class="form-control" style="width: 80px;" th:value="${pageSize}">
+    </div>
+    <button type="submit" class="btn btn-primary align-self-end">Buscar</button>
+</form>
+
+</body>
+</html>
