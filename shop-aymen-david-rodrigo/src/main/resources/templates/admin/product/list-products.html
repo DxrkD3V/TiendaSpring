@@ -11,7 +11,7 @@
     <h1>Administración de productos</h1>
 
     <div class="container mt-2">
-        <form th:replace="~{/fragments/admin/form :: form('/admin/products')}"></form>
+        <form th:replace="~{admin/fragments/form :: form('/admin/products',${atributos}, ${orderBy}, ${orderDir}, ${pageSize})}"></form>
     </div>
 
     <table class="table table-striped">
@@ -34,7 +34,7 @@
         </tbody>
     </table>
 
-    <div th:replace="~{/fragments/admin/pagination :: pagination('products')}"></div>
+    <div th:replace="~{/admin/fragments/pagination :: pagination('products')}"></div>
 
 </body>
 </html>

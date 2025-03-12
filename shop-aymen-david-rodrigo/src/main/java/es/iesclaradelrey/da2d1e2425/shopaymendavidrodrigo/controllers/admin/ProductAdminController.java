@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("admin/products")
 
@@ -30,6 +32,9 @@ public class ProductAdminController {
 
         Page<Product> productPage = productService.findAll(pageNumber, pageSize, orderBy, orderDir);
 
+        List<String> atributos = List.of("Name", "Description");
+
+        model.addAttribute("atributos", atributos);
         model.addAttribute("products", productPage.getContent());
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("pageSize", pageSize);

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/categories")
@@ -30,6 +31,9 @@ public class CategoryAdminController {
 
         Page<Category> categoryPage = categoryService.findAll(pageNumber, pageSize, orderBy, orderDir);
 
+        List<String> atributos = List.of("Name", "Description");
+
+        model.addAttribute("atributos", atributos);
         model.addAttribute("categories", categoryPage.getContent());
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("pageSize", pageSize);
