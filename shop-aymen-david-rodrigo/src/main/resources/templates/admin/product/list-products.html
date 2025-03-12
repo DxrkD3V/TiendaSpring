@@ -34,7 +34,7 @@
         </tbody>
     </table>
 
-    <div th:replace="~{/admin/fragments/pagination :: pagination('products')}"></div>
+    <div th:replace="~{/admin/fragments/pagination :: pagination('products', ${orderBy}, ${orderDir}, ${pageSize}, ${currentPage}, ${totalPages})}"></div>
 
 </body>
 </html>

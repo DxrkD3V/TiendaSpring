@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<div th:fragment="pagination(url)">
+<div th:fragment="pagination(url, orderBy, orderDir, pageSize, currentPage, totalPages)">
   <ul class="pagination">
     <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
       <a class="page-link"
