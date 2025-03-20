@@ -8,6 +8,9 @@
 </head>
 <body>
 <h1>Administración de categorías</h1>
+
+<a th:href="@{/admin/categories/new}"><p>Crear una nueva categoria</p></a>
+
 <div class="container mt-2">
     <form th:replace="~{admin/fragments/form :: form('/admin/categories',${atributos}, ${orderBy}, ${orderDir}, ${pageSize})}"></form>
 </div>

@@ -10,6 +10,7 @@
 
     <h1>Administración de productos</h1>
 
+    <a th:href="@{/admin/products/new}"><p>Crear un nuevo producto</p></a>
     <div class="container mt-2">
         <form th:replace="~{admin/fragments/form :: form('/admin/products',${atributos}, ${orderBy}, ${orderDir}, ${pageSize})}"></form>
     </div>

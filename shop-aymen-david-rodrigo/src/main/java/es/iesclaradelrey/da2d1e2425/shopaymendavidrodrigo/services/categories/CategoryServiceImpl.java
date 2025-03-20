@@ -1,7 +1,9 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.categories;
 
 
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateCategoryDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.AlreadyExistException;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.categories.CategoryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -46,5 +48,18 @@ public class CategoryServiceImpl implements CategoryService {
         Pageable pageable = PageRequest.of(pageNumber - 1, pageSize, Sort.by(direction, orderBy));
 
         return categoryRepository.findAll(pageable);
+    }
+    @Override
+    public void create(CreateCategoryDTO createProductDTO){
+        if (categoryRepository.existsProductByNameIgnoreCase(createProductDTO.getName())) {
+           throw new AlreadyExistException(String.format("Ya existe un producto con el nombre %s", createProductDTO.getName()));
+        }
+        Category category = new Category();
+        category.setName(createProductDTO.getName());
+        category.setDescription(createProductDTO.getDescription());
+        category.setImage(createProductDTO.getImage());
+
+        Category savedCategory = categoryRepository.save(category);
+
     }
 }

@@ -33,20 +33,4 @@ public class ProductController {
         model.addAttribute("categories", categories);
         return "products";
     }
-
-    
-    @GetMapping("/new")
-    public ModelAndView newProduct() {
-        Collection<Category> categories = categoryService.findAll();
-        ModelAndView modelAndView = new ModelAndView("new-product");
-        modelAndView.addObject("product", new CreateProductDto());
-        modelAndView.addObject("categories", categories);
-        return modelAndView;
-    }
-
-    @PostMapping("/new")
-    public ModelAndView newProduct(@ModelAttribute CreateProductDto productDto) {
-        Long productId = productService.create(productDto);
-        return new ModelAndView("redirect:/categories/product/" + productId);
-    }
 }

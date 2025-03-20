@@ -1,5 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.categories;
 
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateCategoryDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import org.springframework.data.domain.Page;
 import java.util.Collection;
@@ -10,6 +11,7 @@ public interface CategoryService {
     void save(Category category);
     Collection<Category> findAll();
     Optional<Category> findById(Long id);
+    void create (CreateCategoryDTO createCategoryDTO);
 
     Page<Category> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir);
 }

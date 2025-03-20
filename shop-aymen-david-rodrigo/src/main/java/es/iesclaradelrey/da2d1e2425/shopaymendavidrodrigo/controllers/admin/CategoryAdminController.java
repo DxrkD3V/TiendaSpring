@@ -1,13 +1,16 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.controllers.admin;
 
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateCategoryDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.categories.CategoryService;
+import jakarta.validation.Valid;
+import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
 import java.util.List;
@@ -42,5 +45,21 @@ public class CategoryAdminController {
         model.addAttribute("orderDir", orderDir);
 
         return "admin/category/list-categories";
+    }
+
+    @GetMapping("/new")
+    public ModelAndView newCategory(){
+        ModelAndView modelAndView = new ModelAndView("admin/category/new-category");
+        modelAndView.addObject("category", new CreateCategoryDTO());
+        return modelAndView;
+    }
+    @PostMapping("/new")
+    public ModelAndView newCategory(@Valid @ModelAttribute("category") CreateCategoryDTO categoryDTO, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return new ModelAndView("admin/category/new-category");
+        }
+
+        categoryService.create(categoryDTO);
+        return new ModelAndView("redirect:/categories/");
     }
 }
