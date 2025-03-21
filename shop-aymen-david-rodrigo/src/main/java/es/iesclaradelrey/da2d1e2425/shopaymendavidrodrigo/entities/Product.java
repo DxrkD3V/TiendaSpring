@@ -63,7 +63,5 @@ public class Product {
         this.maxVelocity = maxVelocity;
         this.stock = stock;
         this.category = category;
-
-
     }
 }

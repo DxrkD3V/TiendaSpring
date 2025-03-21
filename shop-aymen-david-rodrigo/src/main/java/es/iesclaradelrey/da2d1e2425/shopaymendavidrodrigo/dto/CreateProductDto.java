@@ -23,11 +23,11 @@ public class CreateProductDto {
     @Size(min = 10, max = 500, message = "La descripción debe tener entre 10 y 500 caracteres")
     private String description;
 
-    @NotBlank(message = "El precio es obligatorio")
+    @NotNull(message = "El precio es obligatorio")
     @DecimalMin(value = "0.01", message = "El precio debe ser mayor a 0")
     private Double price;
 
-    @NotBlank(message = "El stock es obligatorio")
+    @NotNull(message = "El stock es obligatorio")
     @Min(value = 0, message = "El stock no puede ser negativo")
     private int stock;
 
@@ -44,6 +44,6 @@ public class CreateProductDto {
     @Min(value = 0, message = "La velocidad máxima no puede ser negativa")
     private int maxVelocity;
 
-    @NotBlank(message = "La categoría es obligatoria")
+    @NotNull(message = "La categoría es obligatoria")
     private Category category;
 }
