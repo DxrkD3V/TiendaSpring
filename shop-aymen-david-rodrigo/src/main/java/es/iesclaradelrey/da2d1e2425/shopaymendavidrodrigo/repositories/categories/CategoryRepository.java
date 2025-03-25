@@ -6,4 +6,5 @@ import org.springframework.data.repository.ListCrudRepository;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     boolean existsProductByNameIgnoreCase(String name);
+    boolean existsCategoryByNameIgnoreCase(String name);
 }

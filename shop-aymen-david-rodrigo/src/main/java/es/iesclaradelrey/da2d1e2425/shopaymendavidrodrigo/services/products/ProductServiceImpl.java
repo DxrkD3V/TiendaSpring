@@ -1,10 +1,12 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.products;
 
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateProductDto;
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateProductDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.AlreadyExistException;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.categories.CategoryRepository;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.products.ProductRepository;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.categories.CategoryService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,8 +21,11 @@ import java.util.stream.Collectors;
 @Service
 public class ProductServiceImpl implements ProductService{
 private final ProductRepository productRepository;
-public ProductServiceImpl(ProductRepository productRepo) {
+private final CategoryRepository categoryRepository;
+
+public ProductServiceImpl(ProductRepository productRepo, CategoryRepository categoryRepository) {
     this.productRepository = productRepo;
+    this.categoryRepository = categoryRepository;
 }
     @Override
     public long count() {
@@ -60,9 +65,13 @@ public ProductServiceImpl(ProductRepository productRepo) {
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
     }
+    @Override
+    public boolean existsByName(String name) {
+        return productRepository.existsProductByNameIgnoreCase(name);
+    }
 
     @Override
-    public Long create(CreateProductDto productDto) {
+    public Long create(CreateProductDTO productDto) {
         if (productRepository.existsProductByNameIgnoreCase(productDto.getName())) {
             throw new AlreadyExistException(String.format("Ya existe un producto con el nombre %s", productDto.getName()));
         }
@@ -91,4 +100,23 @@ public ProductServiceImpl(ProductRepository productRepo) {
 
         return productRepository.findAll(pageable);
     }
+    @Override
+    public void update(Long id, CreateProductDTO productDTO){
+
+        if(productRepository.existsProductByNameIgnoreCase(productDTO.getName())) {
+            throw new AlreadyExistException("Ya existe un producto con el nombre "+productDTO.getName());
+        }
+        Product product = productRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Producto no encontrado."));
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
+        product.setCategory(categoryRepository.findById(productDTO.getCategory().getId()).orElseThrow(() -> new EntityNotFoundException("Categoría no encontrada.")));
+        product.setManufacture(productDTO.getManufacture());
+        product.setMotor(productDTO.getMotor());
+        product.setHp(productDTO.getHp());
+        product.setMaxVelocity(productDTO.getMaxVelocity());
+
+        Product savedProduct = productRepository.save(product);
+    }
+
 }

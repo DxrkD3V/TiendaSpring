@@ -5,6 +5,7 @@ import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateCategoryDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.AlreadyExistException;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.categories.CategoryRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -49,17 +50,39 @@ public class CategoryServiceImpl implements CategoryService {
 
         return categoryRepository.findAll(pageable);
     }
+
     @Override
-    public void create(CreateCategoryDTO createProductDTO){
-        if (categoryRepository.existsProductByNameIgnoreCase(createProductDTO.getName())) {
-           throw new AlreadyExistException(String.format("Ya existe un producto con el nombre %s", createProductDTO.getName()));
+    public boolean existsByName(String name) {
+        return categoryRepository.existsCategoryByNameIgnoreCase(name);
+    }
+
+    @Override
+    public void create(CreateCategoryDTO createCategoryDTO){
+        if (categoryRepository.existsCategoryByNameIgnoreCase(createCategoryDTO.getName())) {
+           throw new AlreadyExistException(String.format("Ya existe una categoria con el nombre %s", createCategoryDTO.getName()));
         }
         Category category = new Category();
-        category.setName(createProductDTO.getName());
-        category.setDescription(createProductDTO.getDescription());
-        category.setImage(createProductDTO.getImage());
+        category.setName(createCategoryDTO.getName());
+        category.setDescription(createCategoryDTO.getDescription());
+        category.setImage(createCategoryDTO.getImage());
 
-        Category savedCategory = categoryRepository.save(category);
+        categoryRepository.save(category);
 
+    }
+    @Override
+    public void update(Long id, CreateCategoryDTO createCategoryDTO) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Categoría no encontrada"));
+
+        if (!category.getName().equalsIgnoreCase(createCategoryDTO.getName()) &&
+                categoryRepository.existsCategoryByNameIgnoreCase(createCategoryDTO.getName())) {
+            throw new AlreadyExistException("Ya existe una categoría con el mismo nombre.");
+        }
+
+        category.setName(createCategoryDTO.getName());
+        category.setDescription(createCategoryDTO.getDescription());
+        category.setImage(createCategoryDTO.getImage());
+
+        categoryRepository.save(category);
     }
 }

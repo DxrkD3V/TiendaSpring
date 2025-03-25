@@ -5,7 +5,11 @@
 <body class="bg-gray-50 font-['Poppins']">
 <main class="max-w-4xl mx-auto mt-40 mb-20">
   <h1 class="text-2xl font-bold text-gray-900 mb-6 text-center">Crear un nuevo producto</h1>
-  <form method="post" th:object="${product}" class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md mt-10">
+  <div th:if="${globalError}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4">
+    <strong class="font-bold">¡Error!</strong>
+    <span class="block sm:inline" th:text="${globalError}"></span>
+  </div>
+  <form method="post" th:object="${product}" class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md mt-10" novalidate>
 
     <!-- Nombre -->
     <div class="mb-4">

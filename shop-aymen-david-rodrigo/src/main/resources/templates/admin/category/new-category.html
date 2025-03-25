@@ -4,26 +4,39 @@
 </head>
 <body class="bg-gray-50 font-['Poppins']">
 <main class="max-w-4xl mx-auto mt-40 mb-20">
-    <h1 class="text-2xl font-bold text-gray-900 mb-6 text-center">Crear una nueva categoria</h1>
+    <h1 class="text-2xl font-bold text-gray-900 mb-6 text-center">Crear una nueva categoría</h1>
+    <div th:if="${globalError}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4">
+        <strong class="font-bold">¡Error!</strong>
+        <span class="block sm:inline" th:text="${globalError}"></span>
+    </div>
     <form method="post" th:object="${category}" class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md mt-10" novalidate>
+
         <div class="mb-4">
             <label for="txt-name" class="block text-gray-600 text-sm font-bold mb-2">Nombre:</label>
-            <input type="text" id="txt-name" th:field="*{name}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ">
+            <input type="text" id="txt-name" th:field="*{name}" required
+                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   th:classappend="${#fields.hasErrors('name')} ? 'border-red-500' : ''">
             <div class="text-red-500 text-xs italic" th:if="${#fields.hasErrors('name')}">
                 <p th:each="error : ${#fields.errors('name')}" th:text="${error}"></p>
             </div>
         </div>
+
         <div class="mb-4">
             <label for="txt-description" class="block text-gray-600 text-sm font-bold mb-2">Descripción:</label>
-            <textarea id="txt-description" th:field="*{description}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+            <textarea id="txt-description" th:field="*{description}" required
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      th:classappend="${#fields.hasErrors('description')} ? 'border-red-500' : ''"></textarea>
             <div class="text-red-500 text-xs italic" th:if="${#fields.hasErrors('description')}">
                 <p th:each="error : ${#fields.errors('description')}" th:text="${error}"></p>
             </div>
         </div>
+
         <div class="mb-4">
             <label for="txt-imageurl" class="block text-gray-600 text-sm font-bold mb-2">URL de la Imagen:</label>
-            <input type="text" id="txt-imageurl" th:field="*{image}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <input type="text" id="txt-imageurl" th:field="*{image}"
+                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
+
         <div class="flex items-center justify-between">
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Aceptar
@@ -31,7 +44,9 @@
         </div>
     </form>
 
-    <a th:href="@{/amin/categories}"><p>Volver al listado de categorias</p></a>
+    <a th:href="@{/admin/categories}" class="block mt-4 text-blue-600 hover:underline">
+        Volver al listado de categorías
+    </a>
 </main>
 </body>
 </html>

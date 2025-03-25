@@ -1,7 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.products;
 
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateProductDto;
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateProductDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import org.springframework.data.domain.Page;
 
@@ -17,9 +16,10 @@ public interface ProductService {
     Collection<Product> findByName(String name);
 
     List<Product> findByNameContainingIgnoreCase(String query);
-
+    boolean existsByName(String name);
     Optional<Product> findById(Long id);
-    Long create(CreateProductDto createProductDto);
+    Long create(CreateProductDTO createProductDto);
+    void update(Long id,CreateProductDTO createProductDto);
 
     Page<Product> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir);
 

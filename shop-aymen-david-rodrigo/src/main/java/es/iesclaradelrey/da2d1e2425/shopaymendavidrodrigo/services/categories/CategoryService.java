@@ -11,7 +11,9 @@ public interface CategoryService {
     void save(Category category);
     Collection<Category> findAll();
     Optional<Category> findById(Long id);
+    boolean existsByName(String name);
     void create (CreateCategoryDTO createCategoryDTO);
 
     Page<Category> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir);
+    void update(Long id, CreateCategoryDTO createCategoryDTO);
 }
