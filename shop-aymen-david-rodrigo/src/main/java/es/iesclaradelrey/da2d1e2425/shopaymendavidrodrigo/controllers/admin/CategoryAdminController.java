@@ -3,6 +3,7 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.controllers.admin;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateCategoryDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.AlreadyExistException;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.CategoryHasRelatedProducts;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.categories.CategoryService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/categories")
@@ -92,7 +94,7 @@ public class CategoryAdminController {
     @PostMapping("/edit/{id}")
     public ModelAndView updateCategory(@PathVariable Long id,
                                        @Valid @ModelAttribute("category") CreateCategoryDTO categoryDto,
-                                       BindingResult bindingResult, RedirectAttributes redirAttrs) {
+                                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             if(categoryService.existsByName(categoryDto.getName())) {
                 bindingResult.rejectValue("name", null, "El nombre de la categoria ya existe");
@@ -102,7 +104,7 @@ public class CategoryAdminController {
         }
         try {
             categoryService.update(id, categoryDto);
-            redirAttrs.addFlashAttribute("success", "Categoria actualizada con exito");
+            redirectAttributes.addFlashAttribute("success", "Categoria actualizada con exito");
             return new ModelAndView("redirect:/admin/categories");
         }catch (AlreadyExistException e){
             bindingResult.rejectValue("name", null, e.getMessage());
@@ -112,5 +114,39 @@ public class CategoryAdminController {
             return modelAndView;
         }
         return new ModelAndView("admin/category/edit-category").addObject("categoryId", id);
+    }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView deleteCategory(@PathVariable("id") Long id) {
+        Category category = categoryService.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Categoria no encontrada"));
+        ModelAndView modelAndView = new ModelAndView("admin/category/delete-category");
+        modelAndView.addObject("category", category);
+        return modelAndView;
+    }
+
+    @PostMapping("/delete/{id}")
+    public ModelAndView deleteCategory(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        System.out.println("Intentando eliminar categoría con ID: " + id);
+        try {
+            categoryService.delete(id);
+            System.out.println("Categoría eliminada con éxito.");
+            redirectAttributes.addFlashAttribute("success", "Categoria eliminada con exito");
+            return new ModelAndView("redirect:/admin/categories");
+        } catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("success","categoria no encontrada");
+            return new ModelAndView("admin/category/list-categories");
+        } catch (CategoryHasRelatedProducts e) {
+            ModelAndView modelAndView = new ModelAndView("/admin/category/delete-category");
+            Optional<Category> category = categoryService.findById(id);
+            modelAndView.addObject("category", category.get());
+            modelAndView.addObject("globalError", e.getMessage());
+            return modelAndView;
+        } catch (Exception e) {
+            System.out.println("Error inesperado: " + e.getMessage());
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("globalError", e.getMessage());
+            return modelAndView;
+        }
     }
 }

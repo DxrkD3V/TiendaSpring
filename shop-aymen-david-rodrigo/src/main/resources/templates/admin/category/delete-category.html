@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{/fragments/head :: headPage('Eliminar Categoria','')}">
+</head>
+<body class="bg-gray-50 font-['Poppins']">
+
+<main class="max-w-4xl mx-auto mt-20 mb-20">
+  <h1 class="text-2xl font-bold text-gray-900 mb-6 text-center">Eliminar Categoría</h1>
+
+  <!-- Mensaje de error global -->
+  <div th:if="${globalError}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+    <span th:text="${globalError}"></span>
+  </div>
+
+  <form method="post" th:object="${category}" class="bg-white p-8 rounded-lg shadow-md">
+    <!-- Nombre -->
+    <div class="mb-4">
+      <label for="txt-name" class="block text-gray-600 text-sm font-bold mb-2">Nombre:</label>
+      <input type="text" id="txt-name" th:field="*{name}" required readonly
+             class="shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+             th:classappend="${#fields.hasErrors('name')} ? 'border-red-500' : 'border-gray-300'">
+      <div class="text-red-500 text-xs italic" th:if="${#fields.hasErrors('name')}">
+        <p th:each="error : ${#fields.errors('name')}" th:text="${error}"></p>
+      </div>
+    </div>
+
+    <!-- Descripción -->
+    <div class="mb-4">
+      <label for="txt-description" class="block text-gray-600 text-sm font-bold mb-2">Descripción:</label>
+      <textarea id="txt-description" th:field="*{description}" required readonly
+                class="shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                th:classappend="${#fields.hasErrors('description')} ? 'border-red-500' : 'border-gray-300'"></textarea>
+      <div class="text-red-500 text-xs italic" th:if="${#fields.hasErrors('description')}">
+        <p th:each="error : ${#fields.errors('description')}" th:text="${error}"></p>
+      </div>
+    </div>
+
+    <!-- Imagen -->
+    <div class="mb-4">
+      <label for="txt-imageurl" class="block text-gray-600 text-sm font-bold mb-2">URL de la Imagen:</label>
+      <input type="text" id="txt-imageurl" th:field="*{image}" readonly
+             class="shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+             th:classappend="${#fields.hasErrors('image')} ? 'border-red-500' : 'border-gray-300'">
+      <div class="text-red-500 text-xs italic" th:if="${#fields.hasErrors('image')}">
+        <p th:each="error : ${#fields.errors('image')}" th:text="${error}"></p>
+      </div>
+    </div>
+
+    <!-- Botón de enviar -->
+    <div class="flex items-center justify-between">
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Eliminar
+      </button>
+    </div>
+  </form>
+
+  <a th:href="@{/admin/categories}" class="block mt-4 text-center text-blue-500 hover:underline">Volver al listado de categorías</a>
+</main>
+
+</body>
+</html>

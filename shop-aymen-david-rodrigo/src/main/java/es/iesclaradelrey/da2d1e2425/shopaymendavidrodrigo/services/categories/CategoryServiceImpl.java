@@ -4,6 +4,7 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.categories;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateCategoryDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.AlreadyExistException;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.CategoryHasRelatedProducts;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.categories.CategoryRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -42,6 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Optional<Category> findById(Long id) {
         return categoryRepository.findById(id);
     }
+
 
     @Override
     public Page<Category> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir) {
@@ -84,5 +86,17 @@ public class CategoryServiceImpl implements CategoryService {
         category.setImage(createCategoryDTO.getImage());
 
         categoryRepository.save(category);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Categoria no encontrada"));
+
+        if (category.getProducts() == null || !category.getProducts().isEmpty()) {
+            throw new CategoryHasRelatedProducts("La categoria tiene productos asociados no se puede eliminar");
+        }
+
+        categoryRepository.delete(category);
     }
 }

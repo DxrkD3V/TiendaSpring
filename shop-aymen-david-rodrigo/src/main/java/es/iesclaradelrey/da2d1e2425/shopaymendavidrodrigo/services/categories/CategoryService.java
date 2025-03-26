@@ -16,4 +16,5 @@ public interface CategoryService {
 
     Page<Category> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir);
     void update(Long id, CreateCategoryDTO createCategoryDTO);
+    void delete(Long id);
 }

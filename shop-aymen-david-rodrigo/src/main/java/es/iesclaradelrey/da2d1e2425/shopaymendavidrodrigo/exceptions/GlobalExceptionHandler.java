@@ -23,4 +23,8 @@ public class GlobalExceptionHandler {
     ResponseEntity<String> handleTaskAssignmentAlreadyCompletedException(AlreadyExistException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     }
+    @ExceptionHandler(CategoryHasRelatedProducts.class)
+    ResponseEntity<String> handleTaskAssignmentAlreadyCompletedException(CategoryHasRelatedProducts e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    }
 }
