@@ -1,6 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.products;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateProductDTO;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.AlreadyExistException;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.categories.CategoryRepository;
@@ -65,6 +66,12 @@ public ProductServiceImpl(ProductRepository productRepo, CategoryRepository cate
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
     }
+
+    @Override
+    public Product findByIdThrowException(Long id) {
+        return productRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("el producto no existe"));
+    }
+
     @Override
     public boolean existsByName(String name) {
         return productRepository.existsProductByNameIgnoreCase(name);
@@ -102,21 +109,36 @@ public ProductServiceImpl(ProductRepository productRepo, CategoryRepository cate
     }
     @Override
     public void update(Long id, CreateProductDTO productDTO){
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado."));
 
-        if(productRepository.existsProductByNameIgnoreCase(productDTO.getName())) {
-            throw new AlreadyExistException("Ya existe un producto con el nombre "+productDTO.getName());
+        if (!product.getName().equalsIgnoreCase(productDTO.getName())) {
+            boolean exists = productRepository.existsProductByNameIgnoreCase(productDTO.getName());
+            if (exists) {
+                throw new AlreadyExistException("El producto ya existe con ese nombre.");
+            }
         }
-        Product product = productRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Producto no encontrado."));
+
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
-        product.setCategory(categoryRepository.findById(productDTO.getCategory().getId()).orElseThrow(() -> new EntityNotFoundException("Categoría no encontrada.")));
+        product.setCategory(categoryRepository.findById(productDTO.getCategory().getId())
+                .orElseThrow(() -> new EntityNotFoundException("Categoría no encontrada.")));
         product.setManufacture(productDTO.getManufacture());
         product.setMotor(productDTO.getMotor());
         product.setHp(productDTO.getHp());
         product.setMaxVelocity(productDTO.getMaxVelocity());
 
-        Product savedProduct = productRepository.save(product);
+
+        productRepository.save(product);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Product product = findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("El producto con ID: " + id + " no existe"));
+
+        productRepository.delete(product);
     }
 
 }

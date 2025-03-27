@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{/fragments/head :: headPage('Borrar producto','')}">
+</head>
+<body class="bg-gray-50 font-['Poppins']">
+<main class="max-w-4xl mx-auto mt-40 mb-20">
+    <h1 class="text-2xl font-bold text-gray-900 mb-6 text-center">Eliminar producto</h1>
+    <div th:if="${globalError}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4">
+        <strong class="font-bold">¡Error!</strong>
+        <span class="block sm:inline" th:text="${globalError}"></span>
+    </div>
+    <form method="post" th:object="${product}" class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md mt-10" novalidate>
+
+        <!-- Nombre -->
+        <div class="mb-4">
+            <label class="block text-gray-600 text-sm font-bold mb-2">Nombre:</label>
+            <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{name}"></div>
+        </div>
+
+        <!-- URL de la Imagen -->
+        <div class="mb-4">
+            <label class="block text-gray-600 text-sm font-bold mb-2">URL de la Imagen:</label>
+            <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{imageurl}"></div>
+        </div>
+
+        <!-- Descripción -->
+        <div class="mb-4">
+            <label class="block text-gray-600 text-sm font-bold mb-2">Descripción:</label>
+            <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{description}"></div>
+        </div>
+
+        <!-- Precio -->
+        <div class="mb-4">
+            <label class="block text-gray-600 text-sm font-bold mb-2">Precio (€):</label>
+            <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{price}"></div>
+        </div>
+
+        <!-- Stock -->
+        <div class="mb-4">
+            <label class="block text-gray-600 text-sm font-bold mb-2">Stock:</label>
+            <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{stock}"></div>
+        </div>
+
+        <!-- Fabricante -->
+        <div class="mb-4">
+            <label class="block text-gray-600 text-sm font-bold mb-2">Fabricante:</label>
+            <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{manufacture}"></div>
+        </div>
+
+        <!-- Motor -->
+        <div class="mb-4">
+            <label class="block text-gray-600 text-sm font-bold mb-2">Motor:</label>
+            <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{motor}"></div>
+        </div>
+
+        <!-- Potencia -->
+        <div class="mb-4">
+            <label class="block text-gray-600 text-sm font-bold mb-2">Potencia (HP):</label>
+            <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{hp}"></div>
+        </div>
+
+        <!-- Velocidad Máxima -->
+        <div class="mb-4">
+            <label class="block text-gray-600 text-sm font-bold mb-2">Velocidad Máxima (km/h):</label>
+            <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{maxVelocity}"></div>
+        </div>
+
+        <!-- Categoría -->
+        <div class="mb-4">
+            <label  class="block text-gray-600 text-sm font-bold mb-2">Categoría:</label>
+            <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{category.name}"></div>
+        </div>
+
+        <!-- Botón de enviar -->
+        <div class="flex items-center justify-between">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Aceptar
+            </button>
+        </div>
+
+    </form>
+
+    <a th:href="@{/admin/products}" class="block mt-4 text-center text-blue-500 hover:underline">Volver al listado de productos</a>
+
+</main>
+</body>
+</html>

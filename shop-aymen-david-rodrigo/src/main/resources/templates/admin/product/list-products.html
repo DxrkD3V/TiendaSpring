@@ -13,6 +13,9 @@
     <div class="container">
         <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
     </div>
+    <div class="container">
+        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+    </div>
     <a th:href="@{/admin/products/new}"><p>Crear un nuevo producto</p></a>
     <div class="container mt-2">
         <form th:replace="~{admin/fragments/form :: form('/admin/products',${atributos}, ${orderBy}, ${orderDir}, ${pageSize})}"></form>
@@ -40,9 +43,9 @@
                                <a class="btn btn-warning btn-sm mx-1" th:href="@{'/admin/products/edit/' + ${product.id}}">
                                    <i class="fas fa-edit"></i>
                                </a>
-                               <button class="btn btn-danger btn-sm mx-1">
+                               <a class="btn btn-danger btn-sm mx-1" th:href="@{'/admin/products/delete/' + ${product.id}}">
                                    <i class="fas fa-trash-alt"></i>
-                               </button>
+                               </a>
                            </div>
                        </td>
                    </tr>

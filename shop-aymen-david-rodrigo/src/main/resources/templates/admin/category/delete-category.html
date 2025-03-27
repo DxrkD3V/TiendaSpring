@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head th:replace="~{/fragments/head :: headPage('Eliminar Categoria','')}">
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{/fragments/head :: headPage('Eliminar Categoría','')}">
 </head>
 <body class="bg-gray-50 font-['Poppins']">
 
@@ -15,35 +15,20 @@
   <form method="post" th:object="${category}" class="bg-white p-8 rounded-lg shadow-md">
     <!-- Nombre -->
     <div class="mb-4">
-      <label for="txt-name" class="block text-gray-600 text-sm font-bold mb-2">Nombre:</label>
-      <input type="text" id="txt-name" th:field="*{name}" required readonly
-             class="shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-             th:classappend="${#fields.hasErrors('name')} ? 'border-red-500' : 'border-gray-300'">
-      <div class="text-red-500 text-xs italic" th:if="${#fields.hasErrors('name')}">
-        <p th:each="error : ${#fields.errors('name')}" th:text="${error}"></p>
-      </div>
+      <label class="block text-gray-600 text-sm font-bold mb-2">Nombre:</label>
+      <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{name}"></div>
     </div>
 
-    <!-- Descripción -->
+    <!-- Descripción (más larga) -->
     <div class="mb-4">
-      <label for="txt-description" class="block text-gray-600 text-sm font-bold mb-2">Descripción:</label>
-      <textarea id="txt-description" th:field="*{description}" required readonly
-                class="shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                th:classappend="${#fields.hasErrors('description')} ? 'border-red-500' : 'border-gray-300'"></textarea>
-      <div class="text-red-500 text-xs italic" th:if="${#fields.hasErrors('description')}">
-        <p th:each="error : ${#fields.errors('description')}" th:text="${error}"></p>
-      </div>
+      <label class="block text-gray-600 text-sm font-bold mb-2">Descripción:</label>
+      <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{description}"></div>
     </div>
 
     <!-- Imagen -->
     <div class="mb-4">
-      <label for="txt-imageurl" class="block text-gray-600 text-sm font-bold mb-2">URL de la Imagen:</label>
-      <input type="text" id="txt-imageurl" th:field="*{image}" readonly
-             class="shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-             th:classappend="${#fields.hasErrors('image')} ? 'border-red-500' : 'border-gray-300'">
-      <div class="text-red-500 text-xs italic" th:if="${#fields.hasErrors('image')}">
-        <p th:each="error : ${#fields.errors('image')}" th:text="${error}"></p>
-      </div>
+      <label class="block text-gray-600 text-sm font-bold mb-2">URL de la Imagen:</label>
+      <div class="border rounded w-full py-2 px-3 bg-gray-100 text-gray-700" th:text="*{image}"></div>
     </div>
 
     <!-- Botón de enviar -->

@@ -92,35 +92,40 @@ public class ProductAdminController {
 
 
     @GetMapping("/edit/{id}")
-    public ModelAndView editProduct(@PathVariable Long id) {
+    public ModelAndView editProduct(@PathVariable Long id,
+                                    RedirectAttributes redirectAttributes) {
 
-        Product product = productService.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado"));
+        try {
+            Product product = productService.findByIdThrowException(id);
 
-        CreateProductDTO productDTO = new CreateProductDTO(
-                product.getName(),
-                product.getImageurl(),
-                product.getDescription(),
-                product.getPrice(),
-                product.getStock(),
-                product.getManufacture(),
-                product.getMotor(),
-                product.getHp(),
-                product.getMaxVelocity(),
-                product.getCategory()
-        );
+            CreateProductDTO productDTO = new CreateProductDTO(
+                    product.getName(),
+                    product.getImageurl(),
+                    product.getDescription(),
+                    product.getPrice(),
+                    product.getStock(),
+                    product.getManufacture(),
+                    product.getMotor(),
+                    product.getHp(),
+                    product.getMaxVelocity(),
+                    product.getCategory()
+            );
 
-        ModelAndView modelAndView = new ModelAndView("admin/product/edit-product");
-        modelAndView.addObject("product", productDTO);
-        modelAndView.addObject("categories", categoryService.findAll());
+            ModelAndView modelAndView = new ModelAndView("admin/product/edit-product");
+            modelAndView.addObject("product", productDTO);
+            modelAndView.addObject("categories", categoryService.findAll());
 
-        return modelAndView;
+            return modelAndView;
+        } catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return new ModelAndView("redirect:/admin/products");
+        }
     }
 
     @PostMapping("/edit/{id}")
     public ModelAndView updateProduct(@PathVariable Long id,
                                       @Valid @ModelAttribute("product") CreateProductDTO productDto,
-                                      BindingResult binding,RedirectAttributes redirAttrs) {
+                                      BindingResult binding,RedirectAttributes redirectAttributes) {
         if (binding.hasErrors()) {
             if (productService.existsByName(productDto.getName())) {
                 binding.rejectValue("name", null, "Ya existe un producto llamado " + productDto.getName());
@@ -129,20 +134,53 @@ public class ProductAdminController {
                     .addObject("categories", categoryService.findAll())
                     .addObject("productId", id);
         }
+
         try {
-            redirAttrs.addFlashAttribute("success", "Producto editado con exito");
+            redirectAttributes.addFlashAttribute("success", "Producto editado con exito");
             productService.update(id, productDto);
             return new ModelAndView("redirect:/admin/products");
         } catch (AlreadyExistException e) {
-
             binding.rejectValue("name", null, e.getMessage());
             return new ModelAndView("admin/product/edit-product")
                     .addObject("categories", categoryService.findAll())
                     .addObject("productId", id);
+        } catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return new ModelAndView("redirect:/admin/products");
         } catch (Exception e) {
-
             ModelAndView modelAndView = new ModelAndView("admin/product/edit-product");
             modelAndView.addObject("categories", categoryService.findAll());
+            modelAndView.addObject("globalError", e.getMessage());
+            return modelAndView;
+        }
+//        return new ModelAndView("/admin/product/edit-product");
+    }
+    @GetMapping("/delete/{id}")
+    public ModelAndView deleteProduct(@PathVariable("id")Long id, RedirectAttributes redirectAttributes){
+        ModelAndView modelAndView = new ModelAndView("admin/product/delete-product");
+        try{
+            Product product = productService.findByIdThrowException(id);
+            modelAndView.addObject("product", product);
+            return modelAndView;
+        } catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return new ModelAndView("redirect:/admin/products");
+        }
+    }
+
+    @PostMapping("delete/{id}")
+    public ModelAndView deleteProductPost(@PathVariable Long id,
+                                          RedirectAttributes redirectAttributes) {
+        try{
+            productService.delete(id);
+            redirectAttributes.addFlashAttribute("success","producto eliminado con éxito");
+            return new ModelAndView("redirect:/admin/products");
+        }catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("error",e.getMessage());
+            return new ModelAndView("admin/product/list-products");
+        }catch (Exception e) {
+            System.out.println("Error inesperado: " + e.getMessage());
+            ModelAndView modelAndView = new ModelAndView("/admin/product/delete-product");
             modelAndView.addObject("globalError", e.getMessage());
             return modelAndView;
         }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
-<head th:replace="~{/fragments/head :: headPage('Crear Producto','/css/form.css')}">
+<head th:replace="~{/fragments/head :: headPage('Editar Producto','/css/form.css')}">
 </head>
 <body class="bg-gray-50 font-['Poppins']">
 <main class="max-w-4xl mx-auto mt-40 mb-20">
@@ -123,7 +123,7 @@
 
     </form>
 
-    <a th:href="@{/admin/products}"><p>Volver al listado de productos</p></a>
+    <a th:href="@{/admin/products}" class="block mt-4 text-center text-blue-500 hover:underline">Volver al listado de productos</a>
 
 </main>
 </body>

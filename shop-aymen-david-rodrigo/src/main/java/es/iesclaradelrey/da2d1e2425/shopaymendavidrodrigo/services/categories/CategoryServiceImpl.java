@@ -40,6 +40,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category findByIdThrowException(Long id) {
+        return categoryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("La categoria con ID: " + id + " no existe"));
+    }
+
+    @Override
     public Optional<Category> findById(Long id) {
         return categoryRepository.findById(id);
     }
@@ -79,6 +84,14 @@ public class CategoryServiceImpl implements CategoryService {
         if (!category.getName().equalsIgnoreCase(createCategoryDTO.getName()) &&
                 categoryRepository.existsCategoryByNameIgnoreCase(createCategoryDTO.getName())) {
             throw new AlreadyExistException("Ya existe una categoría con el mismo nombre.");
+        }
+
+        if(!createCategoryDTO.getName().equalsIgnoreCase(category.getName())){
+            boolean exist = categoryRepository.existsCategoryByNameIgnoreCase(createCategoryDTO.getName());
+
+            if(exist){
+                throw new AlreadyExistException("la categoria ya existe con ese nombre");
+            }
         }
 
         category.setName(createCategoryDTO.getName());

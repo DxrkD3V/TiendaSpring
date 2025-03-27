@@ -82,13 +82,18 @@ public class CategoryAdminController {
         return new ModelAndView("admin/category/new-category");
     }
     @GetMapping("/edit/{id}")
-    public ModelAndView editCategory(@PathVariable("id") Long id) {
-        Category category = categoryService.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Categoría no encontrada"));
-        CreateCategoryDTO categoryDTO = new CreateCategoryDTO(category.getName(), category.getDescription(), category.getImage());
-        ModelAndView modelAndView = new ModelAndView("admin/category/edit-category");
-        modelAndView.addObject("category", categoryDTO);
-        return modelAndView;
+    public ModelAndView editCategory(@PathVariable("id") Long id,
+                                     RedirectAttributes redirectAttributes) {
+        try {
+            Category category = categoryService.findByIdThrowException(id);
+            CreateCategoryDTO categoryDTO = new CreateCategoryDTO(category.getName(), category.getDescription(), category.getImage());
+            ModelAndView modelAndView = new ModelAndView("admin/category/edit-category");
+            modelAndView.addObject("category", categoryDTO);
+            return modelAndView;
+        } catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return new ModelAndView("redirect:/admin/categories");
+        }
     }
 
     @PostMapping("/edit/{id}")
@@ -106,7 +111,10 @@ public class CategoryAdminController {
             categoryService.update(id, categoryDto);
             redirectAttributes.addFlashAttribute("success", "Categoria actualizada con exito");
             return new ModelAndView("redirect:/admin/categories");
-        }catch (AlreadyExistException e){
+        }catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return new ModelAndView("redirect:/admin/categories");
+        } catch (AlreadyExistException e){
             bindingResult.rejectValue("name", null, e.getMessage());
         }catch (Exception e) {
             ModelAndView modelAndView = new ModelAndView();
@@ -117,24 +125,27 @@ public class CategoryAdminController {
     }
 
     @GetMapping("/delete/{id}")
-    public ModelAndView deleteCategory(@PathVariable("id") Long id) {
-        Category category = categoryService.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Categoria no encontrada"));
-        ModelAndView modelAndView = new ModelAndView("admin/category/delete-category");
-        modelAndView.addObject("category", category);
-        return modelAndView;
+    public ModelAndView deleteCategory(@PathVariable("id") Long id,
+                                       RedirectAttributes redirectAttributes) {
+        ModelAndView modelAndView = new ModelAndView("admin/category/delete-category");;
+        try {
+            Category category = categoryService.findByIdThrowException(id);
+            modelAndView.addObject("category", category);
+            return modelAndView;
+        } catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return new ModelAndView("redirect:/admin/categories");
+        }
     }
 
     @PostMapping("/delete/{id}")
-    public ModelAndView deleteCategory(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-        System.out.println("Intentando eliminar categoría con ID: " + id);
+    public ModelAndView deleteCategoryPost(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
             categoryService.delete(id);
-            System.out.println("Categoría eliminada con éxito.");
             redirectAttributes.addFlashAttribute("success", "Categoria eliminada con exito");
             return new ModelAndView("redirect:/admin/categories");
         } catch (EntityNotFoundException e) {
-            redirectAttributes.addFlashAttribute("success","categoria no encontrada");
+            redirectAttributes.addFlashAttribute("error",e.getMessage());
             return new ModelAndView("admin/category/list-categories");
         } catch (CategoryHasRelatedProducts e) {
             ModelAndView modelAndView = new ModelAndView("/admin/category/delete-category");

@@ -10,6 +10,8 @@ public interface CategoryService {
     long count();
     void save(Category category);
     Collection<Category> findAll();
+
+    Category findByIdThrowException(Long id);
     Optional<Category> findById(Long id);
     boolean existsByName(String name);
     void create (CreateCategoryDTO createCategoryDTO);
