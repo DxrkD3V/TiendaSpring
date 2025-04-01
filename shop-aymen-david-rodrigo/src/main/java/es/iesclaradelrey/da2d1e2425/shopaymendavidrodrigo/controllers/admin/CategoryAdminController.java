@@ -76,7 +76,7 @@ public class CategoryAdminController {
             bindingResult.rejectValue("name", null, e.getMessage());
         } catch (Exception e) {
             ModelAndView modelAndView = new ModelAndView("admin/category/new-category");
-            modelAndView.addObject("globalError", "Ocurrió un error inesperado. Inténtelo de nuevo.");
+            bindingResult.reject("globalError", e.getMessage());
             return modelAndView;
         }
         return new ModelAndView("admin/category/new-category");
@@ -118,7 +118,7 @@ public class CategoryAdminController {
             bindingResult.rejectValue("name", null, e.getMessage());
         }catch (Exception e) {
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("globalError", e.getMessage());
+            bindingResult.reject("globalError", e.getMessage());
             return modelAndView;
         }
         return new ModelAndView("admin/category/edit-category").addObject("categoryId", id);
@@ -139,7 +139,7 @@ public class CategoryAdminController {
     }
 
     @PostMapping("/delete/{id}")
-    public ModelAndView deleteCategoryPost(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+    public ModelAndView deleteCategoryPost(@PathVariable Long id, RedirectAttributes redirectAttributes,BindingResult bindingResult) {
         try {
             categoryService.delete(id);
             redirectAttributes.addFlashAttribute("success", "Categoria eliminada con exito");
@@ -151,12 +151,12 @@ public class CategoryAdminController {
             ModelAndView modelAndView = new ModelAndView("/admin/category/delete-category");
             Optional<Category> category = categoryService.findById(id);
             modelAndView.addObject("category", category.get());
-            modelAndView.addObject("globalError", e.getMessage());
+            bindingResult.reject("globalError", e.getMessage());
             return modelAndView;
         } catch (Exception e) {
             System.out.println("Error inesperado: " + e.getMessage());
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("globalError", e.getMessage());
+            bindingResult.reject("globalError", e.getMessage());
             return modelAndView;
         }
     }

@@ -84,7 +84,7 @@ public class ProductAdminController {
         } catch (Exception e) {
             ModelAndView modelAndView2 = new ModelAndView("admin/product/new-product");
             modelAndView2.addObject("categories",categoryService.findAll());
-            modelAndView2.addObject("globalError", "Ocurrió un error inesperado. Inténtelo de nuevo.");
+            bindingResult.reject("globalError", e.getMessage());
             return modelAndView2;
         }
         return modelAndView;
@@ -150,7 +150,7 @@ public class ProductAdminController {
         } catch (Exception e) {
             ModelAndView modelAndView = new ModelAndView("admin/product/edit-product");
             modelAndView.addObject("categories", categoryService.findAll());
-            modelAndView.addObject("globalError", e.getMessage());
+            binding.reject("globalError", e.getMessage());
             return modelAndView;
         }
 //        return new ModelAndView("/admin/product/edit-product");
@@ -170,7 +170,7 @@ public class ProductAdminController {
 
     @PostMapping("delete/{id}")
     public ModelAndView deleteProductPost(@PathVariable Long id,
-                                          RedirectAttributes redirectAttributes) {
+                                          RedirectAttributes redirectAttributes, BindingResult bindingResult) {
         try{
             productService.delete(id);
             redirectAttributes.addFlashAttribute("success","producto eliminado con éxito");
@@ -181,7 +181,7 @@ public class ProductAdminController {
         }catch (Exception e) {
             System.out.println("Error inesperado: " + e.getMessage());
             ModelAndView modelAndView = new ModelAndView("/admin/product/delete-product");
-            modelAndView.addObject("globalError", e.getMessage());
+            bindingResult.reject("globalError", e.getMessage());
             return modelAndView;
         }
     }
