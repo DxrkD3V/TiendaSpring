@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/cart")
 public class ShoppingCartRestController {
     private final ShoppingCartService shoppingCartService;
 
@@ -28,6 +28,5 @@ public class ShoppingCartRestController {
         shoppingCartService.delete(productDto.getProductId());
         return ResponseEntity.status(HttpStatus.OK).body("producto eliminado");
     }
-
 
 }
