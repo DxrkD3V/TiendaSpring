@@ -1,4 +1,4 @@
-package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo;
+package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -28,7 +28,7 @@ public class AppUser {
 
     @Size(max = 200)
     @NotNull
-    @Column(name = "email", nullable = false, length = 200)
+    @Column(name = "email", nullable = false, length = 200, unique = true)
     private String email;
 
     @Size(max = 200)
