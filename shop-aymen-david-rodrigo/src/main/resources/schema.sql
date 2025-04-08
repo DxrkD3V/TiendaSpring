@@ -66,3 +66,11 @@ create table shopping_cart
     constraint FK26ajdolmyw3a95bhn6pjk5dor
         foreign key (product_id) references products (id)
 );
+
+create table app_users(
+    user_id bigint primary key auto_increment,
+    first_name varchar(200) not null,
+    last_name varchar(200) not null,
+    email varchar(200) not null unique ,
+    password varchar(200) not null
+);
