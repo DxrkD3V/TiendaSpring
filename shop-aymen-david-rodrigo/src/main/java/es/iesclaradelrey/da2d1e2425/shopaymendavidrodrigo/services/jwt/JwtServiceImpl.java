@@ -1,6 +1,8 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.jwt;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.AppUser;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -60,4 +62,14 @@ public class JwtServiceImpl implements JwtService{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public String extractUsername(String token) {
+        return "";
+    }
+
+    private Claims getClaimsFromToken(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(singningKeySecret.getBytes());
+
+        return null;
+    }
 }

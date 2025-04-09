@@ -20,7 +20,7 @@ public class AppUserServiceImpl implements AppUserService{
 
     @Override
     public AppUser register(RegisterUserDto registerUserDto) {
-        if (appUserRepository.existByEmail(registerUserDto.getEmail())) {
+        if (appUserRepository.existsByEmail(registerUserDto.getEmail())) {
             throw new UserNameAlreadyExistsException(registerUserDto.getEmail());
         }
         AppUser appUser = AppUser.builder()
@@ -32,4 +32,5 @@ public class AppUserServiceImpl implements AppUserService{
 
         return appUserRepository.save(appUser);
     }
+
 }

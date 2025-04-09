@@ -10,4 +10,6 @@ public interface JwtService{
     void validateAccessToken(String token);
 
     void validateRefreshToken(String token);
+
+    String extractUsername(String token);
 }
