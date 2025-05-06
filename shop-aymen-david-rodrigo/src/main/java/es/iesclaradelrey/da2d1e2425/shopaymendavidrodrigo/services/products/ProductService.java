@@ -4,6 +4,7 @@ import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateProductDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,7 +24,7 @@ public interface ProductService {
     Long create(CreateProductDTO createProductDto);
     void update(Long id,CreateProductDTO createProductDto);
     void delete(Long id);
-
+    Page<Product> searchProducts(String search, Long cat, Pageable pageable);
     Page<Product> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir);
 
 }

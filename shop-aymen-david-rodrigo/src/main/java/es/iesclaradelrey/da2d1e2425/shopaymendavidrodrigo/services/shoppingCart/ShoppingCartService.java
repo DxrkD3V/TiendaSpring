@@ -1,5 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.shoppingCart;
 
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CartDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.ShoppingCart;
 
@@ -17,7 +18,7 @@ public interface ShoppingCartService {
     void add(Product product);
     void remove(Long id);
     void removeAll();
-
+    CartDTO getCartDTO(); //cuando tengamos el usuario tendremos que cambiar el metodo y pasarle el id del usuario
     void saveOrUpdate(Long productId, int addUnits) throws Exception;
 
     void delete(Long productId);

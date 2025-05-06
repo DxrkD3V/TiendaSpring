@@ -1,9 +1,11 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.users;
 
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.LoginUserDto;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.RegisterUserDto;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.AppUser;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.UserNameAlreadyExistsException;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.users.AppUserRepository;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,4 +35,14 @@ public class AppUserServiceImpl implements AppUserService{
         return appUserRepository.save(appUser);
     }
 
+    public AppUser login(LoginUserDto loginUserDto) {
+        AppUser user = appUserRepository.findByEmail(loginUserDto.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+
+        if (!passwordEncoder.matches(loginUserDto.getPassword(), user.getPassword())) {
+            throw new BadCredentialsException("Credenciales inválidas");
+        }
+
+        return user;
+    }
 }

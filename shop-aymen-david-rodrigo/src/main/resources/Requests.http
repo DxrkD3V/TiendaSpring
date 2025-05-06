@@ -1,1 +1,3 @@
-
+### Obtener carrito de compras con JWT
+GET http://localhost:8000/api/v1/products/category/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ0eXBlIjoiQUNDRVNTIiwic3ViIjoiZGF2aWRAZXhhbXBsZS5jb20iLCJmaXJzdE5hbWUiOiJEYXZpZCIsImxhc3ROYW1lIjoiUm9kcmlnbyIsImlhdCI6MTc0NjU1NDE3OCwiZXhwIjoxNzQ2NTU1MDc4fQ.cJNyQEAlOzj3-aVWXtys95suBIOhs5HE3Bu7Vh0aJAE

@@ -1,6 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.products;
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CreateProductDTO;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.ProductAPIDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.AlreadyExistException;
@@ -54,6 +55,12 @@ public ProductServiceImpl(ProductRepository productRepo, CategoryRepository cate
                 .stream()
                 .filter(product -> product.getName().equalsIgnoreCase(name))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<Product> searchProducts(String search, Long cat, Pageable pageable) {
+        if (search == null) search = "";
+        return productRepository.findBySearchAndCategory(search, cat, pageable);
     }
 
     @Override

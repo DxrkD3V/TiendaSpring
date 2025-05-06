@@ -1,5 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.shoppingCart;
 
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CartDTO;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CartItemDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.ShoppingCart;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.NotRemaningUnitsException;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -123,4 +126,29 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         }
 
     }
+
+    public CartDTO getCartDTO() {
+        Collection<ShoppingCart> shoppingCartItems = this.findAll();
+
+        List<CartItemDTO> items = shoppingCartItems.stream().map(item -> {
+            Product product = item.getProduct();
+            int quantity = item.getUnits();
+            double unitPrice = product.getPrice();
+            double subtotal = unitPrice * quantity;
+
+            return new CartItemDTO(
+                    product.getId(),
+                    product.getName(),
+                    quantity,
+                    unitPrice,
+                    subtotal
+            );
+        }).toList();
+
+        int totalUnits = items.stream().mapToInt(CartItemDTO::getQuantity).sum();
+        double totalPrice = items.stream().mapToDouble(CartItemDTO::getSubtotal).sum();
+
+        return new CartDTO(items, totalUnits, totalPrice);
+    }
+
 }
