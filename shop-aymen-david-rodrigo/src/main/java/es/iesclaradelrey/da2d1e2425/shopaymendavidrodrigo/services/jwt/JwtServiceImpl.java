@@ -69,7 +69,6 @@ public class JwtServiceImpl implements JwtService{
 
     private Claims getClaimsFromToken(String token) {
         SecretKey key = Keys.hmacShaKeyFor(singningKeySecret.getBytes());
-
         return null;
     }
 }
