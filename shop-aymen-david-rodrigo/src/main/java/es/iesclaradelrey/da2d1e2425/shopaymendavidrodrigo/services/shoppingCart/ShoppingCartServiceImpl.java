@@ -127,28 +127,32 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     }
 
-    public CartDTO getCartDTO() {
+    public CartDTO getCartByUserId(String userId) {
         Collection<ShoppingCart> shoppingCartItems = this.findAll();
 
-        List<CartItemDTO> items = shoppingCartItems.stream().map(item -> {
-            Product product = item.getProduct();
-            int quantity = item.getUnits();
-            double unitPrice = product.getPrice();
-            double subtotal = unitPrice * quantity;
+        List<CartItemDTO> items = shoppingCartItems.stream()
+                .filter(item -> item.getUserId().equals(userId))
+                .map(item -> {
+                    Product product = item.getProduct();
+                    int quantity = item.getUnits();
+                    double unitPrice = product.getPrice();
+                    double subtotal = unitPrice * quantity;
 
-            return new CartItemDTO(
-                    product.getId(),
-                    product.getName(),
-                    quantity,
-                    unitPrice,
-                    subtotal
-            );
-        }).toList();
+                    return new CartItemDTO(
+                            product.getId(),
+                            product.getName(),
+                            quantity,
+                            unitPrice,
+                            subtotal
+                    );
+                })
+                .toList();
 
         int totalUnits = items.stream().mapToInt(CartItemDTO::getQuantity).sum();
         double totalPrice = items.stream().mapToDouble(CartItemDTO::getSubtotal).sum();
 
         return new CartDTO(items, totalUnits, totalPrice);
     }
+
 
 }

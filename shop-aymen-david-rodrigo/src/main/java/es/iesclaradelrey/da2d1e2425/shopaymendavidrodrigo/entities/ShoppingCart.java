@@ -18,6 +18,8 @@ public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false, unique = true)
+    private String userId;
     @Column(nullable = false)
     private int units;
     @Column(columnDefinition = "timestamp default current_timestamp()", nullable = false)

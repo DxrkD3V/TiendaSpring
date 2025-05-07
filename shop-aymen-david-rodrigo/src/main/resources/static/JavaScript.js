@@ -54,7 +54,7 @@ document.addEventListener('click', function (event) {
 });
 
 function addToCart(productId, addUnits) {
-    fetch(`${CONTEXT_PATH}api/v1/add`, {
+    fetch(`${CONTEXT_PATH}api/v1/cart/add`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
