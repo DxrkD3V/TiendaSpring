@@ -30,19 +30,5 @@ public class WebSecurityConfig {
 
         return http.build();
     }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AppUserDetailsService appUserDetailsService) {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(appUserDetailsService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        return new ProviderManager(authenticationProvider);
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
 }
 

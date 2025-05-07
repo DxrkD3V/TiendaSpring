@@ -50,3 +50,5 @@ INSERT INTO `ratings` VALUES
                           (9,'El coche está bien en general, pero he notado que la suspensión no es muy buena en carreteras con baches. Aparte de eso, el diseño y la tecnología son bastante buenos. Es una opción decente, pero tiene margen de mejora.','2022-02-18 00:00:00.000000','Luis',3,5),
                           (10,'¡Perfecto en todos los sentidos! Este coche tiene todo lo que se puede pedir: un diseño espectacular, un interior lleno de detalles de lujo y un motor que es una auténtica joya. La experiencia de conducción es insuperable. Estoy encantado con mi compra.','2024-12-05 00:00:00.000000','Carmen',5,5);
 
+INSERT INTO `app_users` VALUES
+                            (1,'Rodrigo','Franco','rodrigofrancocid@gmail.com','rodrigo');
