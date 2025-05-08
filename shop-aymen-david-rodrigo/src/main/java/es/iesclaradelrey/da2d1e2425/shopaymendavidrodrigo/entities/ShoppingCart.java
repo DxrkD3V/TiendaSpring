@@ -1,5 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities;
 
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.App;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,8 +19,6 @@ public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false, unique = true)
-    private String userId;
     @Column(nullable = false)
     private int units;
     @Column(columnDefinition = "timestamp default current_timestamp()", nullable = false)
@@ -31,9 +30,21 @@ public class ShoppingCart {
     @JoinColumn(name = "product_id", nullable = false)
     Product product;
 
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    AppUser userId;
+
     public ShoppingCart(int units ,Product product) {
         this.units = units;
         this.product = product;
+        this.updateAt = LocalDateTime.now();
+        this.addAt = LocalDateTime.now();
+    }
+
+    public ShoppingCart(int units , Product product, AppUser userId) {
+        this.units = units;
+        this.product = product;
+        this.userId = userId;
         this.updateAt = LocalDateTime.now();
         this.addAt = LocalDateTime.now();
     }

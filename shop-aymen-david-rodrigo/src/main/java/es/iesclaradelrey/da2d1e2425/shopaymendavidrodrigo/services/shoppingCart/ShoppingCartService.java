@@ -18,8 +18,8 @@ public interface ShoppingCartService {
     void add(Product product);
     void remove(Long id);
     void removeAll();
-    CartDTO getCartByUserId(String userId); //cuando tengamos el usuario tendremos que cambiar el metodo y pasarle el id del usuario
-    void saveOrUpdate(Long productId, int addUnits) throws Exception;
+    CartDTO getCartByEmail(String email); //cuando tengamos el usuario tendremos que cambiar el metodo y pasarle el id del usuario
+    void saveOrUpdate(Long productId, int addUnits, String userEmail) throws Exception;
 
-    void delete(Long productId);
+    void delete(Long productId, String email);
 }

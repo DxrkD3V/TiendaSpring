@@ -2,11 +2,13 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.shoppingCart
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CartDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CartItemDTO;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.AppUser;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.ShoppingCart;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.exceptions.NotRemaningUnitsException;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.products.ProductRepository;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.shoppingCart.ShoppingCartRepository;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.repositories.users.AppUserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +22,13 @@ import java.util.Optional;
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     private final ShoppingCartRepository shoppingCartRepository;
     private final ProductRepository productRepository;
+    private final AppUserRepository appUserRepository;
     private Exception EntityNotFoundException;
 
-    public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository, ProductRepository productRepository) {
+    public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository, ProductRepository productRepository, AppUserRepository appUserRepository, AppUserRepository appUserRepository1) {
         this.shoppingCartRepository = shoppingCartRepository;
         this.productRepository = productRepository;
+        this.appUserRepository = appUserRepository;
     }
 
     @Override
@@ -91,16 +95,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public void saveOrUpdate (Long productId, int addUnits) throws Exception {
+    public void saveOrUpdate (Long productId, int addUnits, String userEmail) throws Exception {
         Product product = productRepository
                 .findById(productId)
                 .orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el producto de id "+productId));
-
-        ShoppingCart itemCart = shoppingCartRepository
-                .findByProductId(productId)
-                .orElse(new ShoppingCart(0,product));
-
-
+        AppUser user = appUserRepository.findByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el Usuario "));
+        Optional<ShoppingCart> optionalItemCart = shoppingCartRepository.findByProductIdAndUserEmail(productId, userEmail);
+        ShoppingCart itemCart = optionalItemCart
+            .orElse(new ShoppingCart(0, product, user));
         int remaningUnits = product.getStock() - itemCart.getUnits() - addUnits;
         if(remaningUnits < 0) {
             throw new NotRemaningUnitsException("No hay unidades suficientes en el stock para este producto. Solo quedan "+(product.getStock() - itemCart.getUnits()));
@@ -110,28 +112,25 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public void delete(Long productId) {
-        Product product = productRepository
-                .findById(productId)
-                .orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el producto de id "+productId));
-
+    public void delete(Long productId, String email) {
         ShoppingCart itemCart = shoppingCartRepository
-                .findByProductId(productId)
-                .orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el producto de id "+productId+" en el carrito"));
+                .findByProductIdAndUserEmail(productId, email)
+                .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado el producto con ID " + productId + " en el carrito del usuario " + email));
 
-        if(itemCart.getUnits() > 1) {
+        if (itemCart.getUnits() > 1) {
             itemCart.setUnits(itemCart.getUnits() - 1);
-        }else{
+            shoppingCartRepository.save(itemCart);
+        } else {
             shoppingCartRepository.delete(itemCart);
         }
-
     }
 
-    public CartDTO getCartByUserId(String userId) {
+
+    public CartDTO getCartByEmail(String email) {
         Collection<ShoppingCart> shoppingCartItems = this.findAll();
 
         List<CartItemDTO> items = shoppingCartItems.stream()
-                .filter(item -> item.getUserId().equals(userId))
+                .filter(item -> item.getUserId().equals(email))
                 .map(item -> {
                     Product product = item.getProduct();
                     int quantity = item.getUnits();

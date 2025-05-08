@@ -24,8 +24,8 @@ public class WebSecurityConfig {
 
         http.formLogin(Customizer.withDefaults());
         http.authorizeHttpRequests(auth -> auth
-
-                .anyRequest().permitAll()
+                .requestMatchers("/").permitAll()
+                .anyRequest().authenticated()
         );
 
         return http.build();

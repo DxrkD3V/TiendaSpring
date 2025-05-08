@@ -38,4 +38,6 @@ public class AppUser {
     @Column(name = "password", nullable = false, length = 200)
     private String password;
 
+    @OneToOne(mappedBy = "userId")
+    ShoppingCart shoppingCart;
 }

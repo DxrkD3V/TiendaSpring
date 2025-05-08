@@ -1,10 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.restcontroller;
 
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.AddItemCartDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CartDTO;
-import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.products.ProductService;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.shoppingCart.ShoppingCartService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,24 +18,34 @@ public class ShoppingCartRestController {
 
     @GetMapping("/")
     public ResponseEntity<CartDTO> getCart() {
-        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-        CartDTO cart = shoppingCartService.getCartByUserId(userId);
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        CartDTO cart = shoppingCartService.getCartByEmail(email);
 
         return ResponseEntity.status(HttpStatus.OK).body(cart);
     }
+    @PostMapping("/{productId}")
+    public ResponseEntity<CartDTO> addSingleUnitToCart(@PathVariable Long productId) throws Exception {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addProduct(@RequestBody AddItemCartDTO productDto) throws Exception {
-            shoppingCartService.saveOrUpdate(productDto.getProductId(),productDto.getAddUnits());
-
-
-            return ResponseEntity.status(HttpStatus.OK).body("producto añadido");
+        shoppingCartService.saveOrUpdate(productId, 1, email);
+        CartDTO cart = shoppingCartService.getCartByEmail(email);
+        return ResponseEntity.ok(cart);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> removeProduct(@RequestBody AddItemCartDTO productDto) throws Exception {
-        shoppingCartService.delete(productDto.getProductId());
-        return ResponseEntity.status(HttpStatus.OK).body("producto eliminado");
+    @PostMapping("/{productId}/{count}")
+    public ResponseEntity<CartDTO> addProduct(@PathVariable Long productId, @PathVariable int count) throws Exception {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        shoppingCartService.saveOrUpdate(productId, count, email);
+        CartDTO cart = shoppingCartService.getCartByEmail(email);
+        return ResponseEntity.ok(cart);
     }
 
+
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<CartDTO> removeProduct(@PathVariable Long productId) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        shoppingCartService.delete(productId, email);
+        CartDTO cart = shoppingCartService.getCartByEmail(email);
+        return ResponseEntity.ok(cart);
+    }
 }
