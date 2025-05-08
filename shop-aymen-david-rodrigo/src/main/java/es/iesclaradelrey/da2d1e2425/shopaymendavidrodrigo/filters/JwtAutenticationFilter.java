@@ -35,9 +35,7 @@ public class JwtAutenticationFilter extends OncePerRequestFilter {
         if (pathRequest.startsWith("/api/v1/auth")) {
             filterChain.doFilter(request, response);
             return;
-        }
-
-        if (pathRequest.startsWith("/api/v1/cart") || pathRequest.startsWith("/api/v1/products")) {
+        }else{
             String authHeader = request.getHeader("Authorization");
 
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -62,7 +60,7 @@ public class JwtAutenticationFilter extends OncePerRequestFilter {
                 return;
             }
         }
-
         filterChain.doFilter(request, response);
     }
+    
 }

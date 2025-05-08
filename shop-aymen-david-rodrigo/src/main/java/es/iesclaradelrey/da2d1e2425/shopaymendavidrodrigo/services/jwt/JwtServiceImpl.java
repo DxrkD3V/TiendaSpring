@@ -12,7 +12,8 @@ import javax.crypto.SecretKey;
 import java.util.Date;
 
 @Service
-public class JwtServiceImpl implements JwtService{
+public class JwtServiceImpl implements JwtService {
+
     @Value("${spring.security.jwt.signing-key-secret}")
     private String singningKeySecret;
 
@@ -23,7 +24,7 @@ public class JwtServiceImpl implements JwtService{
     private long refreshTokenTtl;
 
     @Override
-    public String generatedAccessToken(AppUser user){
+    public String generatedAccessToken(AppUser user) {
         SecretKey key = Keys.hmacShaKeyFor(singningKeySecret.getBytes());
 
         return Jwts.builder()
@@ -38,7 +39,7 @@ public class JwtServiceImpl implements JwtService{
     }
 
     @Override
-    public String generatedRefreshToken(AppUser user){
+    public String generatedRefreshToken(AppUser user) {
         SecretKey key = Keys.hmacShaKeyFor(singningKeySecret.getBytes());
 
         return Jwts.builder()
@@ -53,22 +54,27 @@ public class JwtServiceImpl implements JwtService{
     }
 
     @Override
-    public void validateAccessToken(String token){
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void validateAccessToken(String token) {
+        getClaimsFromToken(token);
     }
 
     @Override
-    public void validateRefreshToken(String token){
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void validateRefreshToken(String token) {
+        getClaimsFromToken(token);
     }
 
     @Override
     public String extractUsername(String token) {
-        return "";
+        return getClaimsFromToken(token).getSubject();
     }
 
     private Claims getClaimsFromToken(String token) {
         SecretKey key = Keys.hmacShaKeyFor(singningKeySecret.getBytes());
-        return null;
+
+        JwtParser parser = Jwts.parser()
+                .setSigningKey(key)
+                .build();
+
+        return parser.parseClaimsJws(token).getBody();
     }
 }
