@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface ShoppingCartRepository extends ListCrudRepository<ShoppingCart, Long> {
     Optional<ShoppingCart> findByProductId(Long productId);
-    Optional<ShoppingCart> findByProductIdAndUserEmail(Long productId, String email);
+    Optional<ShoppingCart> findByProductIdAndUserIdEmail(Long productId, String email);
 }

@@ -100,7 +100,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 .findById(productId)
                 .orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el producto de id "+productId));
         AppUser user = appUserRepository.findByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el Usuario "));
-        Optional<ShoppingCart> optionalItemCart = shoppingCartRepository.findByProductIdAndUserEmail(productId, userEmail);
+        Optional<ShoppingCart> optionalItemCart = shoppingCartRepository.findByProductIdAndUserIdEmail(productId, userEmail);
         ShoppingCart itemCart = optionalItemCart
             .orElse(new ShoppingCart(0, product, user));
         int remaningUnits = product.getStock() - itemCart.getUnits() - addUnits;
@@ -114,7 +114,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public void delete(Long productId, String email) {
         ShoppingCart itemCart = shoppingCartRepository
-                .findByProductIdAndUserEmail(productId, email)
+                .findByProductIdAndUserIdEmail(productId, email)
                 .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado el producto con ID " + productId + " en el carrito del usuario " + email));
 
         if (itemCart.getUnits() > 1) {

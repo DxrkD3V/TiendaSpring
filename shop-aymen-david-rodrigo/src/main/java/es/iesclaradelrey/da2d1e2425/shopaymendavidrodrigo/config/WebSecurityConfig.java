@@ -10,23 +10,32 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @Order(200)
 public class WebSecurityConfig {
 
     @Bean
-    public SecurityFilterChain webSecurityFilterChain(HttpSecurity http, JwtAutenticationFilter jwtFilter) throws Exception {
+    public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
+        http
+               
+                .securityMatcher(request -> {
+                    String path = request.getServletPath();
+                    return !path.startsWith("/api/");
+                })
 
-        http.formLogin(Customizer.withDefaults());
-        http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/").permitAll()
-                .anyRequest().authenticated()
-        );
+
+                .authorizeHttpRequests(auth -> auth
+
+                        .requestMatchers("/","/css/**", "/js/**", "/login", "/error").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .formLogin(withDefaults());
 
         return http.build();
     }
