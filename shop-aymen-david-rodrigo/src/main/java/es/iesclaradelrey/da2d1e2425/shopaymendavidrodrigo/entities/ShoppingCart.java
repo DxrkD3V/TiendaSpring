@@ -14,7 +14,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "shopping_cart")
+@Table(name = "shopping_cart", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"product_id", "user_id"})
+})
 public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

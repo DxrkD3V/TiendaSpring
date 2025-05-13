@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -96,21 +97,36 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public void saveOrUpdate (Long productId, int addUnits, String userEmail) throws Exception {
+    public void saveOrUpdate(Long productId, int addUnits, String userEmail) throws Exception {
         Product product = productRepository
                 .findById(productId)
-                .orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el producto de id "+productId));
-        AppUser user = appUserRepository.findByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el Usuario "));
-        Optional<ShoppingCart> optionalItemCart = shoppingCartRepository.findByProductIdAndUserIdEmail(productId, userEmail);
-        ShoppingCart itemCart = optionalItemCart
-            .orElse(new ShoppingCart(0, product, user));
-        int remaningUnits = product.getStock() - itemCart.getUnits() - addUnits;
-        if(remaningUnits < 0) {
-            throw new NotRemaningUnitsException("No hay unidades suficientes en el stock para este producto. Solo quedan "+(product.getStock() - itemCart.getUnits()));
+                .orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el producto de id " + productId));
+
+        AppUser user = appUserRepository
+                .findByEmail(userEmail)
+                .orElseThrow(() -> new EntityNotFoundException("no se ha encontrado el Usuario"));
+
+        ShoppingCart itemCart = shoppingCartRepository
+                .findByProductIdAndUserIdEmail(productId, userEmail)
+                .orElseGet(() -> {
+                    ShoppingCart newCart = new ShoppingCart(0, product, user);
+                    newCart.setAddAt(LocalDateTime.now());
+                    newCart.setUpdateAt(LocalDateTime.now());
+                    return newCart;
+                });
+
+        int remainingUnits = product.getStock() - itemCart.getUnits() - addUnits;
+        if (remainingUnits < 0) {
+            throw new NotRemaningUnitsException("No hay unidades suficientes en el stock para este producto. Solo quedan " +
+                    (product.getStock() - itemCart.getUnits()));
         }
+
         itemCart.setUnits(addUnits + itemCart.getUnits());
+        itemCart.setUpdateAt(LocalDateTime.now());
         shoppingCartRepository.save(itemCart);
     }
+
+
 
     @Override
     public void delete(Long productId, String email) {
