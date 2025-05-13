@@ -8,4 +8,3 @@ Content-Type: application/json
 
 ###
 DELETE localhost:8000/api/v1/cart/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ0eXBlIjoiQUNDRVNTIiwic3ViIjoidGVzdDJAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoicGVwZSIsImxhc3ROYW1lIjoiZ25hcmx5IiwiaWF0IjoxNzQ3MTExMTc0LCJleHAiOjE3NDcxMTIwNzR9.vTv2qWCkG3ZJ8xw7djHTuNQqRMmYvxCUY-CNp_i_esA
