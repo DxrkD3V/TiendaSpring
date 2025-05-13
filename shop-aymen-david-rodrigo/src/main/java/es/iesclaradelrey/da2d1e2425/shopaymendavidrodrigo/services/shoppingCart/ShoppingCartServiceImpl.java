@@ -2,6 +2,7 @@ package es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.services.shoppingCart
 
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CartDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.CartItemDTO;
+import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.dto.ProductAPIDTO;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.AppUser;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopaymendavidrodrigo.entities.ShoppingCart;
@@ -130,20 +131,37 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         Collection<ShoppingCart> shoppingCartItems = this.findAll();
 
         List<CartItemDTO> items = shoppingCartItems.stream()
-                .filter(item -> item.getUserId().equals(email))
+                .filter(item -> item.getUserId().getEmail().equals(email))
                 .map(item -> {
                     Product product = item.getProduct();
                     int quantity = item.getUnits();
                     double unitPrice = product.getPrice();
                     double subtotal = unitPrice * quantity;
-
+                    ProductAPIDTO productDTO = new ProductAPIDTO(
+                            product.getId(),
+                            product.getName(),
+                            product.getImageurl(),
+                            product.getDescription(),
+                            product.getPrice(),
+                            product.getStock(),
+                            product.getManufacture(),
+                            product.getMotor(),
+                            product.getHp(),
+                            product.getMaxVelocity(),
+                            product.getCategory().getId()
+                    );
                     return new CartItemDTO(
                             product.getId(),
                             product.getName(),
                             quantity,
                             unitPrice,
-                            subtotal
+                            subtotal,
+                            product.getImageurl(),
+                            quantity,
+                            productDTO
+
                     );
+
                 })
                 .toList();
 

@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -38,6 +40,7 @@ public class AppUser {
     @Column(name = "password", nullable = false, length = 200)
     private String password;
 
-    @OneToOne(mappedBy = "userId")
-    ShoppingCart shoppingCart;
+    @OneToMany(mappedBy = "userId")
+    private List<ShoppingCart> shoppingCartItems;
+
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,4 +16,9 @@ public class CartItemDTO {
     private int quantity;
     private double unitPrice;
     private double subtotal;
+    private String imageUrl;
+    private int units;
+    private ProductAPIDTO product;
+
+
 }

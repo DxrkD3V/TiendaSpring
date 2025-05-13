@@ -30,8 +30,8 @@ public class ShoppingCart {
     @JoinColumn(name = "product_id", nullable = false)
     Product product;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     AppUser userId;
 
     public ShoppingCart(int units ,Product product) {
@@ -48,5 +48,4 @@ public class ShoppingCart {
         this.updateAt = LocalDateTime.now();
         this.addAt = LocalDateTime.now();
     }
-
 }

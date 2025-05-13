@@ -11,26 +11,30 @@
     <div class="max-w-8xl mx-auto px-6">
         <h2 class="text-4xl font-['Playfair_Display'] text-center mt-16 mb-16">Tu Carrito de Compras</h2>
 
-        <div th:if="${shoppingCart.isEmpty()}" class="text-center text-gray-600">
+        <!-- Verificamos si cartDTO.items está vacío -->
+        <div th:if="${cartDTO == null || cartDTO.items == null || #lists.isEmpty(cartDTO.items)}" class="text-center text-gray-600">
             <p>Tu carrito está vacío. ¡Explora nuestros modelos y encuentra tu próximo coche de lujo!</p>
             <a href="/categories" class="!rounded-button bg-custom hover:bg-gray-800 text-white px-8 py-3 text-lg mt-6 inline-block">Explorar Modelos</a>
         </div>
 
-        <div th:if="${!shoppingCart.isEmpty()}" class="space-y-8">
+        <!-- Modificación: verificar cartDTO.items para mostrar elementos -->
+        <div th:if="${cartDTO != null && cartDTO.items != null && !#lists.isEmpty(cartDTO.items)}"
+             class="space-y-8">
             <a th:href="@{/shoppingCart/removeAll}"  class="!rounded-button bg-red-500 text-white px-4 py-2 hover:bg-red-600">
                 Eliminar Todos
             </a>
             <!-- Lista de productos en el carrito -->
-            <div th:each="item : ${shoppingCart}" class="flex items-center justify-between bg-gray-100 p-6 rounded-lg">
-                <img th:src="${item.product.imageurl}" th:alt="${item.product.name}" class="w-32 h-32 object-cover rounded-lg">
+            <div th:each="item : ${cartDTO.items}" class="flex items-center justify-between bg-gray-100 p-6 rounded-lg">
+                <!-- Modifica la plantilla para usar el nombre correcto de la propiedad -->
+                <img th:src="${item.getImageUrl()}" th:alt="${item.getImageUrl()}" class="w-32 h-32 object-cover rounded-lg">
                 <div class="flex-1 ml-6">
-                    <h3 class="text-xl font-semibold" th:text="${item.product.name}"></h3>
+                    <h3 class="text-xl font-semibold" th:text="${item.getProductName()}"></h3>
                     <p class="text-gray-600 mt-2">Precio: <span th:text="${#numbers.formatDecimal(item.product.price, 1, 'COMMA', 2, 'POINT')} + ' €'"></span></p>
-                    <p class="text-gray-600">Cantidad: <span th:text="${item.units}"></span></p>
+                    <p class="text-gray-600">Cantidad: <span th:text="${item.getUnits()}"></span></p>
                 </div>
                 <div class="flex flex-col items-center">
                     <p class="text-lg font-semibold text-gray-800 mb-4">Total: <span th:text="${#numbers.formatDecimal(item.product.price * item.units, 1, 'COMMA', 2, 'POINT')} + ' €'"></span></p>
-                    <a th:href="@{/shoppingCart/remove(productId=${item.product.id}, returnurl=${'/shoppingCart'})}"  class="!rounded-button bg-red-500 text-white px-4 py-2 hover:bg-red-600">
+                    <a th:href="@{/shoppingCart/remove(productId=${item.getProductId()}, returnurl=${'/shoppingCart'})}"  class="!rounded-button bg-red-500 text-white px-4 py-2 hover:bg-red-600">
                         Eliminar
                     </a>
                 </div>
@@ -40,7 +44,7 @@
             <div class="text-right mt-8">
                 <h3 class="text-2xl font-semibold">
                     Total a Pagar:
-                    <span th:text="${#numbers.formatDecimal(totalPrice, 1, 'COMMA', 2, 'POINT')} + ' €'"></span>
+                    <span th:text="${#numbers.formatDecimal(cartDTO.totalPrice, 1, 'COMMA', 2, 'POINT')} + ' €'"></span>
                 </h3>
                 <a href="/checkout" class="!rounded-button bg-custom text-white px-8 py-3 text-lg mt-4 inline-block hover:bg-gray-800">
                     Proceder al Pago
