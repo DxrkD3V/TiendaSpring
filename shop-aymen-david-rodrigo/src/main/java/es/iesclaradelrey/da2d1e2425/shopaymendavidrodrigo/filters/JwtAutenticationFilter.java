@@ -25,16 +25,16 @@ public class JwtAutenticationFilter extends OncePerRequestFilter {
     private final AppUserDetailsService appUserDetailsService;
 
     private static final String AUTH_HEADER = "Authorization";
-
     private static final String BEARER_PREFIX = "Bearer ";
 
     private static final String PROTECTED_PATHCART = "/api/v1/cart/**";
-    private static final String PROTECTED_PATHPRODUCT = "/api/v1/products/**/*";
+    private static final String PROTECTED_PATHPRODUCTS = "/api/v1/products/**/*"; // Ruta para productos
+    private static final String PROTECTED_PATHCATEGORIES = "/api/v1/categories/**"; // Ruta para categorías
     private static final String PROTECTED_PATHAUTH = "/api/v1/auth";
 
     private static final AntPathRequestMatcher protectedPathMatcherCart = new AntPathRequestMatcher(PROTECTED_PATHCART);
-    private static final AntPathRequestMatcher protectedPathMatcherProducts = new AntPathRequestMatcher(PROTECTED_PATHPRODUCT);
-
+    private static final AntPathRequestMatcher protectedPathMatcherProducts = new AntPathRequestMatcher(PROTECTED_PATHPRODUCTS);
+    private static final AntPathRequestMatcher protectedPathMatcherCategories = new AntPathRequestMatcher(PROTECTED_PATHCATEGORIES);
 
     public JwtAutenticationFilter(JwtService jwtService, AppUserDetailsService appUserDetailsService) {
         this.jwtService = jwtService;
@@ -46,7 +46,10 @@ public class JwtAutenticationFilter extends OncePerRequestFilter {
                                     @NotNull HttpServletResponse response,
                                     @NotNull FilterChain filterChain) throws ServletException, IOException {
 
-        if(protectedPathMatcherCart.matches(request) || protectedPathMatcherProducts.matches(request)) {
+        if (protectedPathMatcherCart.matches(request) ||
+                protectedPathMatcherProducts.matches(request) ||
+                protectedPathMatcherCategories.matches(request)) {
+
             try {
                 String authHeader = request.getHeader(AUTH_HEADER);
 
@@ -65,13 +68,13 @@ public class JwtAutenticationFilter extends OncePerRequestFilter {
                 Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            } catch (Exception e){
+            } catch (Exception e) {
                 String errorMessage = String.format("Error validating access token: %s", e.getMessage());
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, errorMessage);
-
                 return;
             }
         }
+
         filterChain.doFilter(request, response);
     }
 }
