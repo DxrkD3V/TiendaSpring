@@ -17,7 +17,7 @@ public interface ShoppingCartService {
     Double sumTotalPrice(Collection<ShoppingCart> shoppingCarts);
     void add(Product product);
     void remove(Long id);
-    void removeAll();
+    void removeAll(String email);
     CartDTO getCartByEmail(String email); //cuando tengamos el usuario tendremos que cambiar el metodo y pasarle el id del usuario
     void saveOrUpdate(Long productId, int addUnits, String userEmail) throws Exception;
 

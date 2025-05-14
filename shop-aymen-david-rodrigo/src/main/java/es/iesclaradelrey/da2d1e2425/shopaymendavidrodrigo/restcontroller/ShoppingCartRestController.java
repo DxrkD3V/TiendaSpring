@@ -48,4 +48,12 @@ public class ShoppingCartRestController {
         CartDTO cart = shoppingCartService.getCartByEmail(email);
         return ResponseEntity.ok(cart);
     }
+
+    @DeleteMapping("/")
+    public ResponseEntity<CartDTO> removeAll() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        shoppingCartService.removeAll(email);
+        CartDTO cart = shoppingCartService.getCartByEmail(email);
+        return ResponseEntity.ok(cart);
+    }
 }

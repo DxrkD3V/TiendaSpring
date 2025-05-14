@@ -91,9 +91,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         }
     }
 
-    public void removeAll() {
-        Collection<ShoppingCart> shoppingCarts = shoppingCartRepository.findAll();
-        shoppingCartRepository.deleteAll(shoppingCarts);
+    public void removeAll(String email) {
+        List<ShoppingCart> items = shoppingCartRepository.findByUserIdEmail(email);
+        if (items.isEmpty()) {
+            throw new EntityNotFoundException("No se ha encontrado ningún producto en el carrito del usuario con email " + email);
+        }
+        shoppingCartRepository.deleteAll(items);
     }
 
     @Override
