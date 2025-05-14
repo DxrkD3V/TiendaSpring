@@ -32,7 +32,7 @@ public class WebSecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
-                        .requestMatchers("/","/css/**", "/js/**", "/login", "/error").permitAll()
+                        .requestMatchers("/","/css/**", "/JavaScript.js", "/login", "/error", "/imagenes/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(withDefaults());
